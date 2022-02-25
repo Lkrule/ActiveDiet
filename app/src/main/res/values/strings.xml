@@ -1,3 +1,60 @@
 <resources>
     <string name="app_name">ActiveDiet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="welcome_message">We\'ve got just couple of questions. Please fill the form on the next page to calculate your BMR.</string>
+    <string name="ok">OK</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="welcome">Welcome</string>
+    <string name="calculate_bmr">Calculate BMR</string>
+    <string name="weight">Weight</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="kg">kg</string>
+    <string name="years">years</string>
+    <string name="cm">cm</string>
+    <string name="height">Height</string>
+    <string name="activity">Activity</string>
+    <string name="calculate">Calculate</string>
+    <string name="goal">Goal</string>
+    <string name="your_calculated_bmr">You calculated BMR is:</string>
+    <string name="apply">Apply</string>
+    <array name="genders">
+        <item>Select</item>
+        <item>Male</item>
+        <item>Female</item>
+    </array>
+    <array name="activity_level">
+        <item>Select</item>
+        <item>Little/No exercise</item>
+        <item>Light exercise</item>
+        <item>Moderate exercise (3-5 days/week)</item>
+        <item>Very active (6-7 days/week)</item>
+        <item>Extra active (very active and physical job)</item>
+    </array>
+    <array name="goals">
+        <item>Select</item>
+        <item>I want to loose weight</item>
+        <item>I want to keep weight</item>
+        <item>I want to gain weight</item>
+    </array>
+    <string name="item_required">Required</string>
+    <string name="kcal">kcal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="breakfast">Breakfast</string>
+    <string name="second_breakfast">II Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="diner">Diner</string>
+    <string name="supper">Supper</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="amount">Amount</string>
+    <string name="add_ingredient_dialog_title">Add Ingredient</string>
+    <string name="calories">Calories</string>
+    <string name="proteins">Proteins</string>
+    <string name="fats">Fats</string>
+    <string name="carbs">Carbs</string>
 </resources>

@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Maoz/StudioProjects/ActiveDiet/app/src/main/res/layout/activity_main.xml" value="0.1322463768115942" />
+        <entry key="..\:/Users/Maoz/StudioProjects/ActiveDiet/app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="..\:/Users/Maoz/StudioProjects/ActiveDiet/app/src/main/res/layout/fragment_about.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/Maoz/StudioProjects/ActiveDiet/app/src/main/res/layout/fragment_calculator.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Maoz/StudioProjects/ActiveDiet/app/src/main/res/layout/fragment_welcome.xml" value="0.1774193548387097" />
       </map>
     </option>
   </component>
