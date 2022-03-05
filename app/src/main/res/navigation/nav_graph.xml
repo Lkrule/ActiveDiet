@@ -6,17 +6,20 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.activediet.WelcomeFragment"
+        android:name="com.example.activediet.fragments.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcomeFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.example.activediet.CalculatorFragment"
+        android:name="com.example.activediet.fragments.CalculatorFragment"
         android:label="fragment_calculator"
         tools:layout="@layout/fragment_calculator" />
 </navigation>
