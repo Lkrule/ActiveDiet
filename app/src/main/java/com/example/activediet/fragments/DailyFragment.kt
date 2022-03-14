@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 private const val MEALS_COUNT = 5
 
-
+@AndroidEntryPoint
 class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     ProductAdapter.ProductAdapterListener {
     private var _binding: FragmentDailyBinding? = null

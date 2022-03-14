@@ -8,23 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.databinding.FragmentWelcomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class WelcomeFragment : Fragment() {
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var sharedPreferences : SharedPreferences
+    lateinit var sharedPrefs : SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        if(sharedPreferences?.getFloat(BMR_PREF, 0f) != 0f) {
-//           navigateToDailyFragment()
-//        }
+        if(sharedPrefs.getFloat(BMR_PREF, 0f) != 0f) {
+           navigateToDailyFragment()
+        }
     }
 
     override fun onCreateView(

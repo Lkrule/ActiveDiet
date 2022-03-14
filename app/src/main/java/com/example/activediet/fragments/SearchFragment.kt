@@ -17,8 +17,10 @@ import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.databinding.FragmentSearchBinding
 import com.example.activediet.viewmodels.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchFragment : Fragment(), SearchIngredientPagingAdapter.OnItemClickListener {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!

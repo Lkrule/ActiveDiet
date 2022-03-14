@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 const val BMR_PREF = "BMR"
 
-
+@AndroidEntryPoint
 class CalculatorFragment : Fragment() {
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = _binding!!
@@ -31,23 +31,20 @@ class CalculatorFragment : Fragment() {
 
     private var calculatedBmr: Float = 0f
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
             calcCalculateBtn.setOnClickListener(calculateButtonListener)
-            // calcApplyButton.setOnClickListener(applyButtonClickListener)
+            calcApplyButton.setOnClickListener(applyButtonClickListener)
         }
 
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
@@ -61,19 +58,15 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-
     private val applyButtonClickListener = View.OnClickListener {
         sharedPrefs.edit().putFloat(BMR_PREF, calculatedBmr).apply()
         navigateToDailyFragment()
     }
 
-
     private fun navigateToDailyFragment() {
-        // val action = CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
-        // findNavController().navigate(action)
+        val action = CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
+        findNavController().navigate(action)
     }
-
-
 
     private val calculateButtonListener = View.OnClickListener {
         var validationFailed = validateForm()
@@ -92,8 +85,6 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-
-    // validation for input values
     private fun validateForm(): Boolean {
         var validationFailed = false
         binding.apply {
