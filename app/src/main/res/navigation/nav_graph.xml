@@ -3,7 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/blankFragment">
+
+
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.activediet.fragments.BlankFragment"
+        android:label="@string/hello_blank_fragment"
+        tools:layout="@layout/fragment_blank" >
+    </fragment>
 
     <fragment
         android:id="@+id/calculatorFragment"
@@ -49,6 +57,13 @@
         <action
             android:id="@+id/action_dailyFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
+        <action
+            android:id="@+id/action_dailyFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/popup_enter"
+            app:popExitAnim="@anim/popup_exit" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
