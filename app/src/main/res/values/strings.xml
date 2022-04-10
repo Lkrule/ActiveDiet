@@ -4,8 +4,8 @@
     <string name="welcome_message">We\'ve got just couple of questions. Please fill the form on the next page to calculate your BMR.</string>
     <string name="ok">OK</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="hello_blank_fragment">Welcome to the Active Diet App!</string>
+    <string name="workouts_link">Work Outs<a href="https://www.masterclass.com/articles/full-body-workout-plan#how-to-do-a-fullbody-workout"> </a></string>
     <string name="welcome">Welcome</string>
     <string name="calculate_bmr">Calculate BMR</string>
     <string name="weight">Weight</string>
@@ -58,4 +58,7 @@
     <string name="fats">Fats</string>
     <string name="carbs">Carbs</string>
     <string name="settings">Settings</string>
+    <string name="welcome_to_the_active_diet_app">Welcome to the Active Diet App!</string>
+    <string name="healthy_recipes">Healthy Recipes</string>
+    <string name="workouts">workoutS</string>
 </resources>

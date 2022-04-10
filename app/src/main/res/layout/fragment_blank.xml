@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BlankFragment">
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background"
+    tools:context=".fragments.BlankFragment">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <!--        Maybe get an input for the user name?-->
+
+
+    <TextView
+        android:id="@+id/textViewEllipsize"
+        android:layout_width="386dp"
+        android:layout_height="74dp"
+        android:ellipsize="end"
+        android:maxLines="10"
+        android:layout_marginLeft="35dp"
+        android:text="Stay Active With US!\nHere's a couple activities our app offers:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="374dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="35dp"
+        android:text="•Click the in order to check your food consumption\n•
+Get great ideas for new workouts!\n•New recipes every day, helping you stay healthy!
+\n•something more"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/cardview_shadow_end_color"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="341dp"
+        android:layout_height="116dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="343dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="16dp"
+            android:background="#466B878F">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="83dp"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/workout_pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/bghelper" />
+
+                <LinearLayout
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:background="#774F65F2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/workoutId"
+                        android:linksClickable="true"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:background="#66B768F0"
+                        android:text="@string/workouts_link"
+                        android:textColor="@color/black"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="340dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="343dp"
+            android:layout_height="79dp"
+            android:layout_marginVertical="10dp"
+            android:background="#8AF49AF2"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/food_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/foodsjpg" />
+
+            <LinearLayout
+                android:layout_width="208dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:background="#749D36C3"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/foodId"
+                    android:layout_width="206dp"
+                    android:layout_height="wrap_content"
+                    android:background="#66B768F0"
+                    android:text="@string/healthy_recipes"
+                    android:textColor="@color/black"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

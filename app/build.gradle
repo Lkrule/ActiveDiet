@@ -26,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -97,5 +98,6 @@ dependencies {
     // Material Dialogs
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:input:3.3.0'
-
+    // External library for cool image crop
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
