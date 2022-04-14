@@ -11,6 +11,21 @@
         android:name="com.example.activediet.fragments.BlankFragment"
         android:label="@string/hello_blank_fragment"
         tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_blankFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_blankFragment_to_dailyFragment"
+            app:destination="@id/dailyFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_blankFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment

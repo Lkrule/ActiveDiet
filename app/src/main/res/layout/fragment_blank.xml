@@ -1,136 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    android:gravity="center_horizontal"
-    android:background="@drawable/background"
     tools:context=".fragments.BlankFragment">
     <!-- TODO: Update blank fragment layout -->
 
     <!--        Maybe get an input for the user name?-->
 
+    <TextView
+        android:layout_width="124dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="4dp"
+        android:text="Helpful links"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#673AB7"
+        android:textColorLink="#FFFFFF"
+        android:textScaleX="1"
+        android:textSelectHandle="@drawable/ic_launcher_background"
+        android:textSize="15dp"
+        android:background="@android:color/background_light"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewEllipsize"
-        android:layout_width="386dp"
-        android:layout_height="74dp"
+        android:layout_width="363dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="4dp"
         android:ellipsize="end"
         android:maxLines="10"
-        android:layout_marginLeft="35dp"
         android:text="Stay Active With US!\nHere's a couple activities our app offers:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="374dp"
-        android:layout_height="162dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="35dp"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="52dp"
         android:text="•Click the in order to check your food consumption\n•
 Get great ideas for new workouts!\n•New recipes every day, helping you stay healthy!
 \n•something more"
         android:textColor="@color/black"
         android:textColorHighlight="@color/cardview_shadow_end_color"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEllipsize" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/searchNav"
+        android:layout_width="184dp"
+        android:layout_height="52dp"
+        android:background="@drawable/purple_dark"
+
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Search Feature"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/dailyNav"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calculateNav" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dailyNav"
+
+        android:layout_width="177dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="160dp"
+
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/light_blue_button"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Daily Feature"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/calculateNav"
+        android:layout_width="184dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/blue_dark_button"
+
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Calculate bmi"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <LinearLayout
-        android:layout_width="341dp"
-        android:layout_height="116dp"
-        android:orientation="vertical">
+        android:id="@+id/linearLayout4"
+        android:layout_width="171dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="#8AF49AF2"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout6">
 
-        <RelativeLayout
-            android:layout_width="343dp"
-            android:layout_height="102dp"
-            android:layout_marginTop="16dp"
-            android:background="#466B878F">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/workout_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/bghelper" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="83dp"
-                android:layout_marginVertical="10dp"
-                android:orientation="horizontal">
+        <Button
+            android:id="@+id/workoutId"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#66B768F0"
+            android:text="Work Outs"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/workout_pic"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/bghelper" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="#774F65F2"
+            android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="204dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:background="#774F65F2"
-                    android:orientation="vertical">
+        </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/workoutId"
-                        android:linksClickable="true"
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:background="#66B768F0"
-                        android:text="@string/workouts_link"
-                        android:textColor="@color/black"
-                        android:textSize="21sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-        </RelativeLayout>
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="340dp"
-        android:layout_height="93dp"
-        android:layout_marginTop="16dp">
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="173dp"
+        android:layout_height="58dp"
+        android:background="#8AF49AF2"
+        android:gravity="bottom|left|center_vertical|fill_vertical|end"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:layout_width="343dp"
-            android:layout_height="79dp"
-            android:layout_marginVertical="10dp"
-            android:background="#8AF49AF2"
-            android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fitnessFotos"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/foodsjpg" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/food_pic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/foodsjpg" />
+        <Button
+            android:id="@+id/fitnessFacts"
+            android:layout_width="81dp"
+            android:layout_height="match_parent"
+            android:background="#66B768F0"
+            android:text="Fitness Starter Guide"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="208dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:background="#749D36C3"
-                android:orientation="vertical">
+    </LinearLayout>
 
-                <Button
-                    android:id="@+id/foodId"
-                    android:layout_width="206dp"
-                    android:layout_height="wrap_content"
-                    android:background="#66B768F0"
-                    android:text="@string/healthy_recipes"
-                    android:textColor="@color/black"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="172dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="4dp"
+        android:background="#8AF49AF2"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-            </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/food_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/foodsjpg" />
 
-        </LinearLayout>
-    </RelativeLayout>
+        <Button
+            android:id="@+id/healthyRecipes"
+            android:layout_width="76dp"
+            android:layout_height="match_parent"
+            android:background="#66B768F0"
+            android:baselineAligned="false"
+            android:text="@string/healthy_recipes"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
