@@ -1,13 +1,15 @@
 package com.example.activediet
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ListView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.activediet.databinding.ActivityMainBinding
+import com.example.activediet.utilities.MyService
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         drawerLayout = binding.drawerLayout
         val navController = this.findNavController(R.id.nav_host_fragment)
@@ -24,6 +25,14 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navView, navController)
 
 
+    }
+    override fun onResume() {
+        stopService(Intent(this, MyService::class.java))
+        super.onResume()
+    }
+    override fun onStop() {
+        ContextCompat.startForegroundService(this, Intent(this, MyService::class.java))
+        super.onStop()
     }
 
     override fun onSupportNavigateUp(): Boolean {

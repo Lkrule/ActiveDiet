@@ -47,12 +47,18 @@ class BlankFragment : Fragment() {
     ): View {
         // If we want to move to other fragments from menu
 
+        val button2 = binding.stepCountBttn
+        button2.setOnClickListener{
+            val action = BlankFragmentDirections.actionBlankFragmentToStepFragment()
+            findNavController().navigate(action)
+        }
 
         val button3 = binding.calculateNav
         button3.setOnClickListener{
             val action = BlankFragmentDirections.actionBlankFragmentToCalculatorFragment()
             findNavController().navigate(action)
         }
+
         val button4 = binding.searchNav
         button4.setOnClickListener{
             val sdf = SimpleDateFormat("dd/M/yyyy")
@@ -60,6 +66,7 @@ class BlankFragment : Fragment() {
             val action = BlankFragmentDirections.actionBlankFragmentToSearchFragment(currentDate)
             findNavController().navigate(action)
         }
+
         val button5 = binding.dailyNav
         button5.setOnClickListener{
             val action = BlankFragmentDirections.actionBlankFragmentToDailyFragment()
@@ -68,6 +75,7 @@ class BlankFragment : Fragment() {
         // If we want to do Hyperlinks from menu
         val workOut_link = binding.workoutId
         workOut_link.setOnClickListener {printText()}
+        val button6 = binding.stepCountBttn
 
         return binding.root
     }

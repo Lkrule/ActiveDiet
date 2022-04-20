@@ -5,19 +5,22 @@
     android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#C5CAE9"
     android:padding="16dp"
     tools:context=".fragments.BlankFragment">
     <!-- TODO: Update blank fragment layout -->
 
     <!--        Maybe get an input for the user name?-->
 
+    <!-- LAST ARG -->
     <TextView
+
         android:layout_width="124dp"
         android:layout_height="31dp"
         android:layout_marginStart="4dp"
+        android:background="@android:color/background_light"
         android:text="Helpful links"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
@@ -26,96 +29,10 @@
         android:textScaleX="1"
         android:textSelectHandle="@drawable/ic_launcher_background"
         android:textSize="15dp"
-        android:background="@android:color/background_light"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewEllipsize"
-        android:layout_width="363dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:maxLines="10"
-        android:text="Stay Active With US!\nHere's a couple activities our app offers:"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="52dp"
-        android:text="•Click the in order to check your food consumption\n•
-Get great ideas for new workouts!\n•New recipes every day, helping you stay healthy!
-\n•something more"
-        android:textColor="@color/black"
-        android:textColorHighlight="@color/cardview_shadow_end_color"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEllipsize" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/searchNav"
-        android:layout_width="184dp"
-        android:layout_height="52dp"
-        android:background="@drawable/purple_dark"
-
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="Search Feature"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/dailyNav"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calculateNav" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/dailyNav"
-
-        android:layout_width="177dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="160dp"
-
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/light_blue_button"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="Daily Feature"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/calculateNav"
-        android:layout_width="184dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/blue_dark_button"
-
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="Calculate bmi"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -217,5 +134,201 @@ Get great ideas for new workouts!\n•New recipes every day, helping you stay he
             android:textSize="8sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="399dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="31dp"
+        android:background="#E8EAF6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv1">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout12"
+            android:layout_width="112dp"
+            android:layout_height="133dp"
+            android:background="#E9EFE4EF"
+            android:gravity="bottom|left|center_vertical|fill_vertical|end"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.053"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/spork"
+                android:layout_width="97dp"
+                android:layout_height="76dp"
+                android:src="@drawable/spork"
+                app:layout_constraintBottom_toTopOf="@+id/dailyNav"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.966" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/dailyNav"
+
+                android:layout_width="90dp"
+                android:layout_height="37dp"
+
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/light_blue_button"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="Daily Count"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout11"
+            android:layout_width="112dp"
+            android:layout_height="133dp"
+            android:layout_marginTop="16dp"
+            android:background="#EFE7E4"
+            android:gravity="bottom|left|center_vertical|fill_vertical|end"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/calc"
+                android:layout_width="97dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/calc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/calculateNav"
+                android:layout_width="87dp"
+                android:layout_height="32dp"
+                android:background="@drawable/blue_dark_button"
+
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="Calculate bmi"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calc" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="112dp"
+            android:layout_height="133dp"
+            android:background="#E9EFE4EF"
+            android:gravity="bottom|left|center_vertical|fill_vertical|end"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.515">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/searchNav"
+                android:layout_width="93dp"
+                android:layout_height="32dp"
+                android:background="@drawable/blue_dark_button"
+
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="Food Search"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daily_pic" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/daily_pic"
+                android:layout_width="97dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/fruits"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Daily follow up"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="Categories"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="370dp"
+        android:layout_height="248dp"
+        android:layout_marginTop="8dp"
+        android:background="#E8EAF6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv2">
+
+        <Button
+            android:id="@+id/step_count_bttn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Click me to step counts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

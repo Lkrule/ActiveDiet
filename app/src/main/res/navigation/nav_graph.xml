@@ -26,6 +26,9 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_blankFragment_to_stepFragment"
+            app:destination="@id/stepFragment" />
     </fragment>
 
     <fragment
@@ -73,12 +76,8 @@
             android:id="@+id/action_dailyFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
         <action
-            android:id="@+id/action_dailyFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/popup_enter"
-            app:popExitAnim="@anim/popup_exit" />
+            android:id="@+id/action_dailyFragment_to_blankFragment2"
+            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -92,5 +91,14 @@
         <argument
             android:name="date"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/stepFragment"
+        android:name="com.example.activediet.fragments.StepFragment"
+        android:label="step_counter"
+        tools:layout="@layout/step_counter" >
+        <action
+            android:id="@+id/action_stepFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
 </navigation>

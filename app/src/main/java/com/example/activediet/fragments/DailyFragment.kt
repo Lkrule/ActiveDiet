@@ -86,6 +86,12 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
             changeDate(-1)
             loadAllProducts(highlightedDate)
         }
+
+        val button3 = binding.backToMenu
+        button3.setOnClickListener{
+            val action = DailyFragmentDirections.actionDailyFragmentToBlankFragment2()
+            findNavController().navigate(action)
+        }
     }
 
     private fun loadAllProducts(date: String) {
