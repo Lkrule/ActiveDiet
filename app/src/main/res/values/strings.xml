@@ -3,7 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="welcome_message">We\'ve got just couple of questions. Please fill the form on the next page to calculate your BMR.</string>
     <string name="ok">OK</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Welcome to the Active Diet App!</string>
     <string name="workouts_link">Work Outs<a href="https://www.masterclass.com/articles/full-body-workout-plan#how-to-do-a-fullbody-workout"> </a></string>
     <string name="welcome">Welcome</string>
@@ -12,6 +11,7 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="age">Age</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD3JDRSAea-I2E2KRJmJb0GxIhTZJ55LB0</string>
     <string name="gender">Gender</string>
     <string name="kg">kg</string>
     <string name="years">years</string>
