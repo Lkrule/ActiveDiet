@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 const val BASE_URL = "https://api.spoonacular.com/"
-const val API_KEY = "74bb70d489914e4a92cc323856dae0bf"
+const val API_KEY = "005f2b02140b4c28a6c1da806cb27c76"
 
 @Module
 @InstallIn(SingletonComponent::class)
