@@ -106,6 +106,12 @@ dependencies {
 
 
 
+    // Dagger Core
+    implementation "com.google.dagger:dagger:2.38.1"
+    kapt "com.google.dagger:dagger-compiler:2.38.1"
+
+
+
 
     // Google Maps Location Services
     implementation 'com.google.android.gms:play-services-location:19.0.1'

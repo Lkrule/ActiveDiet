@@ -6,6 +6,12 @@ import androidx.room.Room
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.db.AppDatabase
 import com.example.activediet.db.IngredientsDao
+import com.example.activediet.db.RunningDatabase
+import com.example.activediet.utilities.Constants.KEY_FIRST_TIME_TOGGLE
+import com.example.activediet.utilities.Constants.KEY_NAME
+import com.example.activediet.utilities.Constants.KEY_WEIGHT
+import com.example.activediet.utilities.Constants.RUNNING_DATABASE_NAME
+import com.example.activediet.utilities.Constants.SHARED_PREFERENCES_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -75,4 +81,34 @@ class AppModule {
     fun provideSharedPrefs(@ApplicationContext context: Context) : SharedPreferences {
         return context.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
     }
+
+    // test
+
+    @Singleton
+    @Provides
+    fun provideRunningDatabase(
+        @ApplicationContext app: Context
+    ) = Room.databaseBuilder(
+        app,
+        RunningDatabase::class.java,
+        RUNNING_DATABASE_NAME
+    ).build()
+
+    @Singleton
+    @Provides
+    fun provideRunDao(db: RunningDatabase) = db.getRunDao()
+
+
+    @Singleton
+    @Provides
+    fun provideName(sharedPref: SharedPreferences) = sharedPref.getString(KEY_NAME, "") ?: ""
+
+    @Singleton
+    @Provides
+    fun provideWeight(sharedPref: SharedPreferences) = sharedPref.getFloat(KEY_WEIGHT, 80f)
+
+    @Singleton
+    @Provides
+    fun provideFirstTimeToggle(sharedPref: SharedPreferences) =
+        sharedPref.getBoolean(KEY_FIRST_TIME_TOGGLE, true)
 }
