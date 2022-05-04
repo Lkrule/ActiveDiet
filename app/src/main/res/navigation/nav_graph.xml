@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.example.activediet.fragments.CalculatorFragment"
+        android:name="com.example.activediet.fragments.food.CalculatorFragment"
         android:label="@string/calculate_bmr"
         tools:layout="@layout/fragment_calculator" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.activediet.fragments.WelcomeFragment"
+        android:name="com.example.activediet.fragments.food.WelcomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/dailyFragment"
-        android:name="com.example.activediet.fragments.DailyFragment"
+        android:name="com.example.activediet.fragments.food.DailyFragment"
         android:label="Daily calories"
         tools:layout="@layout/fragment_daily" >
         <action
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.activediet.fragments.SearchFragment"
+        android:name="com.example.activediet.fragments.food.SearchFragment"
         android:label="Add Ingredient"
         tools:layout="@layout/fragment_search" >
         <argument
@@ -109,7 +109,7 @@
 
     <fragment
         android:id="@+id/setupFragment"
-        android:name="com.example.activediet.fragments.SettingsFragment"
+        android:name="com.example.activediet.fragments.run.SettingsFragment"
         android:label="SetupFragment" >
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
@@ -118,7 +118,7 @@
 
     <fragment
         android:id="@+id/runFragment"
-        android:name="com.example.activediet.fragments.RunFragment"
+        android:name="com.example.activediet.fragments.run.RunFragment"
         android:label="RunFragment" >
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
@@ -128,12 +128,12 @@
 
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.example.activediet.fragments.StatisticsFragment"
+        android:name="com.example.activediet.fragments.run.StatisticsFragment"
         android:label="StatisticsFragment" />
 
     <fragment
         android:id="@+id/trackingFragment"
-        android:name="com.example.activediet.fragments.TrackingFragment"
+        android:name="com.example.activediet.fragments.run.TrackingFragment"
         android:label="TrackingFragment" >
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
@@ -141,7 +141,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.activediet.fragments.SettingsFragment"
+        android:name="com.example.activediet.fragments.run.SettingsFragment"
         android:label="SettingsFragment" />
 
 

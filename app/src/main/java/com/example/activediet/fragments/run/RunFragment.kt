@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.run
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

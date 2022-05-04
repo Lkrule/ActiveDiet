@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.run
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.activediet.R
 
-class TrackingFragment : Fragment() {
-
+class SetupFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +18,7 @@ class TrackingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tracking, container, false)
+        return inflater.inflate(R.layout.fragment_setup, container, false)
     }
 
 }

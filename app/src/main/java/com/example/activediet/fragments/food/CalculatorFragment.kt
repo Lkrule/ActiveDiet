@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.food
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -64,7 +64,9 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun navigateToDailyFragment() {
-        val action = CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
+        val action =
+            com.example.activediet.fragments.food
+                .CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
         findNavController().navigate(action)
     }
 

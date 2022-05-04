@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.run
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.activediet.R
-import com.example.activediet.databinding.FragmentSearchBinding
 import com.example.activediet.databinding.FragmentSettingsBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

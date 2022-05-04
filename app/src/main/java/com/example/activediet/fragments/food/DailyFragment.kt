@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.food
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -88,8 +88,10 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         }
 
         val button3 = binding.backToMenu
-        button3.setOnClickListener{
-            val action = DailyFragmentDirections.actionDailyFragmentToBlankFragment2()
+        button3.setOnClickListener {
+            val action =
+                com.example.activediet.fragments.food
+                    .DailyFragmentDirections.actionDailyFragmentToBlankFragment2()
             findNavController().navigate(action)
         }
     }
@@ -129,7 +131,11 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     }
 
     override fun addItemClicked(pos: Int) {
-        val action = DailyFragmentDirections.actionDailyFragmentToSearchFragment(highlightedDate)
+        val action =
+            com.example.activediet.fragments.food
+                .DailyFragmentDirections.actionDailyFragmentToSearchFragment(
+                highlightedDate
+            )
         findNavController().navigate(action)
     }
 
@@ -186,9 +192,11 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.daily_menu_settings -> {
-                val action = DailyFragmentDirections.actionDailyFragmentToCalculatorFragment()
+                val action =
+                    com.example.activediet.fragments.food
+                        .DailyFragmentDirections.actionDailyFragmentToCalculatorFragment()
                 findNavController().navigate(action)
                 true
             }

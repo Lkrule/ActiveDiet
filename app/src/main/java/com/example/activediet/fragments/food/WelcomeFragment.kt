@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.food
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -39,14 +39,18 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.welcomeNextBtn.setOnClickListener {
-                val action = WelcomeFragmentDirections.actionWelcomeFragmentToCalculatorFragment()
+                val action =
+                    com.example.activediet.fragments.food
+                        .WelcomeFragmentDirections.actionWelcomeFragmentToCalculatorFragment()
             findNavController().navigate(action)
         }
     }
 
 
     private fun navigateToDailyFragment() {
-        val action = WelcomeFragmentDirections.actionWelcomeFragmentToDailyFragment()
+        val action =
+            com.example.activediet.fragments.food
+                .WelcomeFragmentDirections.actionWelcomeFragmentToDailyFragment()
         findNavController().navigate(action)
     }
 }

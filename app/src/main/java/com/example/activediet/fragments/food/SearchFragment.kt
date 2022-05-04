@@ -1,4 +1,4 @@
-package com.example.activediet.fragments
+package com.example.activediet.fragments.food
 
 import android.os.Bundle
 import android.text.InputType
@@ -27,7 +27,7 @@ class SearchFragment : Fragment(), SearchIngredientPagingAdapter.OnItemClickList
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private val args: SearchFragmentArgs by navArgs()
+    private val args: com.example.activediet.fragments.food.SearchFragmentArgs by navArgs()
 
     @Inject
     lateinit var api: FoodAPI
