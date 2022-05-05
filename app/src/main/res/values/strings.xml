@@ -61,4 +61,15 @@
     <string name="welcome_to_the_active_diet_app">Welcome to the Active Diet App!</string>
     <string name="healthy_recipes">Healthy Recipes</string>
     <string name="workouts">workoutS</string>
+
+
+    <string name="test_name">RunningApp</string>
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
+
 </resources>

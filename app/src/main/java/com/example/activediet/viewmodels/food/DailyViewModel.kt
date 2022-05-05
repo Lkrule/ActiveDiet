@@ -1,4 +1,4 @@
-package com.example.activediet.viewmodels
+package com.example.activediet.viewmodels.food
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

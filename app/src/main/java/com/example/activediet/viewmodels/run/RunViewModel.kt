@@ -1,4 +1,4 @@
-package com.example.activediet.viewmodels
+package com.example.activediet.viewmodels.run
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel

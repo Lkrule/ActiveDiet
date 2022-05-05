@@ -16,7 +16,7 @@ import com.example.activediet.adapters.SearchIngredientPagingAdapter
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.databinding.FragmentSearchBinding
-import com.example.activediet.viewmodels.SearchViewModel
+import com.example.activediet.viewmodels.food.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

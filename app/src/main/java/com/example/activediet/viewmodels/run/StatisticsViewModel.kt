@@ -1,4 +1,4 @@
-package com.example.activediet.viewmodels
+package com.example.activediet.viewmodels.run
 
 import androidx.lifecycle.ViewModel
 import com.example.activediet.repos.RunRepository

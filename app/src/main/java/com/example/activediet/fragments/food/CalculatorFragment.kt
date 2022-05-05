@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.databinding.FragmentCalculatorBinding
 import com.example.activediet.utilities.BMRCalculator
-import com.example.activediet.viewmodels.CalculatorViewModel
+import com.example.activediet.viewmodels.food.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -12,7 +12,7 @@ import com.example.activediet.adapters.ProductAdapter
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentDailyBinding
-import com.example.activediet.viewmodels.DailyViewModel
+import com.example.activediet.viewmodels.food.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
