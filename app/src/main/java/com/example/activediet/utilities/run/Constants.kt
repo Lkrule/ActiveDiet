@@ -1,4 +1,4 @@
-package com.example.activediet.utilities
+package com.example.activediet.utilities.run
 
 import android.graphics.Color
 

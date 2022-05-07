@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
-import com.example.activediet.databinding.FragmentSettingsBinding
 import com.example.activediet.databinding.FragmentSetupBinding
-import com.example.activediet.utilities.Constants.KEY_FIRST_TIME_TOGGLE
-import com.example.activediet.utilities.Constants.KEY_NAME
-import com.example.activediet.utilities.Constants.KEY_WEIGHT
+import com.example.activediet.utilities.run.Constants.KEY_FIRST_TIME_TOGGLE
+import com.example.activediet.utilities.run.Constants.KEY_NAME
+import com.example.activediet.utilities.run.Constants.KEY_WEIGHT
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

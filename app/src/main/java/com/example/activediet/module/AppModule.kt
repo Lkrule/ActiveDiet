@@ -7,11 +7,10 @@ import com.example.activediet.api.FoodAPI
 import com.example.activediet.db.AppDatabase
 import com.example.activediet.db.IngredientsDao
 import com.example.activediet.db.RunningDatabase
-import com.example.activediet.utilities.Constants.KEY_FIRST_TIME_TOGGLE
-import com.example.activediet.utilities.Constants.KEY_NAME
-import com.example.activediet.utilities.Constants.KEY_WEIGHT
-import com.example.activediet.utilities.Constants.RUNNING_DATABASE_NAME
-import com.example.activediet.utilities.Constants.SHARED_PREFERENCES_NAME
+import com.example.activediet.utilities.run.Constants.KEY_FIRST_TIME_TOGGLE
+import com.example.activediet.utilities.run.Constants.KEY_NAME
+import com.example.activediet.utilities.run.Constants.KEY_WEIGHT
+import com.example.activediet.utilities.run.Constants.RUNNING_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

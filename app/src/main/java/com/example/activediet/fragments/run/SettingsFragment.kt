@@ -10,8 +10,8 @@ import com.example.activediet.databinding.FragmentSettingsBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.example.activediet.utilities.Constants.KEY_NAME
-import com.example.activediet.utilities.Constants.KEY_WEIGHT
+import com.example.activediet.utilities.run.Constants.KEY_NAME
+import com.example.activediet.utilities.run.Constants.KEY_WEIGHT
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
