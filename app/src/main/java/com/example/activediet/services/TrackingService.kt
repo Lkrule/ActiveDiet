@@ -41,7 +41,7 @@ import javax.inject.Inject
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
 
-// @AndroidEntryPoint
+@AndroidEntryPoint
 class TrackingService : LifecycleService() {
 
     var isFirstRun = true
