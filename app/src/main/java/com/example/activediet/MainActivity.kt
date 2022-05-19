@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.activediet.databinding.ActivityMainBinding
-import com.example.activediet.utilities.MyService
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,14 +24,6 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navView, navController)
 
 
-    }
-    override fun onResume() {
-        stopService(Intent(this, MyService::class.java))
-        super.onResume()
-    }
-    override fun onStop() {
-        ContextCompat.startForegroundService(this, Intent(this, MyService::class.java))
-        super.onStop()
     }
 
     override fun onSupportNavigateUp(): Boolean {

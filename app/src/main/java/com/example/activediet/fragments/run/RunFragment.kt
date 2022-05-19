@@ -45,9 +45,9 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         super.onViewCreated(view, savedInstanceState)
 
 
-/*        requestPermissions()*/
-
-/*        setupRecyclerView()*/
+    /*        requestPermissions()
+                setupRecyclerView()
+ */
 
         when(viewModel.sortType) {
             SortType.DATE -> binding.spFilter.setSelection(0)

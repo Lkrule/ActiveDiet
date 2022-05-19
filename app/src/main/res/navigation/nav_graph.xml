@@ -109,8 +109,8 @@
 
     <fragment
         android:id="@+id/setupFragment"
-        android:name="com.example.activediet.fragments.run.SettingsFragment"
-        android:label="SetupFragment" >
+        android:name="com.example.activediet.fragments.run.SetupFragment"
+        android:label="SetupFragment">
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment" />

@@ -5,14 +5,42 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.activediet.R
+import com.bumptech.glide.Glide
 import com.example.activediet.databinding.RunItemBinding
 import com.example.activediet.db.Run
+import com.example.activediet.utilities.run.TrackingUtility
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
-    inner class RunViewHolder(private val binding: RunItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class RunViewHolder(private val binding: RunItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(run: Run) {
+            binding.apply {
+                Glide.with(itemView).load(run.img).into(ivRunImage)
+
+                val calendar = Calendar.getInstance().apply {
+                    timeInMillis = run.timestamp
+                }
+                val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+                tvDate.text = dateFormat.format(calendar.time)
+
+                val avgSpeed = "${ run.avgSpeedInKMH }km/h"
+                tvAvgSpeed.text = avgSpeed
+
+                val distanceInKm = "${run.distanceInMeters / 1000f}km"
+                tvDistance.text = distanceInKm
+
+                tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
+
+                val caloriesBurned = "${run.caloriesBurned}kcal"
+                tvCalories.text = caloriesBurned
+            }
+        }
+    }
 
     private val diffCallback = object : DiffUtil.ItemCallback<Run>(){
         override fun areItemsTheSame(oldItem: Run, newItem: Run): Boolean {
@@ -34,29 +62,8 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RunViewHolder, position: Int) {
-/*
         val run = differ.currentList[position]
-        holder.itemView.apply {
-            Glide.with(this).load(run.img).into(ivRunImage)
-
-            val calendar = Calendar.getInstance().apply {
-                timeInMillis = run.timestamp
-            }
-            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-            tvDate.text = dateFormat.format(calendar.time)
-
-            val avgSpeed = "${ run.avgSpeedInKMH }km/h"
-            tvAvgSpeed.text = avgSpeed
-
-            val distanceInKm = "${run.distanceInMeters / 1000f}km"
-            tvDistance.text = distanceInKm
-
-            tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
-
-            val caloriesBurned = "${run.caloriesBurned}kcal"
-            tvCalories.text = caloriesBurned
-        }*/
-
+        holder.bind(run)
     }
 
     override fun getItemCount(): Int {

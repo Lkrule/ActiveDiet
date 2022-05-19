@@ -3,16 +3,11 @@ package com.example.activediet.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.activediet.R
 import com.example.activediet.databinding.FragmentBlankBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,13 +41,42 @@ class BlankFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // If we want to move to other fragments from menu
-
-        val button2 = binding.stepCountBttn
-        button2.setOnClickListener{
-            val action = BlankFragmentDirections.actionBlankFragmentToStepFragment()
-            findNavController().navigate(action)
+        val vegetarian_button = binding.Vegetarian
+        vegetarian_button.setOnClickListener {
+            goToUrl("https://www.self.com/gallery/high-protein-vegetarian-meals")
         }
-
+        val vegan_button = binding.Vegan
+        vegan_button.setOnClickListener {
+            goToUrl("https://www.olivemagazine.com/recipes/collection/high-protein-vegan-meals/")
+        }
+        val low_cal_button = binding.LowCal
+        low_cal_button.setOnClickListener {
+            goToUrl("https://www.bbcgoodfood.com/recipes/category/all-healthy")
+        }
+        val post_button = binding.appCompatButton3
+        post_button.setOnClickListener {
+            goToUrl("https://www.rhoderunner.com/run-club-blog/what-to-do-immediately-after-a-run")
+        }
+        val warmup_button = binding.appCompatButton2
+        warmup_button.setOnClickListener {
+            goToUrl("https://www.planetfitness.com/community/articles/easy-10-minute-cardio-warm")
+        }
+        val running_button = binding.appCompatButton
+        running_button.setOnClickListener {
+            goToUrl("https://www.nytimes.com/guides/well/how-to-start-running")
+        }
+        val train_button = binding.trainingButton
+        train_button.setOnClickListener{
+            goToUrl("https://www.nuffieldhealth.com/article/gym-workouts-for-beginners")
+        }
+        val health_button = binding.healthButton
+        health_button.setOnClickListener{
+            goToUrl("https://kaynutrition.com/healthy-daily-habits/")
+        }
+        val func_training_button = binding.functionalTraining
+        func_training_button.setOnClickListener{
+            goToUrl("https://www.webmd.com/fitness-exercise/how-to-exercise-with-functional-training")
+        }
         val button3 = binding.calculateNav
         button3.setOnClickListener{
             val action = BlankFragmentDirections.actionBlankFragmentToCalculatorFragment()
@@ -65,6 +89,7 @@ class BlankFragment : Fragment() {
             val currentDate = sdf.format(Date())
             val action = BlankFragmentDirections.actionBlankFragmentToSearchFragment(currentDate)
             findNavController().navigate(action)
+
         }
 
         val button5 = binding.dailyNav
@@ -72,23 +97,17 @@ class BlankFragment : Fragment() {
             val action = BlankFragmentDirections.actionBlankFragmentToDailyFragment()
             findNavController().navigate(action)
         }
+
         // If we want to do Hyperlinks from menu
-        val workOut_link = binding.workoutId
-        workOut_link.setOnClickListener {printText()}
-        val button6 = binding.stepCountBttn
 
         return binding.root
     }
 
-    public fun printText() {
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse
-                    ("https://www.masterclass.com/articles/full-body-workout-plan#how-to-do-a-fullbody-workout")
-            )
-        )
+    fun goToUrl(s: String) {
+        var my_url = Uri.parse(s)
+        startActivity( Intent(Intent.ACTION_VIEW,my_url))
     }
+
 }
 
 

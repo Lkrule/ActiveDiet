@@ -28,12 +28,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".utilities.MyService"
-            android:enabled="true"
-            android:exported="false"/>
-        
-        <receiver android:name=".utilities.MyPhoneReciver"/>
-
 
         <meta-data
             android:name="com.google.android.gms.version"
