@@ -1,5 +1,8 @@
 package com.example.activediet.fragments
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,30 +12,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.databinding.FragmentBlankBinding
+import com.example.activediet.utilities.AlarmReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BlankFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BlankFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-
     private lateinit var binding: FragmentBlankBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentBlankBinding.inflate(layoutInflater)
-
-
     }
 
 
@@ -40,6 +30,14 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val HOUR_TO_SHOW_PUSH = 9
+        val alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
+        val alarmPendingIntent by lazy{
+            val intent = Intent(context, AlarmReceiver::class.java)
+            PendingIntent.getBroadcast(context, 0, intent, 0)
+        }
+        // The hour we want to receive the notification daily
+        schedulePushNotifications(HOUR_TO_SHOW_PUSH, alarmManager, alarmPendingIntent)
         // If we want to move to other fragments from menu
         val vegetarian_button = binding.Vegetarian
         vegetarian_button.setOnClickListener {
@@ -98,16 +96,33 @@ class BlankFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        // If we want to do Hyperlinks from menu
-
         return binding.root
     }
-
+    fun schedulePushNotifications(
+        HOUR_TO_SHOW_PUSH: Int,
+        alarmManager: AlarmManager,
+        alarmPendingIntent: PendingIntent
+    ) {
+        val calendar = GregorianCalendar.getInstance().apply {
+            if (get(Calendar.HOUR_OF_DAY) >= HOUR_TO_SHOW_PUSH) {
+                add(Calendar.DAY_OF_MONTH, 1)
+            }
+            set(Calendar.HOUR_OF_DAY, HOUR_TO_SHOW_PUSH)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            alarmPendingIntent
+        )
+    }
     fun goToUrl(s: String) {
         var my_url = Uri.parse(s)
         startActivity( Intent(Intent.ACTION_VIEW,my_url))
     }
-
 }
 
 
