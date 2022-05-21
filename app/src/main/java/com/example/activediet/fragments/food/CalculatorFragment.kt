@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
@@ -87,32 +88,15 @@ class CalculatorFragment : Fragment() {
     private fun validateForm(): Boolean {
         var validationFailed = false
         binding.apply {
-            if (!BMRCalculator.validateGender(calcGenderSpinner.selectedItemPosition)) {
-                (calcGenderSpinner.selectedView as TextView).error =
-                    getString(R.string.item_required)
-                validationFailed = true
-            }
-            if (!BMRCalculator.validateWeight(calcWeightIn.text.toString())) {
-                calcWeightIn.error = getString(R.string.item_required)
-                validationFailed = true
-            }
-            if (!BMRCalculator.validateHeight(calcHeightIn.text.toString())) {
-                calcHeightIn.error = getString(R.string.item_required)
-                validationFailed = true
-            }
-            if (!BMRCalculator.validateAge(calcAgeIn.text.toString())) {
-                calcAgeIn.error = getString(R.string.item_required)
-                validationFailed = true
-            }
-            if (!BMRCalculator.validateActivity(calcActivitySpinner.selectedItemPosition)) {
-                (calcActivitySpinner.selectedView as TextView).error =
-                    getString(R.string.item_required)
-                validationFailed = true
-            }
-            if (!BMRCalculator.validateGoal(calcGoalSpinner.selectedItemPosition)) {
-                (calcGoalSpinner.selectedView as TextView).error =
-                    getString(R.string.item_required)
-                validationFailed = true
+            if (!BMRCalculator.validateInt(calcGenderSpinner.selectedItemPosition)||
+                !BMRCalculator.validateString(calcWeightIn.text.toString()) ||
+                !BMRCalculator.validateString(calcHeightIn.text.toString()) ||
+                !BMRCalculator.validateString(calcAgeIn.text.toString()) ||
+                !BMRCalculator.validateInt(calcActivitySpinner.selectedItemPosition) ||
+                !BMRCalculator.validateInt(calcGoalSpinner.selectedItemPosition)) {
+                    validationFailed = true
+                    Toast.makeText(context,"Not enough parameters.", Toast.LENGTH_LONG).show();
+
             }
         }
         return validationFailed

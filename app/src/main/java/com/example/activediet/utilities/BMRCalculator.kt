@@ -2,20 +2,15 @@ package com.example.activediet.utilities
 
 // singleton static object
 object BMRCalculator {
-    private val BenedictFormula = listOf(1.2, 1.375, 1.55, 1.725, 1.9)
+
+    // Harris-Benedict formula
+    private val energyFormula = listOf(1.2, 1.375, 1.55, 1.725, 1.9)
+    // goal
     private val goalFormula = listOf(-300, 0, 300)
 
-    fun validateGender(input: Int): Boolean = input > 0
+    fun validateInt(input: Int): Boolean = input > 0
 
-    fun validateWeight(input: String): Boolean = input.isNotEmpty()
-
-    fun validateHeight(input: String): Boolean = input.isNotEmpty()
-
-    fun validateAge(input: String): Boolean = input.isNotEmpty()
-
-    fun validateActivity(input: Int): Boolean = input > 0
-
-    fun validateGoal(input: Int): Boolean = input > 0
+    fun validateString(input: String): Boolean = input.isNotEmpty()
 
     fun calcBMRForGoal(
         gender: Int,
@@ -43,6 +38,6 @@ object BMRCalculator {
         bmr: Double,
         activity: Int
     ) : Double {
-        return bmr * BenedictFormula[activity - 1]
+        return bmr * energyFormula[activity - 1]
     }
 }
