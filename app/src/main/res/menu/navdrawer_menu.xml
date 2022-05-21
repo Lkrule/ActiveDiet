@@ -4,14 +4,14 @@
     <item
         android:id = "@+id/setupFragment"
         android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="GPS" />
+        android:title="Run" />
     <item
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="Sports" />
     <item
         android:id = "@+id/welcomeFragment"
         android:icon="@android:drawable/ic_menu_day"
-        android:title="Track" />
+        android:title="Schedule" />
     <item
         android:icon="@android:drawable/ic_menu_recent_history"
         android:title="History" />

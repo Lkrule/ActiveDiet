@@ -27,7 +27,7 @@ class SearchFragment : Fragment(), SearchIngredientPagingAdapter.OnItemClickList
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private val args: com.example.activediet.fragments.food.SearchFragmentArgs by navArgs()
+    private val args: SearchFragmentArgs by navArgs()
 
     @Inject
     lateinit var api: FoodAPI

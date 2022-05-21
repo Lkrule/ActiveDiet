@@ -39,18 +39,14 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.welcomeNextBtn.setOnClickListener {
-                val action =
-                    com.example.activediet.fragments.food
-                        .WelcomeFragmentDirections.actionWelcomeFragmentToCalculatorFragment()
+                val action = WelcomeFragmentDirections.actionWelcomeFragmentToCalculatorFragment()
             findNavController().navigate(action)
         }
     }
 
 
     private fun navigateToDailyFragment() {
-        val action =
-            com.example.activediet.fragments.food
-                .WelcomeFragmentDirections.actionWelcomeFragmentToDailyFragment()
+        val action = WelcomeFragmentDirections.actionWelcomeFragmentToDailyFragment()
         findNavController().navigate(action)
     }
 }
