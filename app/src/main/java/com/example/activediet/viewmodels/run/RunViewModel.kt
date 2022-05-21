@@ -5,14 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.activediet.db.Run
 import com.example.activediet.repos.RunRepository
+import com.example.activediet.utilities.SortType
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-enum class SortType {
-    DATE, RUNNING_TIME, AVG_SPEED, DISTANCE, CALORIES_BURNED
-}
 
-
+@HiltViewModel
 class RunViewModel @Inject constructor(
     private val runRepository: RunRepository
 ) : ViewModel() {

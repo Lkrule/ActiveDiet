@@ -1,5 +1,7 @@
 package com.example.activediet.fragments.run
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,12 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.R
 import com.example.activediet.adapters.RunAdapter
 import com.example.activediet.databinding.FragmentRunBinding
+import com.example.activediet.utilities.SortType
+import com.example.activediet.utilities.run.Constants.REQUEST_CODE_LOCATION_PERMISSION
+import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.viewmodels.run.RunViewModel
-import com.example.activediet.viewmodels.run.SortType
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -45,9 +51,9 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         super.onViewCreated(view, savedInstanceState)
 
 
-    /*        requestPermissions()
-                setupRecyclerView()
- */
+        requestPermissions()
+        setupRecyclerView()
+
 
         when(viewModel.sortType) {
             SortType.DATE -> binding.spFilter.setSelection(0)
@@ -71,11 +77,11 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-/*
+
         viewModel.runs.observe(viewLifecycleOwner, Observer {
             runAdapter.submitList(it)
         })
-*/
+
 
 
         binding.fab.setOnClickListener {
@@ -83,13 +89,13 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
-/*    private fun setupRecyclerView() = rvRuns.apply {
+     private fun setupRecyclerView() = binding.rvRuns.apply {
         runAdapter = RunAdapter()
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
-    }*/
+    }
 
-    /*private fun requestPermissions(){
+    private fun requestPermissions(){
         if (TrackingUtility.hasLocationPermissions(requireContext())){
             return
         }
@@ -114,7 +120,7 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 )
             }
         }
-    }*/
+    }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) { }
 
@@ -123,7 +129,7 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             AppSettingsDialog.Builder(this).build().show()
         }
         else{
-           /* requestPermissions()*/
+           requestPermissions()
         }
     }
 
