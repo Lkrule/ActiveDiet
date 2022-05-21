@@ -26,9 +26,6 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_blankFragment_to_stepFragment"
-            app:destination="@id/stepFragment" />
     </fragment>
 
     <fragment
@@ -92,16 +89,6 @@
             android:name="date"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/stepFragment"
-        android:name="com.example.activediet.fragments.StepFragment"
-        android:label="step_counter"
-        tools:layout="@layout/step_counter" >
-        <action
-            android:id="@+id/action_stepFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
-    </fragment>
-
 
     <action android:id="@+id/action_global_trackingFragment"
         app:destination="@+id/trackingFragment"

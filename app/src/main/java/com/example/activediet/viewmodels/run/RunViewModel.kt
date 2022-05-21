@@ -16,11 +16,11 @@ class RunViewModel @Inject constructor(
     private val runRepository: RunRepository
 ) : ViewModel() {
 
-    private val runsSortedByDate = runRepository.getAllRunsSortedByDate()
-    private val runsSortedByDistance = runRepository.getAllRunsSortedByDistance()
-    private val runsSortedByCaloriesBurned = runRepository.getAllRunsSortedByCaloriesBurned()
-    private val runsSortedByTimeInMillis = runRepository.getAllRunsSortedByTimeInMillis()
-    private val runsSortedByAvgSpeed = runRepository.getAllRunsSortedByAvgSpeed()
+    private val runsSortedByDate = runRepository.allRunsSortedBy("timestamp")
+    private val runsSortedByDist = runRepository.allRunsSortedBy("distance")
+    private val runsSortedByCalsBurned = runRepository.allRunsSortedBy("calories")
+    private val runsSortedByTimeInMs = runRepository.allRunsSortedBy("time_ms")
+    private val runsSortedByAvgSpeed = runRepository.allRunsSortedBy("speed")
 
 
     val runs = MediatorLiveData<List<Run>>()
@@ -38,17 +38,17 @@ class RunViewModel @Inject constructor(
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(runsSortedByCaloriesBurned) { result ->
+        runs.addSource(runsSortedByCalsBurned) { result ->
             if (sortType == SortType.CALORIES_BURNED) {
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(runsSortedByDistance) { result ->
+        runs.addSource(runsSortedByDist) { result ->
             if (sortType == SortType.DISTANCE) {
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(runsSortedByTimeInMillis) { result ->
+        runs.addSource(runsSortedByTimeInMs) { result ->
             if (sortType == SortType.RUNNING_TIME) {
                 result?.let { runs.value = it }
             }
@@ -57,10 +57,10 @@ class RunViewModel @Inject constructor(
 
     fun sortRuns(sortType: SortType) = when (sortType) {
         SortType.DATE -> runsSortedByDate.value?.let { runs.value = it }
-        SortType.RUNNING_TIME -> runsSortedByTimeInMillis.value?.let { runs.value = it }
+        SortType.RUNNING_TIME -> runsSortedByTimeInMs.value?.let { runs.value = it }
         SortType.AVG_SPEED -> runsSortedByAvgSpeed.value?.let { runs.value = it }
-        SortType.DISTANCE -> runsSortedByDistance.value?.let { runs.value = it }
-        SortType.CALORIES_BURNED -> runsSortedByCaloriesBurned.value?.let { runs.value = it }
+        SortType.DISTANCE -> runsSortedByDist.value?.let { runs.value = it }
+        SortType.CALORIES_BURNED -> runsSortedByCalsBurned.value?.let { runs.value = it }
     }.also {
         this.sortType = sortType
     }
@@ -68,6 +68,10 @@ class RunViewModel @Inject constructor(
 
     fun insertRun(run: Run) = viewModelScope.launch {
         runRepository.insertRun(run)
+    }
+
+    fun deleteRun(run: Run) = viewModelScope.launch {
+        runRepository.deleteRun(run)
     }
 
 }

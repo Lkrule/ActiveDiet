@@ -20,23 +20,23 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
         fun bind(run: Run) {
             binding.apply {
-                Glide.with(itemView).load(run.img).into(ivRunImage)
+                Glide.with(itemView).load(run.Image).into(ivRunImage)
 
                 val calendar = Calendar.getInstance().apply {
-                    timeInMillis = run.timestamp
+                    timeInMillis = run.TimeStamp
                 }
                 val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
                 tvDate.text = dateFormat.format(calendar.time)
 
-                val avgSpeed = "${ run.avgSpeedInKMH }km/h"
+                val avgSpeed = "${ run.AvgSpeedInKmh }km/h"
                 tvAvgSpeed.text = avgSpeed
 
-                val distanceInKm = "${run.distanceInMeters / 1000f}km"
+                val distanceInKm = "${run.DistInMeters / 1000f}km"
                 tvDistance.text = distanceInKm
 
-                tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
+                tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.TimeInMs)
 
-                val caloriesBurned = "${run.caloriesBurned}kcal"
+                val caloriesBurned = "${run.CalBurned}kcal"
                 tvCalories.text = caloriesBurned
             }
         }

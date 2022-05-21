@@ -7,6 +7,6 @@ import com.example.activediet.data.IngredientSearch
 
 @Database(entities = [IngredientSearch::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class FoodDatabase : RoomDatabase() {
     abstract fun ingredientDao(): IngredientsDao
 }

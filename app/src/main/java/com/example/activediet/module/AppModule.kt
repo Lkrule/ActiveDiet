@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.activediet.api.FoodAPI
-import com.example.activediet.db.AppDatabase
+import com.example.activediet.db.FoodDatabase
 import com.example.activediet.db.IngredientsDao
 import com.example.activediet.db.RunningDatabase
 import com.example.activediet.utilities.run.Constants.KEY_FIRST_TIME_TOGGLE
@@ -61,17 +61,17 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+    fun provideDatabase(@ApplicationContext context: Context): FoodDatabase {
         return Room.databaseBuilder(
             context,
-            AppDatabase::class.java,
+            FoodDatabase::class.java,
             "ingredients_db"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideIngredientsDao(db: AppDatabase): IngredientsDao {
+    fun provideIngredientsDao(db: FoodDatabase): IngredientsDao {
         return db.ingredientDao()
     }
 

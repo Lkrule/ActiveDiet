@@ -64,16 +64,13 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun navigateToDailyFragment() {
-        val action =
-            com.example.activediet.fragments.food
-                .CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
+        val action = CalculatorFragmentDirections
+            .actionCalculatorFragmentToDailyFragment()
         findNavController().navigate(action)
     }
 
     private val calculateButtonListener = View.OnClickListener {
-        var validationFailed = validateForm()
-
-        if (!validationFailed) {
+        if (!validateForm()) {
             binding.apply {
                 viewModel.calculateBMR(
                     gender = calcGenderSpinner.selectedItemPosition,

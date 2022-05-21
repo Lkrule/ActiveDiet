@@ -17,7 +17,7 @@ class CalculatorViewModel : ViewModel() {
         activity: Int,
         goal: Int
     ) {
-        _bmrLiveData.value = BMRCalculator.calculateBMRForGoal(
+        _bmrLiveData.value = BMRCalculator.calcBMRForGoal(
             gender, weight, height, age, activity, goal
         )
     }

@@ -71,13 +71,15 @@ class StatisticsFragment : Fragment() {
     }
 
     private fun subscribeToObservers() {
-        viewModel.totalTimeRun.observe(viewLifecycleOwner, Observer {
+        viewModel.totalTimeInMs.observe(viewLifecycleOwner, Observer
+        {
             it?.let {
-                val totalTimeRun = TrackingUtility.getFormattedStopWatchTime(it)
-                binding.tvTotalTime.text = totalTimeRun
+                    val totalTimeRun = TrackingUtility.getFormattedStopWatchTime(it)
+                    binding.tvTotalTime.text = totalTimeRun
+                }
             }
-        })
-        viewModel.totalDistance.observe(viewLifecycleOwner, Observer {
+        )
+        viewModel.totalDist.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val km = it / 1000f
                 val totalDistance = Math.round(km * 10f) / 10f
@@ -92,7 +94,7 @@ class StatisticsFragment : Fragment() {
                 binding.tvAverageSpeed.text = avgSpeedString
             }
         })
-        viewModel.totalCaloriesBurned.observe(viewLifecycleOwner, Observer {
+        viewModel.totalCalsBurned.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val totalCalories = "${it}kcal"
                 binding.tvTotalCalories.text = totalCalories
@@ -101,12 +103,12 @@ class StatisticsFragment : Fragment() {
 
         viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
             it?.let {
-                val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].avgSpeedInKMH) }
-                val bardataSet = BarDataSet(allAvgSpeeds, "Avg Speed Over Time").apply {
+                val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
+                val barDataSet = BarDataSet(allAvgSpeeds, "Avg Speed Over Time").apply {
                     valueTextColor = Color.WHITE
                     color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
                 }
-                binding.barChart.data = BarData(bardataSet)
+                binding.barChart.data = BarData(barDataSet)
                 binding.barChart.marker = CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
                 binding.barChart.invalidate()
             }
