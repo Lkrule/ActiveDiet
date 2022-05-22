@@ -12,13 +12,12 @@ interface RunDAO {
     @Delete
     suspend fun deleteRun(run: Run)
 
-    // st
 
     @Query("SELECT SUM(TimeInMs) FROM running_table")
-    fun getTotalTimeInMillis(): LiveData<Long>
+    fun getTotalTimeInMs(): LiveData<Long>
 
     @Query("SELECT SUM(CalBurned) FROM running_table")
-    fun getTotalCaloriesBurned(): LiveData<Int>
+    fun getTotalCalsBurned(): LiveData<Int>
 
     @Query("SELECT SUM(DistInMeters) FROM running_table")
     fun getTotalDistance(): LiveData<Int>

@@ -26,11 +26,6 @@ class SearchViewModel @Inject constructor(
         _searchIngredientsLiveData
 
     fun searchIngredients(query: String, metaInformation: Boolean) {
-        viewModelScope.launch() {
-            repo.searchIngredients(query, metaInformation).cachedIn(viewModelScope).collect {
-                    _searchIngredientsLiveData.value = it
-            }
-        }
     }
 
     fun addIngredient(meal: Int, date: String, ingredient: IngredientSearch, amount: Int) {

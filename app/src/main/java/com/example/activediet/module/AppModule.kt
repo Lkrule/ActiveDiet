@@ -81,7 +81,7 @@ class AppModule {
         return context.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
     }
 
-    // test
+    // run module
 
     @Singleton
     @Provides

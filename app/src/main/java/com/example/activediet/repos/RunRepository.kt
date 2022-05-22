@@ -17,7 +17,7 @@ class RunRepository @Inject constructor(
 
     fun getTotalDist() = runDao.getTotalDistance()
 
-    fun getTotalCalsBurned() = runDao.getTotalCaloriesBurned()
+    fun getTotalCalsBurned() = runDao.getTotalCalsBurned()
 
-    fun getTotalTimeInMs() = runDao.getTotalTimeInMillis()
+    fun getTotalTimeInMs() = runDao.getTotalTimeInMs()
 }
