@@ -19,7 +19,7 @@ class MealsAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: String, pos: Int) {
-            binding.titleTv.text = title
+            binding.title.text = title
 
             binding.addBtn.setOnClickListener {
                 mealsListener.addItemClicked(pos)
@@ -37,9 +37,9 @@ class MealsAdapter(
 
         fun updateTotals(totals: MealTotals) {
             binding.apply {
-                kcalTv.text = String.format("%.2f", totals.kcal) + " kcal"
-                fatTv.text = String.format("%.2f", totals.fats) + " g"
-                proteinTv.text = String.format("%.2f", totals.proteins) + " g"
+                kcal.text = String.format("%.2f", totals.kcal) + " kcal"
+                fat.text = String.format("%.2f", totals.fats) + " g"
+                protein.text = String.format("%.2f", totals.proteins) + " g"
                 carbsTv.text = String.format("%.2f", totals.carbs) + " g"
             }
         }

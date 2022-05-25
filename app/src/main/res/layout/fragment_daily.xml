@@ -43,15 +43,6 @@
             app:layout_constraintStart_toEndOf="@+id/daily_date_tv"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/back_to_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Menu"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -175,5 +166,12 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/back_to_menu"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Menu" />
 
 </LinearLayout>

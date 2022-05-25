@@ -51,9 +51,9 @@ class CalculatorFragment : Fragment() {
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
             binding.apply {
                 calculatedBmr = bmr.toFloat()
-                calcCalculatedBmrTv.visibility = View.VISIBLE
-                calcCalculatedBmrTv.text = calculatedBmr.toString() + " ${getString(R.string.kcal)}"
-                calcYourBmrTv.visibility = View.VISIBLE
+                calcCalculatedBmr.visibility = View.VISIBLE
+                calcCalculatedBmr.text = calculatedBmr.toString() + " ${getString(R.string.kcal)}"
+                calcYourBmr.visibility = View.VISIBLE
                 calcApplyButton.visibility = View.VISIBLE
             }
         }

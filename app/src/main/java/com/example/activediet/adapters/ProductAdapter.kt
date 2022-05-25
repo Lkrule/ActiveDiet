@@ -17,22 +17,22 @@ class ProductAdapter(
 
         fun bind(ingredient: IngredientSearch) {
             binding.apply {
-                productItemTitleTv.text = ingredient.name.replaceFirstChar { it.uppercase() }
+                productItemTitle.text = ingredient.name.replaceFirstChar { it.uppercase() }
 
-                productItemQuantityTv.text = ingredient.let {
+                productItemQuantity.text = ingredient.let {
                     "${it.amount} ${it.unit}"
                 }
 
-                productItemKcalTv.text = ingredient.nutrients.getCalories().let {
+                productItemKcal.text = ingredient.nutrients.getCalories().let {
                     "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
-                productItemFatTv.text = ingredient.nutrients.getFat().let {
+                productItemFat.text = ingredient.nutrients.getFat().let {
                     "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
-                productItemCarbsTv.text = ingredient.nutrients.getCarbs().let {
+                productItemCarbs.text = ingredient.nutrients.getCarbs().let {
                     "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
-                productItemProteinTv.text =
+                productItemProtein.text =
                     ingredient.nutrients.getProtein().let {
                         "${String.format("%.2f", it.amount)} ${it.unit}"
                     }

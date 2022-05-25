@@ -25,7 +25,7 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/title_tv"
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/breakfast"
@@ -36,49 +36,49 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/kcal_tv"
+                    android:id="@+id/kcal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="50 kcal"
-                    app:layout_constraintEnd_toStartOf="@+id/protein_tv"
+                    app:layout_constraintEnd_toStartOf="@+id/protein"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/title" />
 
                 <TextView
-                    android:id="@+id/protein_tv"
+                    android:id="@+id/protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.5 g"
-                    app:layout_constraintBottom_toBottomOf="@+id/kcal_tv"
-                    app:layout_constraintEnd_toStartOf="@+id/fat_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/kcal"
+                    app:layout_constraintEnd_toStartOf="@+id/fat"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/kcal_tv"
-                    app:layout_constraintTop_toTopOf="@+id/kcal_tv" />
+                    app:layout_constraintStart_toEndOf="@+id/kcal"
+                    app:layout_constraintTop_toTopOf="@+id/kcal" />
 
                 <TextView
-                    android:id="@+id/fat_tv"
+                    android:id="@+id/fat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.5 g"
-                    app:layout_constraintBottom_toBottomOf="@+id/protein_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/protein"
                     app:layout_constraintEnd_toStartOf="@+id/carbs_tv"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/protein_tv"
-                    app:layout_constraintTop_toTopOf="@+id/protein_tv" />
+                    app:layout_constraintStart_toEndOf="@+id/protein"
+                    app:layout_constraintTop_toTopOf="@+id/protein" />
 
                 <TextView
                     android:id="@+id/carbs_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.5 g"
-                    app:layout_constraintBottom_toBottomOf="@+id/fat_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/fat"
                     app:layout_constraintEnd_toStartOf="@+id/guideline8"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/fat_tv"
-                    app:layout_constraintTop_toTopOf="@+id/fat_tv" />
+                    app:layout_constraintStart_toEndOf="@+id/fat"
+                    app:layout_constraintTop_toTopOf="@+id/fat" />
 
                 <ImageView
                     android:id="@+id/add_btn"

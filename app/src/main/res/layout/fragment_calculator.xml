@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/calc_gender_tv"
+            android:id="@+id/calc_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gender"
@@ -22,29 +22,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:entries="@array/genders"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_gender_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/calc_gender"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/calc_gender_tv" />
+            app:layout_constraintTop_toTopOf="@+id/calc_gender" />
 
         <TextView
-            android:id="@+id/calc_weight_tv"
+            android:id="@+id/calc_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="@string/weight"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/calc_gender_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_gender" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_weight_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/calc_weight"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/calc_weight_tv">
+            app:layout_constraintTop_toTopOf="@+id/calc_weight">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/calc_weight_in"
@@ -55,7 +55,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/calc_kg_tv"
+            android:id="@+id/calc_kg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kg"
@@ -64,23 +64,23 @@
             app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
         <TextView
-            android:id="@+id/calc_height_tv"
+            android:id="@+id/calc_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="@string/height"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/calc_weight_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_weight" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutHeight"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_height_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/calc_height"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/calc_height_tv">
+            app:layout_constraintTop_toTopOf="@+id/calc_height">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/calc_height_in"
@@ -91,7 +91,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/calc_cm_tv"
+            android:id="@+id/calc_cm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cm"
@@ -100,23 +100,23 @@
             app:layout_constraintTop_toTopOf="@+id/textInputLayoutHeight" />
 
         <TextView
-            android:id="@+id/calc_age_tv"
+            android:id="@+id/calc_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="@string/age"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/calc_height_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_height" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutAge"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_age_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/calc_age"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/calc_age_tv">
+            app:layout_constraintTop_toTopOf="@+id/calc_age">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/calc_age_in"
@@ -127,7 +127,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/calc_years_tv"
+            android:id="@+id/calc_years"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/years"
@@ -136,42 +136,42 @@
             app:layout_constraintTop_toTopOf="@+id/textInputLayoutAge" />
 
         <TextView
-            android:id="@+id/calc_activity_tv"
+            android:id="@+id/calc_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="@string/activity"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/calc_age_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_age" />
 
         <Spinner
             android:id="@+id/calc_activity_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:entries="@array/activity_level"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_activity_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/calc_activity"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/calc_activity_tv" />
+            app:layout_constraintTop_toTopOf="@+id/calc_activity" />
 
         <TextView
-            android:id="@+id/calc_goal_tv"
+            android:id="@+id/calc_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="@string/goal"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/calc_activity_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_activity" />
 
         <Spinner
             android:id="@+id/calc_goal_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:entries="@array/goals"
-            app:layout_constraintBottom_toBottomOf="@+id/calc_goal_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/calc_goal"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/calc_goal_tv" />
+            app:layout_constraintTop_toTopOf="@+id/calc_goal" />
 
         <Button
             android:id="@+id/calc_calculate_btn"
@@ -184,7 +184,7 @@
             app:layout_constraintTop_toBottomOf="@+id/calc_goal_spinner" />
 
         <TextView
-            android:id="@+id/calc_your_bmr_tv"
+            android:id="@+id/calc_your_bmr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
@@ -198,7 +198,7 @@
 
 
         <TextView
-            android:id="@+id/calc_calculated_bmr_tv"
+            android:id="@+id/calc_calculated_bmr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -207,7 +207,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calc_your_bmr_tv"
+            app:layout_constraintTop_toBottomOf="@+id/calc_your_bmr"
             tools:text="1950 kcal"
             tools:visibility="visible" />
 
@@ -221,7 +221,7 @@
             tools:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/calc_calculated_bmr_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/calc_calculated_bmr" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

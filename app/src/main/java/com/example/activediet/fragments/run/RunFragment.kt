@@ -56,14 +56,14 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         when(viewModel.sortType) {
-            SortType.DATE -> binding.spFilter.setSelection(0)
-            SortType.RUNNING_TIME -> binding.spFilter.setSelection(1)
-            SortType.DISTANCE -> binding.spFilter.setSelection(2)
-            SortType.AVG_SPEED -> binding.spFilter.setSelection(3)
-            SortType.CALORIES_BURNED -> binding.spFilter.setSelection(4)
+            SortType.DATE -> binding.filter.setSelection(0)
+            SortType.RUNNING_TIME -> binding.filter.setSelection(1)
+            SortType.DISTANCE -> binding.filter.setSelection(2)
+            SortType.AVG_SPEED -> binding.filter.setSelection(3)
+            SortType.CALORIES_BURNED -> binding.filter.setSelection(4)
         }
 
-        binding.spFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
 
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
@@ -89,7 +89,7 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
-     private fun setupRecyclerView() = binding.rvRuns.apply {
+     private fun setupRecyclerView() = binding.runs.apply {
         runAdapter = RunAdapter()
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
@@ -135,13 +135,13 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     // fix  deprecated code
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//
+//        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+//    }
 }

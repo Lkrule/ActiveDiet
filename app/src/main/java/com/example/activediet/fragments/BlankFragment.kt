@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.activediet.MainActivity
 import com.example.activediet.databinding.FragmentBlankBinding
 import com.example.activediet.utilities.AlarmReceiver
 import java.text.SimpleDateFormat
@@ -96,6 +97,7 @@ class BlankFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+        binding = FragmentBlankBinding.inflate(layoutInflater)
         return binding.root
     }
     fun schedulePushNotifications(
