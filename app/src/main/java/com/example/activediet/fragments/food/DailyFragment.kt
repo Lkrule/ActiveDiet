@@ -1,8 +1,17 @@
 package com.example.activediet.fragments.food
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +21,7 @@ import com.example.activediet.adapters.ProductAdapter
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentDailyBinding
+import com.example.activediet.fragments.BlankFragment
 import com.example.activediet.viewmodels.food.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -61,6 +71,13 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val CHANNEL_ID = "Daily_Reminder"
+        val notificationId = 1337
+        createNotificationChannel(CHANNEL_ID, notificationId)
+        val set_reminder = binding.reminder
+        set_reminder.setOnClickListener {
+            sendNotification(CHANNEL_ID, notificationId)
+        }
         meals = listOf(
             getString(R.string.breakfast),
             getString(R.string.second_breakfast),
@@ -95,7 +112,43 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
             findNavController().navigate(action)
         }
     }
+    fun sendNotification(CHANNEL_ID: String,notificationId: Int){
+        val intent = Intent(context, BlankFragment::class.java).apply{
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0,intent,0)
+        val bitmap = BitmapFactory.decodeResource(resources,R.drawable.diet_reminder2)
+        val bitmapLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.foodsjpg)
 
+        val builder = context?.let {
+            NotificationCompat.Builder(it, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Food Notification")
+                .setContentText("I didn't eat my meal yet!")
+                .setLargeIcon(bitmapLargeIcon)
+                .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+                .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        }
+        if (builder != null) {
+            with(context?.let { NotificationManagerCompat.from(it) }){
+                this?.notify(notificationId, builder.build())
+            }
+        }
+    }
+
+    fun createNotificationChannel(CHANNEL_ID: String, notificationId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID,name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
     private fun loadAllProducts(date: String) {
         meals.forEachIndexed { index, s ->
             viewModel.loadProducts(index, date)
