@@ -31,6 +31,7 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentBlankBinding.inflate(layoutInflater)
         val HOUR_TO_SHOW_PUSH = 9
         val alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
         val alarmPendingIntent by lazy{
@@ -97,7 +98,6 @@ class BlankFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        binding = FragmentBlankBinding.inflate(layoutInflater)
         return binding.root
     }
     fun schedulePushNotifications(
@@ -122,7 +122,7 @@ class BlankFragment : Fragment() {
         )
     }
     fun goToUrl(s: String) {
-        var my_url = Uri.parse(s)
+        val my_url = Uri.parse(s)
         startActivity( Intent(Intent.ACTION_VIEW,my_url))
     }
 }
