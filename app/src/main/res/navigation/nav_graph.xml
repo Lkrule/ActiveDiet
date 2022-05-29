@@ -130,7 +130,10 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.activediet.fragments.run.SettingsFragment"
         android:label="SettingsFragment" />
-
+    <fragment
+        android:id="@+id/notificationFragment2"
+        android:name="com.example.activediet.fragments.NotificationFragment"
+        android:label="NotificationFragment" />
 
 
 </navigation>

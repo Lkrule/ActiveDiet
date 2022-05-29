@@ -38,6 +38,7 @@ class BlankFragment : Fragment() {
             val intent = Intent(context, AlarmReceiver::class.java)
             PendingIntent.getBroadcast(context, 0, intent, 0)
         }
+        
         // The hour we want to receive the notification daily
         schedulePushNotifications(HOUR_TO_SHOW_PUSH, alarmManager, alarmPendingIntent)
         // If we want to move to other fragments from menu
