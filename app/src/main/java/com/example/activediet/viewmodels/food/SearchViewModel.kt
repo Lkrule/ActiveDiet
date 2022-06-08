@@ -25,15 +25,11 @@ class SearchViewModel @Inject constructor(
     val searchIngredientsLiveData: LiveData<PagingData<IngredientSearch>> =
         _searchIngredientsLiveData
 
-    fun searchIngredients(query: String, metaInformation: Boolean) {
-    }
-
     fun addIngredient(meal: Int, date: String, ingredient: IngredientSearch, amount: Int) {
         ingredient.meal = meal
         ingredient.amount = amount.toFloat()
         ingredient.nutrients.updateAll(amount)
         ingredient.date = date
-        Log.d("TAG", ingredient.date)
         viewModelScope.launch {
             ingredientDao.insertAll(ingredient)
         }
