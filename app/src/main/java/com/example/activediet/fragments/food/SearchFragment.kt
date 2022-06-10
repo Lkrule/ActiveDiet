@@ -14,6 +14,8 @@ import com.afollestad.materialdialogs.input.input
 import com.example.activediet.R
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.Nutrient
+import com.example.activediet.data.Nutrients
 import com.example.activediet.databinding.FragmentSearchBinding
 import com.example.activediet.viewmodels.food.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,8 +44,32 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
+            button.setOnClickListener(buttonListener)
+        }
         // val recyclerView = binding.searchRv
 
     }
-    
+
+
+    // listener
+    private val buttonListener = View.OnClickListener {
+        MaterialDialog(requireContext()).show {
+            title(R.string.add_ingredient_dialog_title)
+            var test = Nutrients(listOf(Nutrient("Fat",40.toFloat(),"g"),
+                Nutrient("Protein",40.toFloat(),"g"),
+                Nutrient("Carbohydrates",10.toFloat(),"g"),
+                Nutrient("Calories",10.toFloat(),"kcal")))
+            var ingredient = IngredientSearch(0,"",0,0,"food","",100.toFloat(),"g",test)
+            input(
+                hintRes = R.string.amount,
+                inputType = InputType.TYPE_CLASS_NUMBER
+            ) { dialog,
+                text ->
+                viewModel.addIngredient(args.mealID, args.date, ingredient, text.toString().toInt())
+            }
+            positiveButton(R.string.add)
+            negativeButton(R.string.cancel)
+        }
+    }
 }

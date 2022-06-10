@@ -184,11 +184,8 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     }
 
     override fun addItemClicked(pos: Int) {
-        val action =
-            com.example.activediet.fragments.food
-                .DailyFragmentDirections.actionDailyFragmentToSearchFragment(
-                highlightedDate
-            )
+        val action = DailyFragmentDirections
+            .actionDailyFragmentToSearchFragment(highlightedDate)
         findNavController().navigate(action)
     }
 
@@ -247,9 +244,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.daily_menu_settings -> {
-                val action =
-                    com.example.activediet.fragments.food
-                        .DailyFragmentDirections.actionDailyFragmentToCalculatorFragment()
+                val action = DailyFragmentDirections.actionDailyFragmentToCalculatorFragment()
                 findNavController().navigate(action)
                 true
             }
