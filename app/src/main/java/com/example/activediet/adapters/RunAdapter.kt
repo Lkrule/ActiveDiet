@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.activediet.databinding.RunItemBinding
-import com.example.activediet.db.Run
+import com.example.activediet.data.Run
 import com.example.activediet.utilities.run.TrackingUtility
 import java.text.SimpleDateFormat
 import java.util.*

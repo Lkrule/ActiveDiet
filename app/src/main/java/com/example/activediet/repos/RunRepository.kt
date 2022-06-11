@@ -1,6 +1,6 @@
 package com.example.activediet.repos
 
-import com.example.activediet.db.Run
+import com.example.activediet.data.Run
 import com.example.activediet.db.RunDAO
 import javax.inject.Inject
 

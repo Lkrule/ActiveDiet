@@ -2,6 +2,7 @@ package com.example.activediet.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.activediet.data.Run
 
 @Dao
 interface RunDAO {

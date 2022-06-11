@@ -64,6 +64,7 @@
 
 
     <string name="test_name">Running App</string>
+    <string name="todo">TODO</string>
     <string-array name="filter_options">
         <item>Date</item>
         <item>Running Time</item>

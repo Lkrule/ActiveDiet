@@ -1,4 +1,4 @@
-package com.example.activediet.db
+package com.example.activediet.data
 
 import android.graphics.Bitmap
 import androidx.room.Entity

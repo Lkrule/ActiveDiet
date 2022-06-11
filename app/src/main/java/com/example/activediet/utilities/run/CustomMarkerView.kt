@@ -1,9 +1,7 @@
 package com.example.activediet.utilities.run
 
 import android.content.Context
-import android.view.LayoutInflater
-import com.example.activediet.databinding.MarkerViewBinding
-import com.example.activediet.db.Run
+import com.example.activediet.data.Run
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
