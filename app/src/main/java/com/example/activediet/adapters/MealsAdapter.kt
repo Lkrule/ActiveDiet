@@ -27,7 +27,8 @@ class MealsAdapter(
 
             binding.root.setOnClickListener {
                 binding.apply {
-                    if(rv.isVisible) rv.visibility = View.GONE else rv.visibility = View.VISIBLE
+                    if(rv.isVisible) rv.visibility = View.GONE
+                    else rv.visibility = View.VISIBLE
                 }
             }
 
@@ -38,10 +39,10 @@ class MealsAdapter(
         // update total of all meals
         fun updateTotals(totals: MealTotals) {
             binding.apply {
-                kcal.text.let {String.format("%.2f", totals.kcal) + " kcal"}
-                fat.text.let {String.format("%.2f", totals.fats) + " g"}
-                protein.text.let{String.format("%.2f", totals.proteins) + " g"}
-                carbs.text.let{String.format("%.2f", totals.carbs) + " g"}
+                kcal.text = String.format("%.2f", totals.kcal) + " kcal"
+                fat.text =  String.format("%.2f", totals.fats) + " g"
+                protein.text = String.format("%.2f", totals.proteins) + " g"
+                carbs.text = String.format("%.2f", totals.carbs) + " g"
             }
         }
     }

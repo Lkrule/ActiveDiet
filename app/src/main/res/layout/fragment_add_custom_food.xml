@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Food Name"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/Food_Text"
         app:layout_constraintEnd_toEndOf="@+id/Food_Text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -36,9 +37,9 @@
         android:id="@+id/Food_Text"
         android:layout_width="320dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="@+id/Protein_Text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/Protein_Text"
-        app:layout_constraintTop_toBottomOf="@+id/Food_Text" />
+        app:layout_constraintTop_toBottomOf="@+id/Food_Text"
+        tools:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Protein_Text"
@@ -83,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fat in grams"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/Fat_Name"
         app:layout_constraintEnd_toEndOf="@+id/Fat_Name"
         app:layout_constraintHorizontal_bias="0.5"
@@ -116,7 +119,8 @@
         app:layout_constraintBottom_toTopOf="@+id/Carbon_Text"
         app:layout_constraintEnd_toEndOf="@+id/Carbon_Text"
         app:layout_constraintStart_toStartOf="@+id/Carbon_Text"
-        app:layout_constraintTop_toBottomOf="@+id/Fat_Name" />
+        app:layout_constraintTop_toBottomOf="@+id/Fat_Name"
+        tools:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Carbon_Text"
@@ -144,7 +148,8 @@
         app:layout_constraintBottom_toTopOf="@+id/Calories_Name"
         app:layout_constraintEnd_toEndOf="@+id/Calories_Name"
         app:layout_constraintStart_toStartOf="@+id/Calories_Name"
-        app:layout_constraintTop_toBottomOf="@+id/Carbon_Text" />
+        app:layout_constraintTop_toBottomOf="@+id/Carbon_Text"
+        tools:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Calories_Name"
@@ -165,16 +170,14 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="220dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="320dp"
+        android:layout_height="64dp"
         android:text="Add a new food"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Calories_Name" />
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/Calories_Name"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

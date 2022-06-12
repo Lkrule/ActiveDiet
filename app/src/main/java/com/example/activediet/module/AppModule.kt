@@ -100,11 +100,13 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideName(sharedPref: SharedPreferences) = sharedPref.getString(KEY_NAME, "") ?: ""
+    fun provideName(sharedPref: SharedPreferences) =
+        sharedPref.getString(KEY_NAME, "") ?: ""
 
     @Singleton
     @Provides
-    fun provideWeight(sharedPref: SharedPreferences) = sharedPref.getFloat(KEY_WEIGHT, 80f)
+    fun provideWeight(sharedPref: SharedPreferences) =
+        sharedPref.getFloat(KEY_WEIGHT, 80f)
 
     @Singleton
     @Provides
