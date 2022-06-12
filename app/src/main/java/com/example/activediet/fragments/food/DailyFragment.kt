@@ -22,6 +22,7 @@ import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentDailyBinding
 import com.example.activediet.fragments.WelcomeFragment
+import com.example.activediet.utilities.run.Constants.BMR_PREF
 import com.example.activediet.viewmodels.food.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -44,7 +45,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     private lateinit var meals: List<String>
 
-    private val totalsList = Array<MealTotals>(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
+    private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
     private lateinit var highlightedDate: String
 
@@ -130,7 +131,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         }
     }
 
-    fun createNotificationChannel(CHANNEL_ID: String, notificationId: Int) {
+    private fun createNotificationChannel(CHANNEL_ID: String, notificationId: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val name = "Notification Title"
             val descriptionText = "Notification Description"

@@ -7,6 +7,8 @@ import com.example.activediet.api.FoodAPI
 import com.example.activediet.db.FoodDatabase
 import com.example.activediet.db.IngredientsDao
 import com.example.activediet.db.RunningDatabase
+import com.example.activediet.utilities.run.Constants.API_KEY
+import com.example.activediet.utilities.run.Constants.BASE_URL
 import com.example.activediet.utilities.run.Constants.KEY_FIRST_TIME_TOGGLE
 import com.example.activediet.utilities.run.Constants.KEY_NAME
 import com.example.activediet.utilities.run.Constants.KEY_WEIGHT
@@ -22,8 +24,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-const val BASE_URL = "https://api.spoonacular.com/"
-const val API_KEY = "005f2b02140b4c28a6c1da806cb27c76"
+
 
 @Module
 @InstallIn(SingletonComponent::class)

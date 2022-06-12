@@ -68,11 +68,11 @@ class AddCustomFoodFragment : Fragment() {
                         .text.toString().toFloat(),"kcal")))
 
                 val ingredient = IngredientSearch(0,"",0,0,binding.FoodName
-                    .text.toString(),"",100.toFloat(),"g",listOfValues)
+                    .text.toString(),100.toFloat(),"g",listOfValues)
                 input(
                     hintRes = R.string.amount,
                     inputType = InputType.TYPE_CLASS_NUMBER
-                ) { dialog,
+                ) { _,
                     text ->
                     viewModel.addIngredient(args.mealID, args.date, ingredient, text.toString().toInt())
                 }

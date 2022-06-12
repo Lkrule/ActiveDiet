@@ -5,7 +5,7 @@ import com.example.activediet.db.RunDAO
 import javax.inject.Inject
 
 class RunRepository @Inject constructor(
-    val runDao: RunDAO
+    private val runDao: RunDAO
 ) {
     suspend fun insertRun(run: Run) = runDao.insertRun(run)
 

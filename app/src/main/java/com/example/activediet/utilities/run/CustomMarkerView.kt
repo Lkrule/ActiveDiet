@@ -26,24 +26,5 @@ class CustomMarkerView(
         if(e == null) {
             return
         }
-        val curRunId = e.x.toInt()
-        val run = runs[curRunId]
-
-        val calendar = Calendar.getInstance().apply {
-            timeInMillis = run.TimeStamp
-        }
-        val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-        // tvDate.text = dateFormat.format(calendar.time)
-
-        val avgSpeed = "${run.AvgSpeedInKmh}km/h"
-        // tvAvgSpeed.text = avgSpeed
-
-        val distanceInKm = "${run.DistInMeters / 1000f}km"
-        // tvDistance.text = distanceInKm
-
-        // tvDuration.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
-
-        val caloriesBurned = "${run.CalBurned}kcal"
-        // tvCaloriesBurned.text = caloriesBurned
     }
 }

@@ -23,9 +23,7 @@
             app:exitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_welcomeFragment_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out" />
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
@@ -49,16 +47,17 @@
         tools:layout="@layout/fragment_daily" >
         <action
             android:id="@+id/action_dailyFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/addCustomFoodFragment" />
         <action
             android:id="@+id/action_dailyFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/addCustomFoodFragment"
         android:name="com.example.activediet.fragments.food.AddCustomFoodFragment"
         android:label="Add Ingredient"
-        tools:layout="@layout/fragment_add_custom_food" >
+        tools:layout="@layout/fragment_add_custom_food"
+        >
         <argument
             android:name="mealID"
             app:argType="integer"
@@ -75,7 +74,8 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.example.activediet.fragments.run.SetupFragment"
-        android:label="SetupFragment">
+        android:label="SetupFragment"
+        tools:layout="@layout/fragment_setup">
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -84,7 +84,8 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="com.example.activediet.fragments.run.RunFragment"
-        android:label="RunFragment" >
+        android:label="RunFragment"
+        tools:layout="@layout/fragment_run">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
@@ -94,12 +95,14 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.activediet.fragments.run.StatisticsFragment"
-        android:label="StatisticsFragment" />
+        android:label="StatisticsFragment"
+        tools:layout="@layout/fragment_statistics"/>
 
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.example.activediet.fragments.run.TrackingFragment"
-        android:label="TrackingFragment" >
+        android:label="TrackingFragment"
+        tools:layout="@layout/fragment_tracking">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -107,11 +110,28 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.activediet.fragments.run.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
     <fragment
         android:id="@+id/notificationFragment2"
         android:name="com.example.activediet.fragments.NotificationFragment"
-        android:label="NotificationFragment" />
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification"/>
+
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.activediet.fragments.food.SearchFragment"
+        android:label="Daily calories"
+        tools:layout="@layout/fragment_search" >
+        <argument
+            android:name="mealID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>
