@@ -1,4 +1,4 @@
-package com.example.activediet.fragments.run
+package com.example.activediet.fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,8 +10,6 @@ import com.example.activediet.databinding.FragmentSettingsBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.example.activediet.utilities.run.Constants.KEY_NAME
-import com.example.activediet.utilities.run.Constants.KEY_WEIGHT
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {

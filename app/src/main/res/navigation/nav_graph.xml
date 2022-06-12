@@ -109,11 +109,11 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.activediet.fragments.run.SettingsFragment"
+        android:name="com.example.activediet.fragments.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"/>
     <fragment
-        android:id="@+id/notificationFragment2"
+        android:id="@+id/notificationFragment"
         android:name="com.example.activediet.fragments.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification"/>

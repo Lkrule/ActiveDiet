@@ -16,10 +16,11 @@
         android:icon="@android:drawable/ic_menu_recent_history"
         android:title="History" />
     <item
+        android:id="@+id/settingsFragment"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Settings" />
     <item
-        android:id="@+id/notificationFragment2"
+        android:id="@+id/notificationFragment"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Reminders"/>
 </menu>

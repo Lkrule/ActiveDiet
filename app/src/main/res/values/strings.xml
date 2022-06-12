@@ -30,25 +30,29 @@
     <array name="activity_level">
         <item>Select</item>
         <item>Little/No exercise</item>
-        <item>Light exercise</item>
-        <item>Moderate exercise (3-5 days/week)</item>
-        <item>Very active (6-7 days/week)</item>
+        <item>Light exercise (1-3 days in week) </item>
+        <item>Moderate exercise (3-5 days in week)</item>
+        <item>Very active (6-7 days in week)</item>
         <item>Extra active (very active and physical job)</item>
     </array>
     <array name="goals">
         <item>Select</item>
-        <item>I want to loose weight</item>
+        <item>I want to lose weight</item>
         <item>I want to keep weight</item>
         <item>I want to gain weight</item>
     </array>
     <string name="item_required">Required</string>
     <string name="kcal">kcal</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="breakfast">Breakfast</string>
     <string name="second_breakfast">Brunch</string>
     <string name="lunch">Lunch</string>
     <string name="diner">Diner</string>
     <string name="supper">Supper</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="amount">Amount</string>
