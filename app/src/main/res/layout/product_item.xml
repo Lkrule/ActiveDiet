@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Milk"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="100 g"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_item_title" />
 
@@ -30,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="50 kcal"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/product_item_protein"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -41,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3.5g"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_item_kcal"
         app:layout_constraintEnd_toStartOf="@+id/product_item_fat"
         app:layout_constraintHorizontal_bias="0.5"
@@ -52,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.5g"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_item_protein"
         app:layout_constraintEnd_toStartOf="@+id/product_item_carbs"
         app:layout_constraintHorizontal_bias="0.5"
@@ -63,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5.5g"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_item_fat"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintHorizontal_bias="0.5"
@@ -83,6 +89,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.89" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

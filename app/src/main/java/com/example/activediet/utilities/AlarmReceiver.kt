@@ -10,7 +10,7 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         showPushNotification() // implement showing notification in this function
     }
-    fun showPushNotification(){
+    private fun showPushNotification(){
         print("THIS IS ALARM TEST")
     }
 }
