@@ -9,7 +9,7 @@
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="Sports" />
     <item
-        android:id = "@+id/welcomeFragment"
+        android:id = "@+id/dailyFragment"
         android:icon="@android:drawable/ic_menu_day"
         android:title="Schedule" />
     <item

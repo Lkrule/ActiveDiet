@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/blankFragment">
+    app:startDestination="@id/welcomeFragment">
 
 
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.example.activediet.fragments.BlankFragment"
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.activediet.fragments.WelcomeFragment"
         android:label="@string/hello_blank_fragment"
-        tools:layout="@layout/fragment_blank" >
+        tools:layout="@layout/fragment_welcome" >
         <action
-            android:id="@+id/action_blankFragment_to_calculatorFragment"
+            android:id="@+id/action_welcomeFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_blankFragment_to_dailyFragment"
+            android:id="@+id/action_welcomeFragment_to_dailyFragment"
             app:destination="@id/dailyFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_blankFragment_to_searchFragment"
+            android:id="@+id/action_welcomeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
@@ -36,30 +36,11 @@
         <action
             android:id="@+id/action_calculatorFragment_to_dailyFragment"
             app:destination="@id/dailyFragment"
-            app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.example.activediet.fragments.food.WelcomeFragment"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_welcome">
-        <action
-            android:id="@+id/action_welcomeFragment_to_calculatorFragment"
-            app:destination="@id/calculatorFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
-        <action
-            app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="true"
-            android:id="@+id/action_welcomeFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyFragment"
@@ -72,9 +53,6 @@
         <action
             android:id="@+id/action_dailyFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
-        <action
-            android:id="@+id/action_dailyFragment_to_blankFragment2"
-            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
-    val runRepository: RunRepository
+    private val runRepository: RunRepository
 ): ViewModel() {
 
     val totalTimeInMs = runRepository.getTotalTimeInMs()

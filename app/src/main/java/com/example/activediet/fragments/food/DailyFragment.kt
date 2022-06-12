@@ -21,7 +21,7 @@ import com.example.activediet.adapters.ProductAdapter
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentDailyBinding
-import com.example.activediet.fragments.BlankFragment
+import com.example.activediet.fragments.WelcomeFragment
 import com.example.activediet.viewmodels.food.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -104,16 +104,9 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
             loadAllProducts(highlightedDate)
         }
 
-        val button3 = binding.backToMenu
-        button3.setOnClickListener {
-            val action =
-                com.example.activediet.fragments.food
-                    .DailyFragmentDirections.actionDailyFragmentToBlankFragment2()
-            findNavController().navigate(action)
-        }
     }
     fun sendNotification(CHANNEL_ID: String,notificationId: Int){
-        val intent = Intent(context, BlankFragment::class.java).apply{
+        val intent = Intent(context, WelcomeFragment::class.java).apply{
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0,intent,0)

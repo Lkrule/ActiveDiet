@@ -12,18 +12,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.MainActivity
-import com.example.activediet.databinding.FragmentBlankBinding
+import com.example.activediet.databinding.FragmentWelcomeBinding
 import com.example.activediet.utilities.AlarmReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 
-class BlankFragment : Fragment() {
-    private lateinit var binding: FragmentBlankBinding
+class WelcomeFragment : Fragment() {
+    private lateinit var binding: FragmentWelcomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentBlankBinding.inflate(layoutInflater)
+        binding = FragmentWelcomeBinding.inflate(layoutInflater)
     }
 
 
@@ -31,7 +31,7 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBlankBinding.inflate(layoutInflater)
+        binding = FragmentWelcomeBinding.inflate(layoutInflater)
         val HOUR_TO_SHOW_PUSH = 9
         val alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
         val alarmPendingIntent by lazy{
@@ -80,7 +80,8 @@ class BlankFragment : Fragment() {
         }
         val button3 = binding.calculateNav
         button3.setOnClickListener{
-            val action = BlankFragmentDirections.actionBlankFragmentToCalculatorFragment()
+            val action = WelcomeFragmentDirections
+                .actionWelcomeFragmentToCalculatorFragment()
             findNavController().navigate(action)
         }
 
@@ -88,14 +89,16 @@ class BlankFragment : Fragment() {
         button4.setOnClickListener{
             val sdf = SimpleDateFormat("dd/M/yyyy")
             val currentDate = sdf.format(Date())
-            val action = BlankFragmentDirections.actionBlankFragmentToSearchFragment(currentDate)
+            val action = WelcomeFragmentDirections
+                .actionWelcomeFragmentToSearchFragment(currentDate)
             findNavController().navigate(action)
 
         }
 
         val button5 = binding.dailyNav
         button5.setOnClickListener{
-            val action = BlankFragmentDirections.actionBlankFragmentToDailyFragment()
+            val action = WelcomeFragmentDirections
+                .actionWelcomeFragmentToDailyFragment()
             findNavController().navigate(action)
         }
 

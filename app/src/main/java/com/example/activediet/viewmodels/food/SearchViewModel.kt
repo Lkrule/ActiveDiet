@@ -17,14 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repo: SearchRepository,
     private val ingredientDao: IngredientsDao
 ) : ViewModel() {
-    private val _searchIngredientsLiveData: MutableLiveData<PagingData<IngredientSearch>> =
-        MutableLiveData()
-    val searchIngredientsLiveData: LiveData<PagingData<IngredientSearch>> =
-        _searchIngredientsLiveData
-
     fun addIngredient(meal: Int, date: String, ingredient: IngredientSearch, amount: Int) {
         ingredient.meal = meal
         ingredient.amount = amount.toFloat()

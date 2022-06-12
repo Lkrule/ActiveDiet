@@ -64,13 +64,13 @@
                     android:layout_height="wrap_content"
                     android:text="4.5 g"
                     app:layout_constraintBottom_toBottomOf="@+id/protein"
-                    app:layout_constraintEnd_toStartOf="@+id/carbs_tv"
+                    app:layout_constraintEnd_toStartOf="@+id/carbs"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/protein"
                     app:layout_constraintTop_toTopOf="@+id/protein" />
 
                 <TextView
-                    android:id="@+id/carbs_tv"
+                    android:id="@+id/carbs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.5 g"

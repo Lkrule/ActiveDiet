@@ -40,7 +40,7 @@ class MealsAdapter(
                 kcal.text = String.format("%.2f", totals.kcal) + " kcal"
                 fat.text = String.format("%.2f", totals.fats) + " g"
                 protein.text = String.format("%.2f", totals.proteins) + " g"
-                carbsTv.text = String.format("%.2f", totals.carbs) + " g"
+                carbs.text = String.format("%.2f", totals.carbs) + " g"
             }
         }
     }
