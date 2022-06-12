@@ -2,11 +2,9 @@ package com.example.activediet.module
 
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import androidx.core.app.NotificationCompat
-import com.example.activediet.MainActivity
 import com.example.activediet.R
-import com.example.activediet.utilities.run.Constants
+import com.example.activediet.utilities.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module
 import dagger.Provides

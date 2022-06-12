@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.activediet.fragments.WelcomeFragment"
-        android:label="@string/hello_blank_fragment"
+        android:label=""
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcomeFragment_to_calculatorFragment"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/dailyFragment"
         android:name="com.example.activediet.fragments.food.DailyFragment"
-        android:label="Daily calories"
+        android:label=""
         tools:layout="@layout/fragment_daily" >
         <action
             android:id="@+id/action_dailyFragment_to_searchFragment"
@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/addCustomFoodFragment"
         android:name="com.example.activediet.fragments.food.AddCustomFoodFragment"
-        android:label="Add Ingredient"
+        android:label=""
         tools:layout="@layout/fragment_add_custom_food"
         >
         <argument
@@ -74,7 +74,7 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.example.activediet.fragments.run.SetupFragment"
-        android:label="SetupFragment"
+        android:label=""
         tools:layout="@layout/fragment_setup">
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
@@ -84,7 +84,7 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="com.example.activediet.fragments.run.RunFragment"
-        android:label="RunFragment"
+        android:label=""
         tools:layout="@layout/fragment_run">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
@@ -95,13 +95,13 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.activediet.fragments.run.StatisticsFragment"
-        android:label="StatisticsFragment"
+        android:label=""
         tools:layout="@layout/fragment_statistics"/>
 
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.example.activediet.fragments.run.TrackingFragment"
-        android:label="TrackingFragment"
+        android:label=""
         tools:layout="@layout/fragment_tracking">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
@@ -110,19 +110,19 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.activediet.fragments.SettingsFragment"
-        android:label="SettingsFragment"
+        android:label=""
         tools:layout="@layout/fragment_settings"/>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.activediet.fragments.NotificationFragment"
-        android:label="NotificationFragment"
+        android:label=""
         tools:layout="@layout/fragment_notification"/>
 
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.activediet.fragments.food.SearchFragment"
-        android:label="Daily calories"
+        android:label=""
         tools:layout="@layout/fragment_search" >
         <argument
             android:name="mealID"

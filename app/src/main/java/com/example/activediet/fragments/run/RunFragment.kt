@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,8 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.R
 import com.example.activediet.adapters.RunAdapter
 import com.example.activediet.databinding.FragmentRunBinding
-import com.example.activediet.utilities.SortType
-import com.example.activediet.utilities.run.Constants.REQUEST_CODE_LOCATION_PERMISSION
+import com.example.activediet.utilities.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.viewmodels.run.RunViewModel
 import dagger.hilt.android.AndroidEntryPoint

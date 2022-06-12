@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.databinding.FragmentCalculatorBinding
 import com.example.activediet.utilities.BMRCalculator
-import com.example.activediet.utilities.run.Constants.BMR_PREF
+import com.example.activediet.utilities.Constants.BMR_PREF
 import com.example.activediet.viewmodels.food.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

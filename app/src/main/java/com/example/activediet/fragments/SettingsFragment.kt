@@ -30,26 +30,16 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadFieldsFromSharedPref()
         binding.apply {
-            btnApplyChanges.setOnClickListener {
-                val success = applyChangesToSharedPref()
-                if (success) {
-                    Snackbar.make(view, "Saved changes", Snackbar.LENGTH_LONG).show()
-                } else {
-                    Snackbar.make(view, "Please fill out all the fields", Snackbar.LENGTH_LONG)
-                        .show()
-                }
-            }
         }
     }
 
 
     private fun loadFieldsFromSharedPref() {
+
     }
 
 
-    private fun applyChangesToSharedPref(): Boolean {
-        return true
+    private fun applyChangesToSharedPref() {
     }
 }

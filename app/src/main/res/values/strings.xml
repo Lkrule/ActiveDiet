@@ -3,7 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="welcome_message">We\'ve got just couple of questions. Please fill the form on the next page to calculate your BMR.</string>
     <string name="ok">OK</string>
-    <string name="hello_blank_fragment">Welcome to the Active Diet App!</string>
     <string name="workouts_link">Work Outs<a href="https://www.masterclass.com/articles/full-body-workout-plan#how-to-do-a-fullbody-workout"> </a></string>
     <string name="welcome">Welcome</string>
     <string name="calculate_bmr">Calculate BMR</string>

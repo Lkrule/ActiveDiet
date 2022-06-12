@@ -22,7 +22,7 @@ import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentDailyBinding
 import com.example.activediet.fragments.WelcomeFragment
-import com.example.activediet.utilities.run.Constants.BMR_PREF
+import com.example.activediet.utilities.Constants.BMR_PREF
 import com.example.activediet.viewmodels.food.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat

@@ -1,4 +1,4 @@
-package com.example.activediet.utilities.run
+package com.example.activediet.utilities
 
 import android.graphics.Color
 
@@ -19,4 +19,5 @@ object Constants {
 
     const val BASE_URL = "https://api.spoonacular.com/"
     const val API_KEY = "005f2b02140b4c28a6c1da806cb27c76"
+    const val GOOGLE_KEY = "AIzaSyD3JDRSAea-I2E2KRJmJb0GxIhTZJ55LB0"
 }
