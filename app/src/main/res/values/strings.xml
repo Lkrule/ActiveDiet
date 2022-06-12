@@ -20,7 +20,7 @@
     <string name="activity">Activity</string>
     <string name="calculate">Calculate</string>
     <string name="goal">Goal</string>
-    <string name="your_calculated_bmr">You calculated BMR is:</string>
+    <string name="your_calculated_bmr">Your BMR is:</string>
     <string name="apply">Apply</string>
     <array name="genders">
         <item>Select</item>

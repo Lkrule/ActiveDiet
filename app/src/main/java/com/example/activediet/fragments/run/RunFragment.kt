@@ -55,27 +55,6 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         setupRecyclerView()
 
 
-        when(viewModel.sortType) {
-            SortType.DATE -> binding.filter.setSelection(0)
-            SortType.RUNNING_TIME -> binding.filter.setSelection(1)
-            SortType.DISTANCE -> binding.filter.setSelection(2)
-            SortType.AVG_SPEED -> binding.filter.setSelection(3)
-            SortType.CALORIES_BURNED -> binding.filter.setSelection(4)
-        }
-
-        binding.filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                when(pos) {
-                    0 -> viewModel.sortRuns(SortType.DATE)
-                    1 -> viewModel.sortRuns(SortType.RUNNING_TIME)
-                    2 -> viewModel.sortRuns(SortType.DISTANCE)
-                    3 -> viewModel.sortRuns(SortType.AVG_SPEED)
-                    4 -> viewModel.sortRuns(SortType.CALORIES_BURNED)
-                }
-            }
-        }
 
 
         viewModel.runs.observe(viewLifecycleOwner, Observer {

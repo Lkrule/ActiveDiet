@@ -48,30 +48,10 @@ class SettingsFragment : Fragment() {
 
 
     private fun loadFieldsFromSharedPref() {
-        val name = sharedPreferences.getString(KEY_NAME, "")
-        val weight = sharedPreferences.getFloat(KEY_WEIGHT, 80f)
-        binding.apply {
-            etName.setText(name)
-            etWeight.setText(weight.toString())
-        }
     }
 
 
     private fun applyChangesToSharedPref(): Boolean {
-        binding.apply {
-            val nameText = etName.text.toString()
-            val weightText = etWeight.text.toString()
-
-            if (nameText.isEmpty() || weightText.isEmpty()) {
-                return false
-            }
-            sharedPreferences.edit()
-                .putString(KEY_NAME, nameText)
-                .putFloat(KEY_WEIGHT, weightText.toFloat())
-                .apply()
-            /*val toolbarText = "Let's go $nameText"
-            requireActivity().tvToolbarTitle.text = toolbarText*/
-            return true
-        }
+        return true
     }
 }

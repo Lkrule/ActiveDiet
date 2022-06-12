@@ -40,22 +40,13 @@ class SetupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        if (!isFirstAppOpen)
-        {
-            val navOptions = NavOptions.Builder().setPopUpTo(R.id.setupFragment, true).build()
-            findNavController().navigate(
-                R.id.action_setupFragment_to_runFragment,
-                savedInstanceState,
-                navOptions
-            )
-        }
+        val action = SetupFragmentDirections.actionSetupFragmentToRunFragment()
+        
 
         _binding?.tvContinue?.setOnClickListener {
             val success = writePersonalDataToSharedPref()
             if (success){
-                findNavController().navigate(R.id.action_setupFragment_to_runFragment)
+                findNavController().navigate(action)
             }else{
                 Snackbar.make(requireView(), "Please enter all the fields", Snackbar.LENGTH_SHORT).show()
             }
@@ -64,21 +55,6 @@ class SetupFragment : Fragment() {
     }
 
     private fun writePersonalDataToSharedPref() : Boolean{
-        val name = binding.etName.text.toString()
-        val weight = binding.etWeight.text.toString()
-
-        if(name.isEmpty() || weight.isEmpty()){
-            return false
-        }
-
-        sharedPref.edit()
-            .putString(KEY_NAME, name)
-            .putFloat(KEY_WEIGHT, weight.toFloat())
-            .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
-            .apply()
-
-        val toolbarText = "Let's go, $name!"
-//        requireActivity().tvToolbarTitle.text = toolbarText
         return true
     }
 }

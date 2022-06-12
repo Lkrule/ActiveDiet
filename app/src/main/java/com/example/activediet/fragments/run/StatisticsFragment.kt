@@ -47,71 +47,13 @@ class StatisticsFragment : Fragment() {
 
 
     private fun setupBarChart() {
-        binding.barChart.xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            setDrawLabels(false)
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
-            setDrawGridLines(false)
-        }
-        binding.barChart.axisLeft.apply {
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
-            setDrawGridLines(false)
-        }
-        binding.barChart.axisRight.apply {
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
-            setDrawGridLines(false)
-        }
-        binding.barChart.apply {
-            description.text = "Avg Speed Over Time"
-            legend.isEnabled = false
-        }
     }
 
     private fun subscribeToObservers() {
-        viewModel.totalTimeInMs.observe(viewLifecycleOwner, Observer
-        {
-            it?.let {
-                    val totalTimeRun = TrackingUtility.getFormattedStopWatchTime(it)
-                    binding.tvTotalTime.text = totalTimeRun
-                }
-            }
-        )
-        viewModel.totalDist.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                val km = it / 1000f
-                val totalDistance = Math.round(km * 10f) / 10f
-                val totalDistanceString = "${totalDistance}km"
-                binding.tvTotalDistance.text = totalDistanceString
-            }
-        })
-        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                val avgSpeed = Math.round(it * 10f) / 10f
-                val avgSpeedString = "${avgSpeed}km/h"
-                binding.tvAverageSpeed.text = avgSpeedString
-            }
-        })
-        viewModel.totalCalsBurned.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                val totalCalories = "${it}kcal"
-                binding.tvTotalCalories.text = totalCalories
-            }
-        })
-
-        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
-                val barDataSet = BarDataSet(allAvgSpeeds, "Avg Speed Over Time").apply {
-                    valueTextColor = Color.WHITE
-                    color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
-                }
-                binding.barChart.data = BarData(barDataSet)
-                binding.barChart.marker = CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
-                binding.barChart.invalidate()
-            }
-        })
+        viewModel.totalTimeInMs.observe(viewLifecycleOwner, Observer {})
+        viewModel.totalDist.observe(viewLifecycleOwner, Observer {})
+        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {})
+        viewModel.totalCalsBurned.observe(viewLifecycleOwner, Observer {})
+        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {})
     }
 }

@@ -143,7 +143,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         }
     }
     private fun loadAllProducts(date: String) {
-        meals.forEachIndexed { index, s ->
+        meals.forEachIndexed { index, _ ->
             viewModel.loadProducts(index, date)
         }
     }
