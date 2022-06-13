@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.databinding.FragmentCalculatorBinding
-import com.example.activediet.utilities.BMRCalculator
 import com.example.activediet.utilities.Constants.BMR_PREF
 import com.example.activediet.viewmodels.food.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,35 +70,19 @@ class CalculatorFragment : Fragment() {
     }
 
     private val calculateButtonListener = View.OnClickListener {
-        if (!validateForm()) {
-            binding.apply {
-                viewModel.calculateBMR(
-                    gender = calcGenderSpinner.selectedItemPosition,
-                    weight = calcWeightIn.text.toString().toFloat(),
-                    height = calcHeightIn.text.toString().toFloat(),
-                    age = calcAgeIn.text.toString().toInt(),
-                    activity = calcActivitySpinner.selectedItemPosition,
-                    goal = calcGoalSpinner.selectedItemPosition
-                )
-            }
-        }
+//        if (!validateForm()) {
+//            binding.apply {
+//                viewModel.calculateBMR(
+//                    gender = calcGenderSpinner.selectedItemPosition,
+//                    weight = 5F,
+//                    height = calcHeightIn.text.toString().toFloat(),
+//                    age = calcAgeIn.text.toString().toInt(),
+//                    activity = calcActivitySpinner.selectedItemPosition,
+//                    goal = calcGoalSpinner.selectedItemPosition
+//                )
+//            }
+//        }
     }
 
-    private fun validateForm(): Boolean {
-        var validationFailed = false
-        binding.apply {
-            if (!BMRCalculator.validateInt(calcGenderSpinner.selectedItemPosition)||
-                !BMRCalculator.validateString(calcWeightIn.text.toString()) ||
-                !BMRCalculator.validateString(calcHeightIn.text.toString()) ||
-                !BMRCalculator.validateString(calcAgeIn.text.toString()) ||
-                !BMRCalculator.validateInt(calcActivitySpinner.selectedItemPosition) ||
-                !BMRCalculator.validateInt(calcGoalSpinner.selectedItemPosition)) {
-                    validationFailed = true
-                    Toast.makeText(context,"Not enough parameters.", Toast.LENGTH_LONG).show();
-
-            }
-        }
-        return validationFailed
-    }
 
 }

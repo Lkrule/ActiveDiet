@@ -7,26 +7,26 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/calc_age2"
+        android:id="@+id/age2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/age"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutAge"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayoutAge"
+        app:layout_constraintBottom_toBottomOf="@+id/AgeInput"
+        app:layout_constraintEnd_toStartOf="@+id/AgeInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayoutAge" />
+        app:layout_constraintTop_toTopOf="@+id/AgeInput" />
 
     <TextView
-        android:id="@+id/calc_height4"
+        android:id="@+id/height2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/height"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/HeightInput"
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toTopOf="@+id/HeightInput" />
 
     <TextView
         android:id="@+id/calc_weight2"
@@ -34,13 +34,13 @@
         android:layout_height="wrap_content"
         android:text="@string/weight"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textinput"
-        app:layout_constraintEnd_toStartOf="@+id/textinput"
+        app:layout_constraintBottom_toBottomOf="@+id/WeightInput"
+        app:layout_constraintEnd_toStartOf="@+id/WeightInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textinput" />
+        app:layout_constraintTop_toTopOf="@+id/WeightInput" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutAge"
+        android:id="@+id/AgeInput"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,10 +48,10 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/HeightInput">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/calc_age_in3"
+            android:id="@+id/AgeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/age"
@@ -59,7 +59,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textinput"
+        android:id="@+id/WeightInput"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gender_spinner">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/calc_weight_in"
+            android:id="@+id/WeightText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/weight"
@@ -158,20 +158,20 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAge" />
+        app:layout_constraintTop_toBottomOf="@+id/AgeInput" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/HeightInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/textinput">
+        app:layout_constraintTop_toBottomOf="@+id/WeightInput">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/calc_height_in4"
+            android:id="@+id/HeightText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
