@@ -28,10 +28,12 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/reminder"
             app:layout_constraintHorizontal_bias="0.813"
             app:layout_constraintStart_toStartOf="@+id/daily_next_day_btn"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
         <ImageView
             android:id="@+id/daily_previous_day_btn"
@@ -39,7 +41,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/chevron_left_48"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/daily_date_tv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,12 +49,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="03-09-2021"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.414"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/daily_next_day_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/daily_previous_day_btn"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.515" />
 
@@ -63,9 +64,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/chevron_right_48"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.096"
-            app:layout_constraintStart_toEndOf="@+id/daily_date_tv"
+            app:layout_constraintEnd_toStartOf="@+id/reminder"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -197,6 +196,7 @@
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Menu" />
+        android:text="Menu"
+        android:textColor="#4A148C" />
 
 </LinearLayout>
