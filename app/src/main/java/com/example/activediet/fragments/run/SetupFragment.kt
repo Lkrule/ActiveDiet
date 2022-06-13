@@ -35,18 +35,7 @@ class SetupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val action = SetupFragmentDirections.actionSetupFragmentToRunFragment()
-        
 
-        _binding?.tvContinue?.setOnClickListener {
-            val success = writePersonalDataToSharedPref()
-            if (success){
-                findNavController().navigate(action)
-            }else{
-                Snackbar.make(requireView(), "Please enter all the fields", Snackbar.LENGTH_SHORT).show()
-            }
-
-        }
     }
 
     private fun writePersonalDataToSharedPref() : Boolean{

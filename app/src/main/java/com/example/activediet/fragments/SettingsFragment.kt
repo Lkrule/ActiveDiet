@@ -36,7 +36,6 @@ class SettingsFragment : Fragment() {
 
 
     private fun loadFieldsFromSharedPref() {
-
     }
 
 

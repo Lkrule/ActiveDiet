@@ -49,12 +49,6 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         super.onViewCreated(view, savedInstanceState)
 
 
-        requestPermissions()
-        setupRecyclerView()
-
-
-
-
         viewModel.runs.observe(viewLifecycleOwner, Observer {
             runAdapter.submitList(it)
         })

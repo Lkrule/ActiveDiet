@@ -40,9 +40,6 @@ class StatisticsFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        subscribeToObservers()
-        setupBarChart()
     }
 
 
@@ -50,10 +47,5 @@ class StatisticsFragment : Fragment() {
     }
 
     private fun subscribeToObservers() {
-        viewModel.totalTimeInMs.observe(viewLifecycleOwner, Observer {})
-        viewModel.totalDist.observe(viewLifecycleOwner, Observer {})
-        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {})
-        viewModel.totalCalsBurned.observe(viewLifecycleOwner, Observer {})
-        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {})
     }
 }

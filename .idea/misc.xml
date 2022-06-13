@@ -70,15 +70,26 @@
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet/app/src/main/res/layouts/layout_for_fragment/layout/tests.xml" value="0.1859375" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet/app/src/main/res/menu/daily_menu.xml" value="0.12777777777777777" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet/app/src/main/res/menu/navdrawer_menu.xml" value="0.3671875" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable-xhdpi/ic_baseline_add_circle_24.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable-xhdpi/ic_baseline_settings_24.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable-xhdpi/remove_circle.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/ic_add_black.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/ic_directions_run_black_24dp.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/ic_pause_black_24dp.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/light_blue_button.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/purple_dark.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/round.xml" value="0.1965" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/drawable/stroke_box.xml" value="0.1965" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout-land/fragment_tracking.xml" value="0.16614583333333333" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/activity_main.xml" value="0.3671875" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_add_custom_food.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_blank.xml" value="0.3671875" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_calculator.xml" value="0.335" />
-        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_daily.xml" value="0.335" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_daily.xml" value="0.25" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_notification.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_run.xml" value="0.22755905511811023" />
-        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_search.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_setup.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Maoz/AndroidStudioProjects/ActiveDiet2/app/src/main/res/layout/fragment_statistics.xml" value="0.30141085934159895" />
