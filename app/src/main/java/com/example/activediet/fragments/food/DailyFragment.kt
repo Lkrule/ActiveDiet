@@ -209,11 +209,11 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     private fun updateDailyTotals(totals: MealTotals) {
         binding.apply {
-            dailyTotalsKcalTv.text = String.format("%.2f", totals.kcal) + " / " +
+            dailyTotalsKcal.text = String.format("%.2f", totals.kcal) + " / " +
                     String.format("%.2f", calculatedBMR)
-            dailyTotalsFatsTv.text = String.format("%.2f", totals.fats) + " g"
-            dailyTotalsProteinsTv.text = String.format("%.2f", totals.proteins) + " g"
-            dailyTotalsCarbsTv.text = String.format("%.2f", totals.carbs) + " g"
+            dailyTotalsFats.text = String.format("%.2f", totals.fats) + " g"
+            dailyTotalsProteins.text = String.format("%.2f", totals.proteins) + " g"
+            dailyTotalsCarbs.text = String.format("%.2f", totals.carbs) + " g"
         }
     }
 

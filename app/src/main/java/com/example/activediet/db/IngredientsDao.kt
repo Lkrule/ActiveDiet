@@ -5,7 +5,7 @@ import com.example.activediet.data.IngredientSearch
 
 @Dao
 interface IngredientsDao {
-    @Query("SELECT * FROM ingredientsearch WHERE date = (:date) AND meal IN (:meal)")
+    @Query("SELECT * FROM IngredientSearch WHERE date = (:date) AND meal IN (:meal)")
     suspend fun loadByMeal(meal: Int, date: String): List<IngredientSearch>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

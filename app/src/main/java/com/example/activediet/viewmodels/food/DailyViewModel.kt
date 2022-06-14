@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.repos.DailyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,14 +22,14 @@ class DailyViewModel @Inject constructor(
         Array(_productsLiveDataArray.size) { i -> _productsLiveDataArray[i] }
 
     fun loadProducts(mealID: Int, date: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             val products = repo.loadProducts(mealID, date)
             _productsLiveDataArray[mealID].postValue(products)
         }
     }
 
     fun deleteProduct(ingredient: IngredientSearch, mealIndex: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             repo.removeProduct(ingredient)
             _productsLiveDataArray[mealIndex].value?.let {
                 val list = it.toMutableList()

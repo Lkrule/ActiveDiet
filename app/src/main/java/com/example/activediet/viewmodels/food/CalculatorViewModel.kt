@@ -34,24 +34,8 @@ class CalculatorViewModel : ViewModel() {
         activity: Int,
         goal: Int
     ): Double {
-        val bmr = calcBMR(gender, weight, height, age)
-        return calcEat(bmr, activity) + goalFormula[goal - 1]
-    }
-
-    private fun calcBMR(
-        gender: Int,
-        weight: Float,
-        height: Float,
-        age: Int
-    ) : Double {
         val genderVar = if(gender == 1) 5 else -161
-        return 9.99f * weight + 6.25f * height - 4.92 * age + genderVar
-    }
-
-    private fun calcEat(
-        bmr: Double,
-        activity: Int
-    ) : Double {
-        return bmr * energyFormula[activity - 1]
+        val bmr = 9.99f * weight + 6.25f * height - 4.92 * age + genderVar
+        return bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
     }
 }

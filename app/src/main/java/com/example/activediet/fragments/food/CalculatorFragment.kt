@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.databinding.FragmentCalculatorBinding
+import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.BMR_PREF
 import com.example.activediet.viewmodels.food.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,19 +71,27 @@ class CalculatorFragment : Fragment() {
     }
 
     private val calculateButtonListener = View.OnClickListener {
-//        if (!validateForm()) {
-//            binding.apply {
-//                viewModel.calculateBMR(
-//                    gender = calcGenderSpinner.selectedItemPosition,
-//                    weight = 5F,
-//                    height = calcHeightIn.text.toString().toFloat(),
-//                    age = calcAgeIn.text.toString().toInt(),
-//                    activity = calcActivitySpinner.selectedItemPosition,
-//                    goal = calcGoalSpinner.selectedItemPosition
-//                )
-//            }
-//        }
+        if (validate()) {
+            binding.apply {
+                viewModel.calculateBMR(
+                    gender = sharedPrefs.getInt(Constants.KEY_GENDER, 0),
+                    weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f)
+                        .toString().toFloat(),
+                    height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f)
+                        .toString().toFloat(),
+                    age = sharedPrefs.getFloat(Constants.KEY_AGE, 0f)
+                        .toString().toFloat().toInt(),
+                    activity = calcActivitySpinner.selectedItemPosition,
+                    goal = calcGoalSpinner.selectedItemPosition
+                )
+            }
+        }
+        else Toast.makeText(context,"no settings or no plan", Toast.LENGTH_LONG).show()
     }
 
-
+    private fun validate(): Boolean {
+        return binding.calcActivitySpinner.selectedItemPosition > 0 &&
+                binding.calcGoalSpinner.selectedItemPosition > 0 &&
+                sharedPrefs.getString(Constants.KEY_NAME, "").toString().isNotEmpty()
+    }
 }

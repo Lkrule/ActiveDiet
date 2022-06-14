@@ -108,7 +108,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/daily_totals_kcal_tv"
+                android:id="@+id/daily_totals_kcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100 kcal" />
@@ -133,7 +133,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/daily_totals_proteins_tv"
+                android:id="@+id/daily_totals_proteins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100 g" />
@@ -158,7 +158,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/daily_totals_fats_tv"
+                android:id="@+id/daily_totals_fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100 g" />
@@ -183,20 +183,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/daily_totals_carbs_tv"
+                android:id="@+id/daily_totals_carbs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100 g" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/back_to_menu"
-        android:layout_width="384dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Menu"
-        android:textColor="#4A148C" />
 
 </LinearLayout>
