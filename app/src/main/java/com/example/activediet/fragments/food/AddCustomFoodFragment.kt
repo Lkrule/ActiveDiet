@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
@@ -18,7 +17,7 @@ import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.Nutrient
 import com.example.activediet.data.Nutrients
 import com.example.activediet.databinding.FragmentAddCustomFoodBinding
-import com.example.activediet.viewmodels.food.SearchViewModel
+import com.example.activediet.viewmodels.food.AddFoodViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,7 +26,7 @@ class AddCustomFoodFragment : Fragment() {
     private var _binding: FragmentAddCustomFoodBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: AddFoodViewModel by viewModels()
 
     private val args: AddCustomFoodFragmentArgs by navArgs()
 

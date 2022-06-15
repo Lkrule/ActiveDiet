@@ -72,6 +72,7 @@ class SettingsFragment : Fragment() {
                 sharedPrefs.edit()
                     .putFloat(KEY_AGE,AgeText.text.toString().toFloat()).apply()
             }
+            Toast.makeText(context,"Updated!", Toast.LENGTH_LONG).show()
         }
     }
 

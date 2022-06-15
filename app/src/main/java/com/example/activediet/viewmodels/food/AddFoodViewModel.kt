@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(
+class AddFoodViewModel @Inject constructor(
     private val ingredientDao: IngredientsDao
 ) : ViewModel() {
     fun addIngredient(meal: Int, date: String, ingredient: IngredientSearch, amount: Int) {
