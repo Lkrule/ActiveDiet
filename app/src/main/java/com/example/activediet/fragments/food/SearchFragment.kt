@@ -3,19 +3,34 @@ package com.example.activediet.fragments.food
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import com.example.activediet.adapters.SearchAdapter
+import com.example.activediet.api.FoodAPI
+import com.example.activediet.data.IngredientSearch
 import com.example.activediet.databinding.FragmentSearchBinding
-
+import com.example.activediet.viewmodels.food.DailyViewModel
+import com.example.activediet.viewmodels.food.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
+    val viewModel: SearchViewModel by viewModels()
+
     private lateinit var adapter: SearchAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,20 +44,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.autoCompleteTextView.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun afterTextChanged(text: Editable?) {
-                if(text?.length!! > 2) {
-                    TODO("Not yet implemented")
-                }
-            }
-        })
+        binding.autoCompleteTextView.addTextChangedListener {
+            if(it?.length!! > 2) viewModel.afterTextChanged(it.toString())
+        }
     }
 }
