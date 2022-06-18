@@ -3,6 +3,7 @@ package com.example.activediet.viewmodels.food
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.db.IngredientsDao
@@ -32,14 +33,14 @@ class SearchViewModel @Inject constructor(
 
     fun afterTextChanged(text: String) {
         isTextChange = true
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val response = api.searchIngredients(text)
             val products = response.body()!!.results
-            val results = mutableListOf<IngredientSearch>()
+            val productsList = mutableListOf<String>()
             products.forEach {
-                val product = api.getIngredientInfo(id = it.id)
-                results.add(product.body()!!)
+                productsList.add(it.name)
             }
+            _products.value = productsList
         }
     }
 }
