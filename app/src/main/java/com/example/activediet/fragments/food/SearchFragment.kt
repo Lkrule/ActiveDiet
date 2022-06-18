@@ -23,14 +23,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    val viewModel: SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
 
     private lateinit var adapter: SearchAdapter
 
+    @Inject
+    lateinit var api: FoodAPI
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
