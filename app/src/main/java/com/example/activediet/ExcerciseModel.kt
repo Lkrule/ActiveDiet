@@ -5,7 +5,7 @@ import java.util.*
 data class ExcerciseModel (
     var id: Int = getAudoId(),
     var name: String = "",
-    var email: String = ""
+    var details: String = ""
 )
 {
     companion object{

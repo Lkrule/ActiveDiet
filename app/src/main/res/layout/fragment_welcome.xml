@@ -19,12 +19,6 @@
         android:padding="16dp"
         tools:context=".fragments.WelcomeFragment"
         tools:ignore="ExtraText">
-        <!-- TODO: Update blank fragment layout -->
-
-        <!--        Maybe get an input for the user name?-->
-
-        <!-- LAST ARG -->
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

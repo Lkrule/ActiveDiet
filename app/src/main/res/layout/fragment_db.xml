@@ -9,14 +9,15 @@
         android:id="@+id/textView5"
         android:layout_width="163dp"
         android:layout_height="47dp"
-        android:text="This is a db TEST"
+        android:text="Exercise List"
         android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <EditText
         android:id="@+id/edName"
@@ -25,39 +26,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:hint="Enter Name // Maybe workout"
+        android:hint="Exercise name"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/edEmail"
+        android:id="@+id/edDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your email// number of sets"
+        android:hint="Describe your exercise and number of reps"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edName" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/blue_dark1_button"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="Add"
+        android:textColor="#000000"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edDetails" />
 
     <Button
         android:id="@+id/btnView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="View"
-
+        android:layout_width="105dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/blue_dark1_button"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:textColor="#000000"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintHorizontal_bias="0.327"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edDetails" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -65,16 +81,26 @@
         android:layout_height="269dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnView" />
+        app:layout_constraintTop_toBottomOf="@+id/btnView"
+        app:layout_constraintVertical_bias="0.565" />
 
     <Button
         android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Update"
+        android:layout_width="105dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/blue_dark1_button"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:textColor="#000000"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toEndOf="@+id/btnView"
-        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>

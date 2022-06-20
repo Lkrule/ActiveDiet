@@ -2,7 +2,6 @@ package com.example.activediet.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.BoringLayout.make
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +16,10 @@ import com.example.activediet.ExcerciseAdapter
 import com.example.activediet.ExcerciseModel
 import com.example.activediet.SQLiteHelper
 import com.example.activediet.databinding.FragmentDbBinding
-import com.google.android.material.snackbar.Snackbar.make
 
 class DbFragment: Fragment() {
     private lateinit var edName: EditText
-    private lateinit var edEmail: EditText
+    private lateinit var edDetails: EditText
     private lateinit var btnAdd: Button
     private lateinit var btnView: Button
     private lateinit var btnUpdate: Button
@@ -49,7 +47,7 @@ class DbFragment: Fragment() {
         adapter?.setOnClickItem {
             Toast.makeText(context,it.name,Toast.LENGTH_SHORT).show()
             edName.setText(it.name)
-            edEmail.setText(it.email)
+            edDetails.setText(it.details)
             std = it
         }
         adapter?.setOnClickDeleteItem {
@@ -81,15 +79,15 @@ class DbFragment: Fragment() {
     }
     private fun updateExercise(){
         val name = edName.text.toString()
-        val email = edEmail.text.toString()
-        if (name == std?.name && email == std?.email){
+        val details = edDetails.text.toString()
+        if (name == std?.name && details == std?.details){
             Toast.makeText(context, "Record didn't change", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (std == null) return
 
-        val std = ExcerciseModel(id =std!!.id, name = name, email = email)
+        val std = ExcerciseModel(id =std!!.id, name = name, details = details)
         val status = sqliteHelper.updateExercise(std)
         if (status > -1){
            clearEditText()
@@ -100,12 +98,12 @@ class DbFragment: Fragment() {
     }
     private fun addExcercise(){
         val name = edName.text.toString()
-        val email = edEmail.text.toString()
-        if (name.isEmpty() || email.isEmpty()){
+        val details = edDetails.text.toString()
+        if (name.isEmpty() || details.isEmpty()){
             // change to toast
             Toast.makeText(context,"Please enter required field", Toast.LENGTH_SHORT).show()
         }else{
-            val std = ExcerciseModel(name = name, email = email)
+            val std = ExcerciseModel(name = name, details = details)
             val status = sqliteHelper.insertExcercise(std)
             // check insert success
             if (status > -1) {
@@ -127,7 +125,7 @@ class DbFragment: Fragment() {
     }
     private fun initView(){
         edName = binding.edName
-        edEmail = binding.edEmail
+        edDetails = binding.edDetails
         btnAdd = binding.btnAdd
         btnView = binding.btnView
         btnUpdate = binding.btnUpdate
@@ -136,7 +134,7 @@ class DbFragment: Fragment() {
     }
     private fun clearEditText(){
         edName.setText("")
-        edEmail.setText("")
+        edDetails.setText("")
         edName.requestFocus()
 
     }

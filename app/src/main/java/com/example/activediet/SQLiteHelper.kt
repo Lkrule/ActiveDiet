@@ -14,12 +14,12 @@ class SQLiteHelper (context:Context): SQLiteOpenHelper(context, DATABASE_NAME,nu
         private const val TBL_EXCERCISE = "tbl_excercise"
         private const val ID = "id"
         private const val NAME = "name"
-        private const val EMAIL = "email"
+        private const val DETAILS = "details"
 
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val createTblExcercise = ("CREATE TABLE " + TBL_EXCERCISE + "(" + ID + " INTEGER PRIMARY KEY,"
-                + NAME + " TEXT," + EMAIL + " TEXT" + ")")
+                + NAME + " TEXT," + DETAILS + " TEXT" + ")")
         db?.execSQL(createTblExcercise)
     }
 
@@ -33,7 +33,7 @@ class SQLiteHelper (context:Context): SQLiteOpenHelper(context, DATABASE_NAME,nu
 
         contentValues.put(ID, std.id)
         contentValues.put(NAME, std.name)
-        contentValues.put(EMAIL, std.email)
+        contentValues.put(DETAILS, std.details)
 
         val success = db.insert(TBL_EXCERCISE, null, contentValues)
         db.close()
@@ -54,15 +54,15 @@ class SQLiteHelper (context:Context): SQLiteOpenHelper(context, DATABASE_NAME,nu
         }
         var id: Int
         var name:String
-        var email:String
+        var details:String
 
         if(cursor.moveToFirst()){
             do{
                 id = cursor.getInt(cursor.getColumnIndex("id"))
                 name = cursor.getString(cursor.getColumnIndex("name"))
-                email = cursor.getString(cursor.getColumnIndex("email"))
+                details = cursor.getString(cursor.getColumnIndex("details"))
 
-                val std = ExcerciseModel(id = id, name = name, email = email)
+                val std = ExcerciseModel(id = id, name = name, details = details)
                 stdList.add(std)
             }while(cursor.moveToNext())
         }
@@ -73,7 +73,7 @@ class SQLiteHelper (context:Context): SQLiteOpenHelper(context, DATABASE_NAME,nu
         val contentValues = ContentValues()
         contentValues.put(ID,std.id)
         contentValues.put(NAME,std.name)
-        contentValues.put(EMAIL,std.email)
+        contentValues.put(DETAILS,std.details)
         val success = db.update(TBL_EXCERCISE, contentValues,"id="+std.id, null)
         db.close()
         return success
