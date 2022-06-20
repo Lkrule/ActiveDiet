@@ -43,13 +43,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     private val products = Array<MutableList<IngredientSearch>>(MEALS_COUNT) { mutableListOf() }
 
-    private var meals: List<String> = listOf(
-        getString(R.string.breakfast),
-        getString(R.string.second_breakfast),
-        getString(R.string.lunch),
-        getString(R.string.diner),
-        getString(R.string.supper)
-    )
+    private lateinit var meals: List<String>
 
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
@@ -72,6 +66,13 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDailyBinding.inflate(inflater, container, false)
+        meals = listOf(
+            getString(R.string.breakfast),
+            getString(R.string.second_breakfast),
+            getString(R.string.lunch),
+            getString(R.string.diner),
+            getString(R.string.supper)
+        )
         return binding.root
     }
 
