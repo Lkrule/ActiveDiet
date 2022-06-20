@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_welcomeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_dbFragment"
+            app:destination="@id/dbFragment" />
     </fragment>
 
     <fragment
@@ -131,6 +134,14 @@
         <argument
             android:name="date"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/dbFragment"
+        android:name="com.example.activediet.fragments.DbFragment"
+        android:label="DbFragment" >
+        <action
+            android:id="@+id/action_dbFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
 
 

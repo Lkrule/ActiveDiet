@@ -6,8 +6,9 @@
         android:icon="@android:drawable/ic_menu_mapmode"
         android:title="Run" />
     <item
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Sports" />
+        android:id = "@+id/dbFragment"
+        android:icon="@drawable/bghelper"
+        android:title="Gym Exercises" />
     <item
         android:id = "@+id/dailyFragment"
         android:icon="@android:drawable/ic_menu_day"
@@ -21,6 +22,6 @@
         android:title="Settings" />
     <item
         android:id="@+id/notificationFragment"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
         android:title="Reminders"/>
 </menu>
