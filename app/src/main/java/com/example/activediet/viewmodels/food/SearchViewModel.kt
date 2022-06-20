@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.Nutrient
 import com.example.activediet.db.IngredientsDao
 import com.example.activediet.repos.DailyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,25 +23,32 @@ class SearchViewModel @Inject constructor(
     var isTextChange = false
     var isProductPicked = false
 
-    private var productsResult = listOf<IngredientSearch>()
+    private var productsResults = listOf<IngredientSearch>()
 
     private var _products = MutableLiveData<List<String>>()
     val products: LiveData<List<String>> = _products
 
-    private var _productId = MutableLiveData<Int>()
-    val productId: LiveData<Int> = _productId
+    private var _nutrients = MutableLiveData<List<Nutrient>>()
+    val nutrients: LiveData<List<Nutrient>> = _nutrients
 
 
     fun afterTextChanged(text: String) {
         isTextChange = true
         viewModelScope.launch {
             val response = api.searchIngredients(text)
-            val products = response.body()!!.results
+            productsResults = response.body()!!.results
             val productsList = mutableListOf<String>()
-            products.forEach {
+            productsResults.forEach {
                 productsList.add(it.name)
             }
             _products.value = productsList
+        }
+    }
+
+    fun launch(position: Int) {
+        viewModelScope.launch {
+            val response = api.getIngredientInfo(productsResults[position].id)
+            _nutrients.value = response.body()!!.nutrients.nutrients
         }
     }
 }

@@ -2,9 +2,6 @@ package com.example.activediet.fragments.food
 
 import android.R
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.activediet.adapters.SearchAdapter
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.databinding.FragmentSearchBinding
@@ -27,7 +23,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private lateinit var adapter: SearchAdapter
+    private var adapter: SearchAdapter = SearchAdapter(mutableListOf())
 
     @Inject
     lateinit var api: FoodAPI
@@ -39,7 +35,7 @@ class SearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-
+        binding.rv.adapter = adapter
         return binding.root
     }
 
@@ -47,14 +43,27 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.products.observe(viewLifecycleOwner) {
-            val adapter = context?.let { it1 ->
-                ArrayAdapter<String>(
-                    it1,
-                    R.layout.simple_list_item_1, it)
+            if(viewModel.isTextChange) {
+                val adapter = context?.let { it1 ->
+                    ArrayAdapter<String>(
+                        it1,
+                        R.layout.simple_list_item_1, it)
+                }
+                binding.autoCompleteTextView.setAdapter(adapter)
+                adapter?.notifyDataSetChanged()
+                viewModel.isTextChange = false
             }
-            binding.autoCompleteTextView.setAdapter(adapter)
-            adapter?.notifyDataSetChanged()
-            viewModel.isTextChange = false
+        }
+
+
+        viewModel.nutrients.observe(viewLifecycleOwner) {
+            binding.apply {
+                rv.adapter = SearchAdapter(it.toMutableList())
+            }
+        }
+
+        binding.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+            viewModel.launch(position)
         }
 
         binding.autoCompleteTextView.addTextChangedListener {
