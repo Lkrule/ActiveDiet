@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.adapters.SearchAdapter
 import com.example.activediet.api.FoodAPI
+import com.example.activediet.data.Nutrient
 import com.example.activediet.databinding.FragmentSearchBinding
 import com.example.activediet.viewmodels.food.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +26,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private var adapter: SearchAdapter = SearchAdapter(mutableListOf())
+    private var adapter: SearchAdapter = SearchAdapter(mutableListOf(Nutrient("food",4.0.toFloat() ,"ug")))
 
     @Inject
     lateinit var api: FoodAPI
@@ -35,6 +38,7 @@ class SearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding.rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rv.adapter = adapter
         return binding.root
     }
@@ -57,9 +61,8 @@ class SearchFragment : Fragment() {
 
 
         viewModel.nutrients.observe(viewLifecycleOwner) {
-            binding.apply {
-                rv.adapter = SearchAdapter(it.toMutableList())
-            }
+            adapter.updateData(it)
+            adapter.notifyDataSetChanged()
         }
 
         binding.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->

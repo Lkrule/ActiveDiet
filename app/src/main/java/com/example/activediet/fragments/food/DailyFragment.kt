@@ -43,7 +43,13 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     private val products = Array<MutableList<IngredientSearch>>(MEALS_COUNT) { mutableListOf() }
 
-    private lateinit var meals: List<String>
+    private var meals: List<String> = listOf(
+        getString(R.string.breakfast),
+        getString(R.string.second_breakfast),
+        getString(R.string.lunch),
+        getString(R.string.diner),
+        getString(R.string.supper)
+    )
 
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
@@ -79,13 +85,6 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         set_reminder.setOnClickListener {
             sendNotification(CHANNEL_ID, notificationId)
         }
-        meals = listOf(
-            getString(R.string.breakfast),
-            getString(R.string.second_breakfast),
-            getString(R.string.lunch),
-            getString(R.string.diner),
-            getString(R.string.supper)
-        )
 
         adapter = MealsAdapter(meals, this)
         val rv = binding.dailyRv
