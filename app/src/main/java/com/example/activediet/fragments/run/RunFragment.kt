@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.R
 import com.example.activediet.adapters.RunAdapter
-import com.example.activediet.databinding.FragmentRunBinding
 import com.example.activediet.utilities.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.viewmodels.run.RunViewModel
@@ -24,8 +23,6 @@ import pub.devrel.easypermissions.EasyPermissions
 
 @AndroidEntryPoint
 class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
-    private var _binding: FragmentRunBinding? = null
-    private val binding get() = _binding!!
 
 
 
@@ -39,8 +36,9 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRunBinding.inflate(inflater, container, false)
-        return binding.root
+//        _binding = FragmentRunBinding.inflate(inflater, container, false)
+//        return binding.root
+        return null
     }
 
 
@@ -54,17 +52,13 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         })
 
 
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
-        }
     }
 
-     private fun setupRecyclerView() = binding.runs.apply {
-        runAdapter = RunAdapter()
-        adapter = runAdapter
-        layoutManager = LinearLayoutManager(requireContext())
-    }
+//     private fun setupRecyclerView() = binding.runs.apply {
+//        runAdapter = RunAdapter()
+//        adapter = runAdapter
+//        layoutManager = LinearLayoutManager(requireContext())
+//    }
 
     private fun requestPermissions(){
         if (TrackingUtility.hasLocationPermissions(requireContext())){

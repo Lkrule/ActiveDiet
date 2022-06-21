@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clInnerLayout"
+        android:id="@+id/innerLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mapView">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTimer"
+            android:id="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00:00:00:00"
@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btnFinishRun"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+            app:layout_constraintTop_toBottomOf="@+id/timer" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFinishRun"
@@ -48,20 +48,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+            app:layout_constraintTop_toBottomOf="@+id/timer" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvLetsGo"
+        android:id="@+id/letsGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Let's go, USERNAME!"
+        android:text="Let's go!"
         android:textAlignment="center"
         android:textSize="50sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/clInnerLayout"
+        app:layout_constraintBottom_toTopOf="@+id/innerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,8 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/clInnerLayout"
+        android:contentDescription="@string/activity"
+        app:layout_constraintBottom_toTopOf="@+id/innerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

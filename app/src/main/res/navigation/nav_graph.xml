@@ -75,16 +75,6 @@
         app:launchSingleTop="true"/>
 
     <fragment
-        android:id="@+id/setupFragment"
-        android:name="com.example.activediet.fragments.run.SetupFragment"
-        android:label=""
-        tools:layout="@layout/fragment_setup">
-        <action
-            android:id="@+id/action_setupFragment_to_runFragment"
-            app:destination="@id/runFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/runFragment"
         android:name="com.example.activediet.fragments.run.RunFragment"
         android:label=""
