@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.activediet.R
 import androidx.lifecycle.Observer
+import com.example.activediet.adapters.RunAdapter
 import com.example.activediet.databinding.FragmentStatisticsBinding
 import com.example.activediet.utilities.run.CustomMarkerView
 import com.example.activediet.utilities.run.TrackingUtility
@@ -27,6 +28,11 @@ class StatisticsFragment : Fragment() {
     private val binding get() = _binding!!
 
 
+
+
+    private lateinit var runAdapter: RunAdapter
+
+
     private val viewModel: StatisticsViewModel by viewModels()
 
 
@@ -40,6 +46,9 @@ class StatisticsFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.runs.observe(viewLifecycleOwner, Observer {
+            runAdapter.submitList(it)
+        })
     }
 
 
