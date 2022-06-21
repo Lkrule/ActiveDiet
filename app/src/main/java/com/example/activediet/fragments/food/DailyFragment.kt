@@ -58,7 +58,6 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         highlightedDate = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
         calculatedBMR = sharedPrefs.getFloat(BMR_PREF, 0f)
     }
@@ -93,19 +92,10 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         val rv = binding.dailyRv
         rv.adapter = adapter
 
+        // helper functions
         updateDateTextView()
-
         loadAllProducts(highlightedDate)
-
-        binding.dailyNextDayBtn.setOnClickListener {
-            changeDate(1)
-            loadAllProducts(highlightedDate)
-        }
-
-        binding.dailyPreviousDayBtn.setOnClickListener {
-            changeDate(-1)
-            loadAllProducts(highlightedDate)
-        }
+        setOnClickListeners()
 
     }
     fun sendNotification(CHANNEL_ID: String,notificationId: Int){
@@ -233,18 +223,15 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         binding.dailyDateTv.text = highlightedDate
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.daily_menu, menu)
-    }
+    private fun setOnClickListeners(){
+        binding.dailyNextDayBtn.setOnClickListener {
+            changeDate(1)
+            loadAllProducts(highlightedDate)
+        }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.daily_menu_settings -> {
-                val action = DailyFragmentDirections.actionDailyFragmentToCalculatorFragment()
-                findNavController().navigate(action)
-                true
-            }
-            else -> false
+        binding.dailyPreviousDayBtn.setOnClickListener {
+            changeDate(-1)
+            loadAllProducts(highlightedDate)
         }
     }
 }
