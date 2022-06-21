@@ -1,6 +1,7 @@
 package com.example.activediet.fragments.run
 
 import android.Manifest
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -58,10 +59,34 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // listeners
+        setOnClickListeners()
+        // map
+        binding.apply {
+            mapView.apply {
+                onCreate(savedInstanceState)
+                mapView.getMapAsync {
+                    map = it
+
+                }
+            }
+        }
     }
 
 
 
+    private fun setOnClickListeners(){
+        binding.apply{
+            btnToggleRun.setOnClickListener {
+                if(isTracking) {
+                    menu?.getItem(0)?.isVisible = true
+                }
+            }
+            btnFinishRun.setOnClickListener {
+            }
+        }
+    }
 
     // permissions
 

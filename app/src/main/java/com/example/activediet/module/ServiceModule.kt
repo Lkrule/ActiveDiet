@@ -2,7 +2,9 @@ package com.example.activediet.module
 
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import androidx.core.app.NotificationCompat
+import com.example.activediet.MainActivity
 import com.example.activediet.R
 import com.example.activediet.utilities.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -22,6 +24,19 @@ object ServiceModule {
     fun provideFusedLocationProviderClient(
         @ApplicationContext app: Context
     ) = FusedLocationProviderClient(app)
+
+    @ServiceScoped
+    @Provides
+    fun provideMainActivityPendingIntent(
+        @ApplicationContext app: Context
+    ) = PendingIntent.getActivity(
+        app,
+        0,
+        Intent(app, MainActivity::class.java).also {
+            it.action = "ACTION_SHOW_TRACKING_FRAGMENT"
+        },
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
 
 
     @ServiceScoped

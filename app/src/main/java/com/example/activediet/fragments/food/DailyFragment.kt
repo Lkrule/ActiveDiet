@@ -23,19 +23,21 @@ import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentDailyBinding
 import com.example.activediet.fragments.WelcomeFragment
 import com.example.activediet.utilities.Constants.BMR_PREF
+import com.example.activediet.utilities.Constants.MEALS_COUNT
 import com.example.activediet.viewmodels.food.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-private const val MEALS_COUNT = 5
 
 @AndroidEntryPoint
 class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     ProductAdapter.ProductAdapterListener {
     private var _binding: FragmentDailyBinding? = null
     private val binding get() = _binding!!
+
+
 
     private lateinit var adapter: MealsAdapter
 

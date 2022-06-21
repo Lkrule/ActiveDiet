@@ -6,7 +6,6 @@ object Constants {
 
     const val RUNNING_DATABASE_NAME = "running_db"
     const val REQUEST_CODE_LOCATION_PERMISSION = 0
-
     const val KEY_FIRST_TIME_TOGGLE = "KEY_FIRST_TIME_TOGGLE"
 
     // shared preferences
@@ -15,6 +14,8 @@ object Constants {
     const val KEY_WEIGHT = "KEY_WEIGHT"
     const val KEY_HEIGHT = "KEY_HEIGHT"
     const val KEY_AGE = "KEY_AGE"
+    const val MEALS_COUNT = 5
+
 
     const val MAP_ZOOM = 15F
     const val BMR_PREF = "BMR"
