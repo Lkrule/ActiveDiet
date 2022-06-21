@@ -105,14 +105,4 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    // fix  deprecated code
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//
-//        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-//    }
 }
