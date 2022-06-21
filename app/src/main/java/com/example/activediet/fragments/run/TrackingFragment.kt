@@ -5,22 +5,41 @@ import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import com.example.activediet.R
-import com.example.activediet.databinding.FragmentStatisticsBinding
+import androidx.fragment.app.viewModels
 import com.example.activediet.databinding.FragmentTrackingBinding
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.run.TrackingUtility
+import com.example.activediet.viewmodels.run.RunViewModel
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.Polyline
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import javax.inject.Inject
 
 
 class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var _binding: FragmentTrackingBinding? = null
     private val binding get() = _binding!!
+
+
+    private val viewModel: RunViewModel by viewModels()
+
+    private var isTracking = false
+    private var pathPoints = mutableListOf<Polyline>()
+
+    private var map: GoogleMap? = null
+
+    private var curTimeInMillis = 0L
+
+    private var menu: Menu? = null
+
+    @set:Inject
+    var weight = 80f
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +59,11 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+
+
+
+    // permissions
 
     private fun requestPermissions(){
         if (TrackingUtility.hasLocationPermissions(requireContext())){

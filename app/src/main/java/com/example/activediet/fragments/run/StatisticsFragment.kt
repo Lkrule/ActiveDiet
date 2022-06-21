@@ -46,15 +46,89 @@ class StatisticsFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // setup bar chart
+        binding.apply {
+            barChart.xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            setDrawLabels(false)
+            axisLineColor = Color.WHITE
+            textColor = Color.WHITE
+            setDrawGridLines(false)
+            }
+            barChart.axisLeft.apply {
+                axisLineColor = Color.WHITE
+                textColor = Color.WHITE
+                setDrawGridLines(false)
+            }
+            barChart.axisRight.apply {
+                axisLineColor = Color.WHITE
+                textColor = Color.WHITE
+                setDrawGridLines(false)
+            }
+            barChart.apply {
+                description.text = "Avg Speed Over Time"
+                legend.isEnabled = false
+            }
+        }
+
+        // other observers
+        subscribeToObservers()
+    }
+
+
+    private fun subscribeToObservers() {
+        // subscribe To Observers
+        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
+                //
+                val barDataSet = BarDataSet(allAvgSpeeds, "Avg Speed Over Time").apply {
+                    valueTextColor = Color.WHITE
+                    color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+                }
+
+
+                binding.apply {
+                    barChart.apply {
+                        data = BarData(barDataSet)
+                        marker = CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
+                        invalidate()
+                    }
+                }
+            }
+        })
+
+        // other observers
         viewModel.runs.observe(viewLifecycleOwner, Observer {
             runAdapter.submitList(it)
         })
-    }
-
-
-    private fun setupBarChart() {
-    }
-
-    private fun subscribeToObservers() {
+        viewModel.totalTimeInMs.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val totalTimeRun = TrackingUtility.getFormattedStopWatchTime(it)
+                binding.totalTime.text = totalTimeRun
+            }
+        })
+        viewModel.totalDist.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val km = it / 1000f
+                val totalDistance = Math.round(km * 10f) / 10f
+                val totalDistanceString = "${totalDistance}km"
+                binding.totalDistance.text = totalDistanceString
+                binding.tvTotalDistanceInfo
+            }
+        })
+        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val avgSpeed = Math.round(it * 10f) / 10f
+                val avgSpeedString = "${avgSpeed}km/h"
+                binding.averageSpeed.text = avgSpeedString
+            }
+        })
+        viewModel.totalCalsBurned.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val totalCalories = "${it}kcal"
+                binding.totalCalories.text = totalCalories
+            }
+        })
     }
 }

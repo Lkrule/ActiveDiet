@@ -12,7 +12,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DATE"
@@ -20,7 +20,7 @@
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/tvDuration"
+            android:id="@+id/duration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DURATION"
@@ -28,7 +28,7 @@
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/tvAvgSpeed"
+            android:id="@+id/avgSpeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="AVG SPEED"
@@ -36,7 +36,7 @@
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/tvDistance"
+            android:id="@+id/distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DISTANCE"
@@ -44,7 +44,7 @@
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/tvCaloriesBurned"
+            android:id="@+id/caloriesBurned"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CALORIES BURNED"
