@@ -2,6 +2,7 @@ package com.example.activediet.fragments.run
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import com.example.activediet.databinding.FragmentTrackingBinding
 import com.example.activediet.utilities.Constants
@@ -31,11 +33,11 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private val viewModel: RunViewModel by viewModels()
 
     private var isTracking = false
-    private var pathPoints = mutableListOf<Polyline>()
+    // private var pathPoints = mutableListOf<Polyline>()
 
     private var map: GoogleMap? = null
 
-    private var curTimeInMillis = 0L
+    private var curTimeInMs = 0L
 
     private var menu: Menu? = null
 
@@ -66,11 +68,23 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding.apply {
             mapView.apply {
                 onCreate(savedInstanceState)
-                mapView.getMapAsync {
+                getMapAsync {
+                    if (ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                    }
+                    it.isMyLocationEnabled = true
+                    it.uiSettings.isMyLocationButtonEnabled = true
+                    it.uiSettings.isZoomControlsEnabled = true
                     map = it
-
                 }
             }
+
         }
     }
 
