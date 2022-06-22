@@ -26,30 +26,36 @@ class StatisticsViewModel @Inject constructor(
         return runRepository.allRunsSortedBy(query)
     }
 
+    private val runsSortedByDate = sortBy("timestamp")
+    private val runsSortedByDist = sortBy("distance")
+    private val runsSortedByCalsBurned = sortBy("calories")
+    private val runsSortedByTimeInMs = sortBy("time_ms")
+    private val runsSortedByAvgSpeed = sortBy("speed")
+
     var sortType = "timestamp"
 
     init {
-        runs.addSource(sortBy("timestamp")) { result ->
+        runs.addSource(runsSortedByDate) { result ->
             if(sortType == "timestamp") {
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(sortBy("speed")) { result ->
+        runs.addSource(runsSortedByAvgSpeed) { result ->
             if(sortType == "speed") {
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(sortBy("calories")) { result ->
+        runs.addSource(runsSortedByCalsBurned) { result ->
             if(sortType == "calories") {
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(sortBy("distance")) { result ->
+        runs.addSource(runsSortedByDist) { result ->
             if(sortType == "distance") {
                 result?.let { runs.value = it }
             }
         }
-        runs.addSource(sortBy("time_ms")) { result ->
+        runs.addSource(runsSortedByTimeInMs) { result ->
             if(sortType == "time_ms") {
                 result?.let { runs.value = it }
             }
@@ -67,5 +73,15 @@ class StatisticsViewModel @Inject constructor(
     }.also {
         this.sortType = sortType
     }
+
+
+    fun remove(){
+        for(run in runs.value!!) {
+            viewModelScope.launch{
+                runRepository.deleteRun(run)
+            }
+        }
+    }
+
 
 }

@@ -82,7 +82,7 @@ class StatisticsFragment : Fragment() {
         // setup bar chart
 
         binding.clear?.setOnClickListener {
-
+            viewModel.remove()
         }
 
         binding.apply {
