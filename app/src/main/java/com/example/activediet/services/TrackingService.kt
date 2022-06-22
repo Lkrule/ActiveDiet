@@ -9,10 +9,15 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
+import com.example.activediet.utilities.Constants.ACTION_PAUSE_SERVICE
+import com.example.activediet.utilities.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.activediet.utilities.Constants.ACTION_STOP_SERVICE
 import com.example.activediet.utilities.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.activediet.utilities.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.activediet.utilities.tracks
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -46,25 +51,48 @@ class TrackingService : LifecycleService() {
     }
 
 
+    private fun addEmptyTracks() = pathPoints.value?.apply {
+        add(mutableListOf())
+        pathPoints.postValue(this)
+    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
+
+
+    val locationCallback = object : LocationCallback(){
+        override fun onLocationResult(result: LocationResult) {
+            super.onLocationResult(result)
+            if(isTracking.value!!){
+                result.locations.let { locations ->
+                    for (location in locations){
+                        addPathPoint(location)
+                        Timber.d("NEW LOCATION: ${location.latitude}, ${location.longitude}")
+                    }
+                }
+            }
+        }
+    }
+
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             when(it.action){
-                "ACTION_START_OR_RESUME_SERVICE" -> {
+                ACTION_START_OR_RESUME_SERVICE -> {
 
                     if(isFirstRun){
+                        startForegroundService()
                         isFirstRun = false
                     }
                     else{
                         Timber.d("ACTION_START_OR_RESUME_SERVICE")
+                        //startTimer()
                     }
 
                 }
-                "ACTION_PAUSE_SERVICE" -> {
+                ACTION_PAUSE_SERVICE -> {
                     Timber.d("ACTION_PAUSE_SERVICE")
+                    //pauseService()
                 }
-                "ACTION_STOP_SERVICE" -> {
-
+                ACTION_STOP_SERVICE -> {
+                    //killService()
                 }
             }
         }
