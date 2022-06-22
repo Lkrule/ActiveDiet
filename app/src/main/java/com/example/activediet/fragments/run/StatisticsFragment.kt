@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.activediet.R
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.adapters.RunAdapter
 import com.example.activediet.databinding.FragmentStatisticsBinding
 import com.example.activediet.utilities.run.CustomMarkerView
@@ -41,12 +43,45 @@ class StatisticsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+
+        recyclerView()
+
+        when(viewModel.sortType) {
+            "timestamp" -> binding.filter.setSelection(0)
+            "time_ms" -> binding.filter.setSelection(1)
+            "distance" -> binding.filter.setSelection(2)
+            "speed" -> binding.filter.setSelection(3)
+            "calories" -> binding.filter.setSelection(4)
+        }
+
+        binding.filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                when(pos) {
+                    0 -> viewModel.sortRuns("timestamp")
+                    1 -> viewModel.sortRuns("time_ms")
+                    2 -> viewModel.sortRuns("distance")
+                    3 -> viewModel.sortRuns("speed")
+                    4 -> viewModel.sortRuns("calories")
+                }
+            }
+        }
         return binding.root
     }
+
+    private fun recyclerView() {
+        runAdapter = RunAdapter()
+        binding.runs.adapter = runAdapter
+        binding.runs.layoutManager = LinearLayoutManager(requireContext())
+    }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // setup bar chart
+
+
         binding.apply {
             barChart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
@@ -78,7 +113,7 @@ class StatisticsFragment : Fragment() {
 
     private fun subscribeToObservers() {
         // subscribe To Observers
-        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+        viewModel.sortBy("timestamp").observe(viewLifecycleOwner, Observer {
             it?.let {
                 val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
                 //
