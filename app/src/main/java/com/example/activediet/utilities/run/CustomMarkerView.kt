@@ -15,16 +15,11 @@ class CustomMarkerView(
     layoutId: Int
 ) : MarkerView(c, layoutId) {
 
-
-
     override fun getOffset(): MPPointF {
         return MPPointF(-width / 2f, -height.toFloat())
     }
 
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         super.refreshContent(e, highlight)
-        if(e == null) {
-            return
-        }
     }
 }

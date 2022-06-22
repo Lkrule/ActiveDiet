@@ -39,7 +39,7 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.math.round
 
-
+@AndroidEntryPoint
 class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var _binding: FragmentTrackingBinding? = null
@@ -61,10 +61,6 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @set:Inject
     var weight = 80f
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
