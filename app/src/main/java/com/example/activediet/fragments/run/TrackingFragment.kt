@@ -90,6 +90,8 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+    // add tracks
+
     private fun addLatestTrack(){
         // check path points
         if(pathPoints.isNotEmpty() && pathPoints.last().size > 1){
@@ -105,6 +107,17 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 .add(lastLatLng)
             map?.addPolyline(trackOptions)
 
+        }
+    }
+
+
+    private fun addAllTracks() {
+        for(track in pathPoints) {
+            val trackOptions = PolylineOptions()
+                .color(Color.RED)
+                .width(8F)
+                .addAll(track)
+            map?.addPolyline(trackOptions)
         }
     }
 
@@ -188,9 +201,9 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
             val avgSpeed = round((distInMeters / 1000f) / (curTimeInMs / 1000f / 60 / 60) * 10) / 10f
             val dateTimeStamp = Calendar.getInstance().timeInMillis
-            val caloriesBurned = ((distInMeters/1000)* weight).toInt()
+            val calsBurned = ((distInMeters/1000)* weight).toInt()
 
-            val run = Run(bitmap, dateTimeStamp, avgSpeed, distInMeters, curTimeInMs, caloriesBurned)
+            val run = Run(bitmap, dateTimeStamp, avgSpeed, distInMeters, curTimeInMs, calsBurned)
             viewModel.insertRun(run)
 
             Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
@@ -217,6 +230,7 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     it.uiSettings.isMyLocationButtonEnabled = true
                     it.uiSettings.isZoomControlsEnabled = true
                     map = it
+                    addAllTracks()
                 }
             }
 
