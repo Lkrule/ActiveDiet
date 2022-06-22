@@ -3,6 +3,7 @@ package com.example.activediet.fragments.run
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Polyline
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +83,33 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         setOnClickListeners()
         // map
         initMap(savedInstanceState)
+
+        // subscribe observers
+        subscribeToObservers()
     }
+
+
+
+    private fun addLatestTrack(){
+        // check path points
+        if(pathPoints.isNotEmpty() && pathPoints.last().size > 1){
+
+            val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
+            val lastLatLng = pathPoints.last().last()
+
+            // track options
+            val trackOptions = PolylineOptions()
+                .color(Color.RED)
+                .width(8F)
+                .add(preLastLatLng)
+                .add(lastLatLng)
+            map?.addPolyline(trackOptions)
+
+        }
+    }
+
+
+
 
     //update track
     private fun updateTracking(isTracking: Boolean) {
@@ -131,9 +159,22 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+    // subscribeToObservers
 
     private fun subscribeToObservers() {
-
+        TrackingService.isTracking.observe(viewLifecycleOwner) {
+            updateTracking(it)
+        }
+        TrackingService.pathPoints.observe(viewLifecycleOwner) {
+            pathPoints = it
+            addLatestTrack()
+            moveCameraToUser()
+        }
+        TrackingService.timeRunInMs.observe(viewLifecycleOwner) {
+            curTimeInMs = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMs, true)
+            binding.timer!!.text = formattedTime
+        }
     }
 
 
