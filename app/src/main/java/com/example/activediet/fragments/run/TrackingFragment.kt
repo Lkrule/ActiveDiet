@@ -10,18 +10,26 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import com.example.activediet.data.Run
 import com.example.activediet.databinding.FragmentTrackingBinding
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.run.TrackingUtility
+import com.example.activediet.utilities.track
 import com.example.activediet.viewmodels.run.RunViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Polyline
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import java.util.*
 import javax.inject.Inject
+import kotlin.math.round
 
 
 class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
@@ -33,7 +41,8 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private val viewModel: RunViewModel by viewModels()
 
     private var isTracking = false
-    // private var pathPoints = mutableListOf<Polyline>()
+
+    private var pathPoints = mutableListOf<track>()
 
     private var map: GoogleMap? = null
 
@@ -65,6 +74,56 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         // listeners
         setOnClickListeners()
         // map
+        initMap(savedInstanceState)
+    }
+
+
+
+
+    // zoom track
+    private fun zoomTrack(){
+        val bounce = LatLngBounds.builder()
+        for (track in pathPoints){
+            for (pos in track){
+                bounce.include(pos)
+            }
+        }
+
+        map?.moveCamera(
+            CameraUpdateFactory.newLatLngBounds(
+                bounce.build(),
+                binding.mapView.width,
+                binding.mapView.height,
+                (binding.mapView.height * 0.05).toInt()
+            )
+        )
+    }
+
+
+
+
+    // save db
+
+    private fun SaveRunInDB(){
+        map?.snapshot { bitmap ->
+            var distInMeters = 0
+            for (track in pathPoints){
+                distInMeters += TrackingUtility.calcTrackLength(track).toInt()
+            }
+            val avgSpeed = round((distInMeters / 1000f) / (curTimeInMs / 1000f / 60 / 60) * 10) / 10f
+            val dateTimeStamp = Calendar.getInstance().timeInMillis
+            val caloriesBurned = ((distInMeters/1000)* weight).toInt()
+
+            val run = Run(bitmap, dateTimeStamp, avgSpeed, distInMeters, curTimeInMs, caloriesBurned)
+            viewModel.insertRun(run)
+
+            Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    // init map
+    private fun initMap(savedInstanceState: Bundle?){
         binding.apply {
             mapView.apply {
                 onCreate(savedInstanceState)
@@ -86,8 +145,8 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
 
         }
-    }
 
+    }
 
 
 
@@ -141,7 +200,7 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    // permissions
+    // permissions - buggy need to fix
 
     private fun requestPermissions(){
         if (TrackingUtility.hasLocationPermissions(requireContext())){
