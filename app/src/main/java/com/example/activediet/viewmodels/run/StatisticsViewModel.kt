@@ -64,11 +64,11 @@ class StatisticsViewModel @Inject constructor(
     }
 
     fun sortRuns(sortType: String) = when(sortType) {
-        "timestamp" -> sortBy("timestamp").value?.let { runs.value = it }
-        "time_ms" -> sortBy("time_ms").value?.let { runs.value = it }
-        "speed" -> sortBy("speed").value?.let { runs.value = it }
-        "distance" -> sortBy("distance").value?.let { runs.value = it }
-        "calories" -> sortBy("calories").value?.let { runs.value = it }
+        "timestamp" -> runsSortedByDate.value?.let { runs.value = it }
+        "time_ms" -> runsSortedByTimeInMs.value?.let { runs.value = it }
+        "speed" -> runsSortedByAvgSpeed.value?.let { runs.value = it }
+        "distance" -> runsSortedByDist.value?.let { runs.value = it }
+        "calories" -> runsSortedByCalsBurned.value?.let { runs.value = it }
         else -> {}
     }.also {
         this.sortType = sortType

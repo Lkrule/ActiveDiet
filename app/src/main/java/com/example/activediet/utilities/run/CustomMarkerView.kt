@@ -21,5 +21,9 @@ class CustomMarkerView(
 
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         super.refreshContent(e, highlight)
+
+        if(e == null) {
+            return
+        }
     }
 }
