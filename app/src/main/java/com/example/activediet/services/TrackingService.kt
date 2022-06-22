@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import com.example.activediet.utilities.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.activediet.utilities.Constants.NOTIFICATION_CHANNEL_NAME
+import com.example.activediet.utilities.tracks
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -35,9 +36,11 @@ class TrackingService : LifecycleService() {
 
     private val timeRunInSec = MutableLiveData<Long>()
 
+
     companion object {
         val timeRunInMs = MutableLiveData<Long>()
         val isTracking = MutableLiveData<Boolean>()
+        val pathPoints = MutableLiveData<tracks>()
     }
 
 

@@ -47,7 +47,25 @@ object TrackingUtility {
 
     }
 
-    fun calcTrackLength(track: track): Int {
-        return 0
+    fun calcTrackLength(track: track): Float {
+        var distance = 0f
+        for (i in 0..track.size - 2){
+            val start = track[i]
+            val end = track[i + 1]
+
+            val result = FloatArray(1)
+
+            // calculate distance between two coordinates
+
+            Location.distanceBetween(
+                start.latitude,
+                start.longitude,
+                end.latitude,
+                end.longitude,
+                result
+            )
+            distance += result[0]
+        }
+        return  distance
     }
 }

@@ -13,9 +13,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import com.example.activediet.R
 import com.example.activediet.data.Run
 import com.example.activediet.databinding.FragmentTrackingBinding
+import com.example.activediet.services.TrackingService
 import com.example.activediet.utilities.Constants
+import com.example.activediet.utilities.Constants.ACTION_PAUSE_SERVICE
+import com.example.activediet.utilities.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.activediet.utilities.Constants.MAP_ZOOM
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.utilities.track
 import com.example.activediet.viewmodels.run.RunViewModel
@@ -23,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Polyline
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -77,6 +83,30 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         initMap(savedInstanceState)
     }
 
+    //update track
+    private fun updateTracking(isTracking: Boolean) {
+        this.isTracking = isTracking
+        if(!isTracking) {
+            binding.btnToggleRun.text = "Start"
+            binding.btnFinishRun.visibility = View.VISIBLE
+        } else {
+            binding.btnToggleRun.text = "Stop"
+            menu?.getItem(0)?.isVisible = true
+            binding.btnFinishRun.visibility = View.GONE
+        }
+    }
+
+
+    private fun moveCameraToUser() {
+        if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
+            map?.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    pathPoints.last().last(),
+                    MAP_ZOOM
+                )
+            )
+        }
+    }
 
 
 
@@ -100,6 +130,11 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+
+
+    private fun subscribeToObservers() {
+
+    }
 
 
     // save db
@@ -188,14 +223,53 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun setOnClickListeners(){
         binding.apply{
             btnToggleRun.setOnClickListener {
-                if(isTracking) {
-                    menu?.getItem(0)?.isVisible = true
-                }
+                toggleRun()
             }
             btnFinishRun.setOnClickListener {
+                zoomTrack()
+                SaveRunInDB()
             }
         }
     }
+
+
+    // send command
+
+
+    private fun toggleRun() {
+        if(isTracking) {
+            menu?.getItem(0)?.isVisible = true
+            sendCommandToService(ACTION_PAUSE_SERVICE)
+        } else {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+        }
+    }
+
+
+    private fun sendCommandToService(action: String) =
+        Intent(requireContext(), TrackingService::class.java).also {
+            it.action = action
+            requireContext().startService(it)
+        }
+
+    // dialog cancel
+
+    private fun showCancelDialog(){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Cancel the Run?")
+            .setMessage("Are you sure to cancel the current run and delete all the data")
+            .setIcon(R.drawable.remove_circle)
+            .setPositiveButton("Yes"){ _,_ ->
+
+            }
+            .setNegativeButton("No"){dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+
+        dialog.show()
+    }
+
 
 
 

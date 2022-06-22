@@ -30,4 +30,9 @@ object Constants {
     const val BASE_URL = "https://api.spoonacular.com/"
     const val API_KEY = "005f2b02140b4c28a6c1da806cb27c76"
     const val GOOGLE_KEY = "AIzaSyD3JDRSAea-I2E2KRJmJb0GxIhTZJ55LB0"
+
+    // service
+    const val ACTION_START_OR_RESUME_SERVICE = "ACTION_START_OR_RESUME_SERVICE"
+    const val ACTION_PAUSE_SERVICE = "ACTION_PAUSE_SERVICE"
+    const val ACTION_STOP_SERVICE = "ACTION_STOP_SERVICE"
 }
