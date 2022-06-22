@@ -1,6 +1,10 @@
 package com.example.activediet.utilities
 
 import android.graphics.Color
+import com.google.android.gms.maps.model.LatLng
+
+typealias track = MutableList<LatLng>
+typealias tracks = MutableList<track>
 
 object Constants {
 
