@@ -67,4 +67,5 @@ class StatisticsViewModel @Inject constructor(
     }.also {
         this.sortType = sortType
     }
+
 }

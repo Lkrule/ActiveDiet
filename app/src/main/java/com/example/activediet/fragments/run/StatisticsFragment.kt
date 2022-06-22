@@ -81,6 +81,9 @@ class StatisticsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // setup bar chart
 
+        binding.clear?.setOnClickListener {
+
+        }
 
         binding.apply {
             barChart.xAxis.apply {

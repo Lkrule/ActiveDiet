@@ -22,8 +22,6 @@ class RunViewModel @Inject constructor(
     private val runsSortedByAvgSpeed = runRepository.allRunsSortedBy("speed")
 
 
-    val runs = MediatorLiveData<List<Run>>()
-
 
     fun insertRun(run: Run) = viewModelScope.launch {
         runRepository.insertRun(run)
