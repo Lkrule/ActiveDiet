@@ -99,16 +99,16 @@ class StatisticsFragment : Fragment() {
         })
 
         // other observers
-        viewModel.runs.observe(viewLifecycleOwner, Observer {
+        viewModel.runs.observe(viewLifecycleOwner) {
             runAdapter.submitList(it)
-        })
-        viewModel.totalTimeInMs.observe(viewLifecycleOwner, Observer {
+        }
+        viewModel.totalTimeInMs.observe(viewLifecycleOwner) {
             it?.let {
                 val totalTimeRun = TrackingUtility.getFormattedStopWatchTime(it)
                 binding.totalTime.text = totalTimeRun
             }
-        })
-        viewModel.totalDist.observe(viewLifecycleOwner, Observer {
+        }
+        viewModel.totalDist.observe(viewLifecycleOwner) {
             it?.let {
                 val km = it / 1000f
                 val totalDistance = Math.round(km * 10f) / 10f
@@ -116,19 +116,19 @@ class StatisticsFragment : Fragment() {
                 binding.totalDistance.text = totalDistanceString
                 binding.tvTotalDistanceInfo
             }
-        })
-        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {
+        }
+        viewModel.totalAvgSpeed.observe(viewLifecycleOwner) {
             it?.let {
                 val avgSpeed = Math.round(it * 10f) / 10f
                 val avgSpeedString = "${avgSpeed}km/h"
                 binding.averageSpeed.text = avgSpeedString
             }
-        })
-        viewModel.totalCalsBurned.observe(viewLifecycleOwner, Observer {
+        }
+        viewModel.totalCalsBurned.observe(viewLifecycleOwner) {
             it?.let {
                 val totalCalories = "${it}kcal"
                 binding.totalCalories.text = totalCalories
             }
-        })
+        }
     }
 }

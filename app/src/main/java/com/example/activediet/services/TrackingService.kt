@@ -3,6 +3,7 @@ package com.example.activediet.services
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.location.Location
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -12,6 +13,7 @@ import com.example.activediet.utilities.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.activediet.utilities.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.activediet.utilities.tracks
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -69,6 +71,22 @@ class TrackingService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+
+
+    private fun addPathPoint(location: Location?){
+        location?.let {
+            val position = LatLng(location.altitude, location.longitude)
+            pathPoints.value?.apply {
+                last().add(position)
+                pathPoints.postValue(this)
+            }
+        }
+    }
+
+
+    private fun startForegroundService(){
+
+    }
 
 
 

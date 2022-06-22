@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.data.Run
 import com.example.activediet.databinding.FragmentTrackingBinding
@@ -21,6 +22,7 @@ import com.example.activediet.services.TrackingService
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.ACTION_PAUSE_SERVICE
 import com.example.activediet.utilities.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.activediet.utilities.Constants.ACTION_STOP_SERVICE
 import com.example.activediet.utilities.Constants.MAP_ZOOM
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.utilities.track
@@ -28,10 +30,8 @@ import com.example.activediet.viewmodels.run.RunViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -207,6 +207,7 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             viewModel.insertRun(run)
 
             Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
+            stopRun()
         }
     }
 
@@ -288,7 +289,7 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    // send command
+    // send commands
 
 
     private fun toggleRun() {
@@ -301,13 +302,18 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    private fun stopRun(){
+        sendCommandToService(ACTION_STOP_SERVICE)
+    }
+
+
     private fun sendCommandToService(action: String) =
         Intent(requireContext(), TrackingService::class.java).also {
             it.action = action
             requireContext().startService(it)
         }
 
-    // dialog cancel
+    // dialog cancel - maybe unnecessary
 
     private fun showCancelDialog(){
         val dialog = MaterialAlertDialogBuilder(requireContext())
@@ -315,7 +321,7 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             .setMessage("Are you sure to cancel the current run and delete all the data")
             .setIcon(R.drawable.remove_circle)
             .setPositiveButton("Yes"){ _,_ ->
-
+                stopRun()
             }
             .setNegativeButton("No"){dialog, _ ->
                 dialog.cancel()
