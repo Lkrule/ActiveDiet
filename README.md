@@ -20,21 +20,21 @@ We weren't satisfied with taking care of building muscles and advising eating ha
 ## Running the application and daily basis routines
 * To start the ActiveDiet app, press the ```Run App```.</br>
 * The :house: screen:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. You get to see tips and articles regarding healthy life style: healthy and tasty recipes.</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Articles and more information about working out correctly and safely.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. See tips and articles regarding healthy life style: healthy and tasty recipes.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Read articles and more information about working out correctly and safely.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Under each category[^1], choose any link in order to explore more data that is related to this category.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. On the top of the home screen, there are 3 options that are available:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate the macro-nutrients daily basis.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate your BMI.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search for food that you would like to add into your daily macro-nutrients counter.</br>
 ## Daily basis tools
-* By pressing the `DAILY COUNT` button, you can set up your daily meals, and then calculate your macro-nutrients daily-intake :green_salad:</br>
-* By pressing the `CALCULATE BMI` button, you can calculate your BMI, and then you know from which category you can benefit the most! All based on science :muscle:</br>
-* By pressing the `FOOD SEARCH` button, you can find any food that is in your local DB and if not, you can always add some new food :poultry_leg:</br>
+* By pressing the `DAILY COUNT` button: Set up your daily meals, and calculate your macro-nutrients daily-intake :green_salad:</br>
+* By pressing the `CALCULATE BMI` button: Calculate your BMI, and learn from which category benefits you most! All based on science :muscle:</br>
+* By pressing the `FOOD SEARCH` button: Find any food that is in your local DB or else, add new food :poultry_leg:</br>
 
 
 ## Exercises management :weight_lifting:
-One of many concerns while working out, is to remember the number of sets, repetitions and even what's the exercise itself.</br>
+One of many concerns while working out, is how to remember how many sets or repetitions you have to do, and sometimes the exercise itself.</br>
 Working out and getting results is based on progress that our body and mind are doing together, and the more consistent we are, the better!</br>
 In order to help you, there is an easy to use exercise list that you can insert/delete/update and view your current exercise list that you want to follow :page_facing_up:.</br>
 Please navigation to the exercise list: Press the tab button(located in the top left corner) :arrow_right:	```Gym Exercises```
