@@ -1,16 +1,16 @@
 # ActiveDiet Mobile Application
 An android application, that will help you get active and be healthier by adding new routines and targets into your life! :dart: </br>
 With this app you get all in one: Tracking your daily macro-nutrients and building up your workout program.</br>
-We weren't satisfied with taking care of building muscles and advising eating habbits. Therfore, we added a whole section and futures for people who like or want to be motivated to start running :running:.</br>
+We weren't satisfied with taking care of building muscles and advising eating habbits. Therfore, we added a whole section and features for  people wishing to start jogging or are an experienced runners and need motivation to do so :running:.</br>
 ## Prerequisites
 * ActiveDiet
 * AndroidStudio
 ## Getting Started
 * Install the prerequisties
 * Clone the project: ```git clone https://github.com/Lkrule/ActiveDiet.git```
-* Enable the gps permissions:</br>
+* Enable gps permissions:</br>
 1. Click the application-window button. :black_large_square:
-2. Click the android symbol that is above the ActiveDiet window. 
+2. Click the android symbol above the ActiveDiet window. 
 3. Click on ```App info``` :arrow_right:	```Permissions``` :arrow_right:	```Location``` & ```Phsical activity```:arrow_right:	```Allow only while using the app```
 4. Please insert the parameters that are in the ```Settings``` tab in the main menu. (Name,Gender etc...)
 </br></br>
