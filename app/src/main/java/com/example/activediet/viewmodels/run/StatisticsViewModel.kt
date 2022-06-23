@@ -76,8 +76,8 @@ class StatisticsViewModel @Inject constructor(
 
 
     fun remove(){
-        for(run in runs.value!!) {
-            viewModelScope.launch{
+        viewModelScope.launch{
+            for(run in runs.value!!) {
                 runRepository.deleteRun(run)
             }
         }
