@@ -12,6 +12,7 @@ Furthermore, we weren't satisfied with only taking care of building muscles and 
 1. Click the application-window button. :black_large_square:
 2. Click the android symbol that is above the ActiveDiet window. 
 3. Click on ```App info``` :arrow_right:	```Permissions``` :arrow_right:	```Location``` & ```Phsical activity```:arrow_right:	```Allow only while using the app```
+4. Please insert the parameters that are in the ```Settings``` tab in the main menu. (Name,Gender etc...)
 </br></br>
 ![image](https://user-images.githubusercontent.com/56928005/175303701-d682fc94-eb33-4109-9f70-27d8f19accbf.png)
 
@@ -25,6 +26,12 @@ Furthermore, we weren't satisfied with only taking care of building muscles and 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate the macro-nutrients daily basis.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate your BMI.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search for food that you would like to add into your daily macro-nutrients counter.</br>
+## Daily basis tools
+* By pressing the `DAILY COUNT` button, you can set up your daily meals, and then calculate your macro-nutrients daily-intake :green_salad:</br>
+* By pressing the `CALCULATE BMI` button, you can calculate your BMI, and then you know from which category you can benefit the most! All based on science :muscle:</br>
+* By pressing the `FOOD SEARCH` button, you can find any food that is in your local DB and if not, you can always add some new food :poultry_leg:</br>
+
+
 ## Exercises management :weight_lifting:
 One of many concerns while working out, is to remember the number of sets, repetitions and even what's the exercise itself.</br>
 Working out and getting results is based on progress that our body and mind are doing together, and the more consistent we are, the better!</br>
