@@ -14,7 +14,8 @@ Furthermore, we weren't satisfied with only taking care of building muscles and 
 3. Click on ```App info``` :arrow_right:	```Permissions``` :arrow_right:	```Location``` & ```Phsical activity```:arrow_right:	```Allow only while using the app```
 4. Please insert the parameters that are in the ```Settings``` tab in the main menu. (Name,Gender etc...)
 </br></br>
-![image](https://user-images.githubusercontent.com/56928005/175303701-d682fc94-eb33-4109-9f70-27d8f19accbf.png)
+![gitpresentation (2)](https://user-images.githubusercontent.com/56928005/175322864-080bfe7f-b1c6-475d-a0e3-8f75291c6929.png)
+
 
 ## Running the application and daily basis routines
 * To start the ActiveDiet app, press the ```Run App```.</br>
