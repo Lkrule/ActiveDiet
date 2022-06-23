@@ -76,22 +76,18 @@ class TrackingService : LifecycleService() {
             when(it.action){
                 ACTION_START_OR_RESUME_SERVICE -> {
                     if(isFirstRun){
-                        startForegroundService()
+                        startTimer()
+                        isTracking.postValue(true)
                         isFirstRun = false
                     }
                     else{
                         Timber.d("ACTION_START_OR_RESUME_SERVICE")
                         startTimer()
                     }
+                }
 
-                }
-                ACTION_PAUSE_SERVICE -> {
-                    Timber.d("ACTION_PAUSE_SERVICE")
-                    pauseService()
-                }
-                ACTION_STOP_SERVICE -> {
-                    killService()
-                }
+                ACTION_PAUSE_SERVICE -> pauseService()
+                ACTION_STOP_SERVICE -> killService()
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -171,7 +167,6 @@ class TrackingService : LifecycleService() {
         isFirstRun = true
         pauseService()
         postInitialValues()
-        stopForeground(true)
         stopSelf()
     }
 
@@ -206,30 +201,5 @@ class TrackingService : LifecycleService() {
         else{
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
-    }
-
-
-
-    private fun startForegroundService(){
-        startTimer()
-        isTracking.postValue(true)
-
-
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            createNotificationChannel(notificationManager)
-        }
-
-    }
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(notificationManager: NotificationManager){
-        val channel = NotificationChannel(
-            NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW)
-
-        notificationManager.createNotificationChannel(channel)
     }
 }
