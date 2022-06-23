@@ -5,7 +5,6 @@ Furthermore, we weren't satisfied with only taking care of building muscles and 
 ## Prerequisites
 * ActiveDiet
 * AndroidStudio
-* Anything else?
 ## Getting Started
 * Install the prerequisties
 * Clone the project: ```git clone https://github.com/Lkrule/ActiveDiet.git```
