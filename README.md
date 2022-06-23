@@ -34,10 +34,10 @@ We weren't satisfied with taking care of building muscles and advising eating ha
 
 
 ## Exercises management :weight_lifting:
-One of many concerns while working out, is how to remember how many sets or repetitions you have to do, and sometimes the exercise itself.</br>
+One of many concerns while working out, is how to remember the number of sets and repetitions needed, and sometimes even the exercise itself.</br>
 Working out and getting results is based on progress that our body and mind are doing together, and the more consistent we are, the better!</br>
-In order to help you, there is an easy to use exercise list that you can insert/delete/update and view your current exercise list that you want to follow :page_facing_up:.</br>
-Please navigation to the exercise list: Press the tab button(located in the top left corner) :arrow_right:	```Gym Exercises```
+In order to help you, there is an easy-to-use exercise list in which you can insert,delete or update your current exercise list that you wish to follow :page_facing_up:.</br>
+Navigation to the exercise list: Press the tab button(located in the top left corner) :arrow_right:	```Gym Exercises```
 * All the exercises are saved to a local SQLite DB.
 </br>![image](https://user-images.githubusercontent.com/56928005/175301940-ffead271-3081-4282-ae02-bd87de489512.png)
 
