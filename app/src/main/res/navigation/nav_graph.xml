@@ -110,7 +110,7 @@
     <fragment
         android:id="@+id/dbFragment"
         android:name="com.example.activediet.fragments.DbFragment"
-        android:label="DbFragment" >
+        android:label="Active Diet" >
         <action
             android:id="@+id/action_dbFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
