@@ -2,6 +2,7 @@ package com.example.activediet.fragments.run
 
 import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
@@ -52,14 +53,14 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var pathPoints = mutableListOf<track>()
 
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
+
     private var map: GoogleMap? = null
 
     private var curTimeInMs = 0L
 
     private var menu: Menu? = null
-
-    @set:Inject
-    var weight = 80f
 
 
     override fun onCreateView(
@@ -197,7 +198,8 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
             val avgSpeed = round((distInMeters / 1000f) / (curTimeInMs / 1000f / 60 / 60) * 10) / 10f
             val dateTimeStamp = Calendar.getInstance().timeInMillis
-            val calsBurned = ((distInMeters/1000)* weight).toInt()
+            val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
+            val calsBurned = ((distInMeters/1000.toFloat())* weight).toInt()
 
             val run = Run(bitmap, dateTimeStamp, avgSpeed, distInMeters, curTimeInMs, calsBurned)
             viewModel.insertRun(run)
