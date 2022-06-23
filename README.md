@@ -38,19 +38,19 @@ One of many concerns while working out, is how to remember the number of sets an
 Working out and getting results is based on progress that our body and mind are doing together, and the more consistent we are, the better!</br>
 In order to help you, there is an easy-to-use exercise list in which you can insert,delete or update your current exercise list that you wish to follow :page_facing_up:.</br>
 Navigation to the exercise list: Press the tab button(located in the top left corner) :arrow_right:	```Gym Exercises```
-* All the exercises are saved to a local SQLite DB.
+* All exercises are saved to a local SQLite DB.
 </br>![image](https://user-images.githubusercontent.com/56928005/175301940-ffead271-3081-4282-ae02-bd87de489512.png)
 
 ## Running with the ActiveDiet :running_woman:
-* This feature is built upon using a GPS- a kotlin service, and a timer to take time of your running session.</br>
-* An easy to use running module, no need to use any other app along with this one, all in one.
-* In the history tab, you can see your running results- how many km you ran, how many calories were burned, how long you ran and your average speed!</br>
+* This feature is built upon using a GPS- a kotlin service, and a timer to track time of your running session.</br>
+* An easy-to-use running module, no need to use any other app along with this one, all in one.</br>
+* In the history tab, you can see your running results- how many KM you ran, how many calories have been burned during the session, how long you ran and your average speed!</br>
 ![gitpresentation](https://user-images.githubusercontent.com/56928005/175313094-9d58a4c8-f767-403f-b50f-9ed2e18234a7.png)
 
 
 
 ## Set a reminder :alarm_clock:
-* Navigate to the notification tab by pressing the Tab button, and then choose ```Reminders```
+* Navigate to the notification tab by pressing the Tab button, and choose ```Reminders```
 * You can set the name of the reminder, and what ever you want it to say. For example: _"Don't forget to prepare food for tomrrow."_
 * After clicking _"SUBMIT NOTIFICATION"_, the next message will be displayed.</br>
 * When time is up, a notification will appear and the user will hear a sound when it happens.</br>
