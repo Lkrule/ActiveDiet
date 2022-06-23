@@ -52,8 +52,8 @@ Navigation to the exercise list: Press the tab button(located in the top left co
 ## Set a reminder :alarm_clock:
 * Navigate to the notification tab by pressing the Tab button, and choose ```Reminders```
 * You can set the name of the reminder, and what ever you want it to say. For example: _"Don't forget to prepare food for tomrrow."_
-* After clicking _"SUBMIT NOTIFICATION"_, the next message will be displayed.</br>
-* When time is up, a notification will appear and the user will hear a sound when it happens.</br>
+* Click _"SUBMIT NOTIFICATION"_, an approval notification will appear.</br>
+* When the time comes, a notification will appear along with a sound.</br>
 ![gitpresentation](https://user-images.githubusercontent.com/56928005/175311928-6c8587c7-df03-458a-b593-57316279fc15.png)
 
 
