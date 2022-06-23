@@ -66,3 +66,4 @@ Please navigation to the exercise list: Press the tab button(located in the top 
 
 
 [^1]: Please calculate your BMI before choosing any random option so you can see what's more relevant to you.
+![test](https://user-images.githubusercontent.com/17682527/175359444-de9e977d-6fe1-486e-a9d9-6d02006d953f.png)
