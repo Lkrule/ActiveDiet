@@ -1,5 +1,6 @@
 # ActiveDiet Mobile Application
-An android application, that will help you stay active and healthier by adding new routines and targets into your life! :dart: </br>
+An android application, that will help you get active and be healthier by adding new routines and targets into your life! :dart: </br>
+With this app you get all in one: Tracking your daily macro-nutrients and building up your work out program.</br>
 Furthermore, we weren't satisfied with only taking care of building muscles and eating tips. Therfore, we added a whole section and futures for people who like or want to be motivated to start running :running:.</br>
 ## Prerequisites
 * ActiveDiet
