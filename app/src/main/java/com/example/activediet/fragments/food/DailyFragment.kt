@@ -92,6 +92,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         val rv = binding.dailyRv
         rv.adapter = adapter
 
+
         // helper functions
         updateDateTextView()
         loadAllProducts(highlightedDate)

@@ -7,11 +7,9 @@ import javax.inject.Inject
 class DailyRepository @Inject constructor(
     private val ingredientDao: IngredientsDao
 ) {
-    suspend fun loadProducts(mealID: Int, date: String): List<IngredientSearch> {
-        return ingredientDao.loadByMeal(mealID, date)
-    }
+    suspend fun loadProducts(mealID: Int, date: String) = ingredientDao.loadByMeal(mealID, date)
 
-    suspend fun removeProduct(ingredient: IngredientSearch) {
-        ingredientDao.delete(ingredient)
-    }
+    suspend fun removeProduct(ingredient: IngredientSearch) = ingredientDao.delete(ingredient)
+
+    fun getProducts() = ingredientDao.loadAllMeals()
 }

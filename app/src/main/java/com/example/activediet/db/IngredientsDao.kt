@@ -1,5 +1,6 @@
 package com.example.activediet.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.activediet.data.IngredientSearch
 
@@ -7,6 +8,9 @@ import com.example.activediet.data.IngredientSearch
 interface IngredientsDao {
     @Query("SELECT * FROM IngredientSearch WHERE date = (:date) AND meal IN (:meal)")
     suspend fun loadByMeal(meal: Int, date: String): List<IngredientSearch>
+
+    @Query("SELECT * FROM IngredientSearch")
+    fun loadAllMeals() : LiveData<List<IngredientSearch>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg ingredients: IngredientSearch)

@@ -20,6 +20,9 @@ class DailyViewModel @Inject constructor(
     val productsLiveDataArray: Array<LiveData<List<IngredientSearch>>> =
         Array(_productsLiveDataArray.size) { i -> _productsLiveDataArray[i] }
 
+    val test = repo.getProducts()
+
+
     fun loadProducts(mealID: Int, date: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val products = repo.loadProducts(mealID, date)
@@ -37,4 +40,6 @@ class DailyViewModel @Inject constructor(
             }
         }
     }
+
+
 }
