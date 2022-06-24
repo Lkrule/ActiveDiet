@@ -20,36 +20,12 @@
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/duration"
+            android:id="@+id/calories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DURATION"
-            android:textSize="20sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/avgSpeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="AVG SPEED"
-            android:textSize="20sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/distance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DISTANCE"
-            android:textSize="20sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/caloriesBurned"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CALORIES BURNED"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="CALORIES "
+            android:textSize="20sp" />
 
     </LinearLayout>
 

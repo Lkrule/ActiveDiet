@@ -27,6 +27,7 @@ import com.example.activediet.databinding.FragmentDailyBinding
 import com.example.activediet.fragments.WelcomeFragment
 import com.example.activediet.utilities.Constants.BMR_PREF
 import com.example.activediet.utilities.Constants.MEALS_COUNT
+import com.example.activediet.utilities.run.CustomMarkerView
 import com.example.activediet.viewmodels.food.DailyViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -186,20 +187,28 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
                 if (date != food.date)  {
                     listDate.add(calsOfDay)
                     date = food.date
+                    calsOfDay = 0F
                 }
-                calsOfDay += food.nutrients.getCalories().amount
+                calsOfDay += (food.amount / 100F) * food.nutrients.getCalories().amount
             }
             //
+            listDate.removeFirst()
+            listDate.add(calsOfDay)
+
             val allCals =
                 listDate.indices.map { i -> BarEntry(i.toFloat(), listDate[i]) }
             val barDataSet = BarDataSet(allCals, "Cals Over Date").apply {
                 valueTextColor = Color.WHITE
                 color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+
+
+
             }
 
             binding.apply {
                 barChart.apply {
                     data = BarData(barDataSet)
+                    marker = CustomMarkerView(listDate, requireContext(), R.layout.marker_view)
                     invalidate()
                 }
             }
