@@ -116,9 +116,10 @@ class StatisticsFragment : Fragment() {
 
     private fun subscribeToObservers() {
         // subscribe To Observers
-        viewModel.sortBy("timestamp").observe(viewLifecycleOwner, Observer {
+        viewModel.sortBy("timestamp").observe(viewLifecycleOwner) {
             it?.let {
-                val allAvgSpeeds = it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
+                val allAvgSpeeds =
+                    it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
                 //
                 val barDataSet = BarDataSet(allAvgSpeeds, "Avg Speed Over Time").apply {
                     valueTextColor = Color.WHITE
@@ -134,7 +135,7 @@ class StatisticsFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
         // other observers
         viewModel.runs.observe(viewLifecycleOwner) {

@@ -29,6 +29,7 @@ import com.example.activediet.utilities.Constants.BMR_PREF
 import com.example.activediet.utilities.Constants.MEALS_COUNT
 import com.example.activediet.viewmodels.food.DailyViewModel
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
@@ -152,10 +153,6 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
 
     private fun setupBar(){
-        viewModel.test.observe(viewLifecycleOwner) {
-            Log.d("test:",it.toString())
-        }
-
         binding.apply {
             barChart.xAxis.apply {
                 position = XAxis.XAxisPosition.BOTTOM
@@ -177,6 +174,34 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
             barChart.apply {
                 description.text = "Avg Cals Over Time"
                 legend.isEnabled = false
+            }
+        }
+
+
+        viewModel.test.observe(viewLifecycleOwner) {
+            var date = ""
+            var calsOfDay = 0F
+            val listDate : MutableList<Float> = mutableListOf()
+            for(food in it){
+                if (date != food.date)  {
+                    listDate.add(calsOfDay)
+                    date = food.date
+                }
+                calsOfDay += food.nutrients.getCalories().amount
+            }
+            //
+            val allCals =
+                listDate.indices.map { i -> BarEntry(i.toFloat(), listDate[i]) }
+            val barDataSet = BarDataSet(allCals, "Cals Over Date").apply {
+                valueTextColor = Color.WHITE
+                color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+            }
+
+            binding.apply {
+                barChart.apply {
+                    data = BarData(barDataSet)
+                    invalidate()
+                }
             }
         }
     }
