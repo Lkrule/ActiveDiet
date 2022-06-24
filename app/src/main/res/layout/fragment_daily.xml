@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -79,11 +83,13 @@
         android:paddingStart="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="5"
-        tools:listitem="@layout/meal_item" />
+        tools:listitem="@layout/meal_item" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="319dp"
         android:layout_gravity="bottom"
         android:paddingStart="40dp"
         android:paddingEnd="40dp">
@@ -101,17 +107,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/calories"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/daily_totals_kcal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 kcal" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,17 +121,6 @@
             app:layout_constraintStart_toEndOf="@+id/daily_totals_calories_layout"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/proteins"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/daily_totals_proteins"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 g" />
         </LinearLayout>
 
         <LinearLayout
@@ -151,17 +135,6 @@
             app:layout_constraintStart_toEndOf="@+id/daily_totals_proteins_layout"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fats"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/daily_totals_fats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 g" />
         </LinearLayout>
 
         <LinearLayout
@@ -176,19 +149,95 @@
             app:layout_constraintStart_toEndOf="@+id/daily_totals_fats_layout"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/carbs"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/daily_totals_carbs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 g" />
         </LinearLayout>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="284dp"
+            android:layout_height="215dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/calories"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/daily_totals_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 kcal"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/proteins"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/daily_totals_proteins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 g"
+            app:layout_constraintEnd_toEndOf="@+id/textView9"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/daily_totals_fats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 g"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fats"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/carbs"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/daily_totals_carbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 g"
+            app:layout_constraintEnd_toEndOf="@+id/textView11"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
+</ScrollView>
