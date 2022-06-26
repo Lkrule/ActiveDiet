@@ -1,24 +1,37 @@
 package com.example.activediet.viewmodels.food
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.activediet.db.IngredientsDao
+import com.example.activediet.utilities.Constants
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlin.math.roundToInt
 
-class CalculatorViewModel : ViewModel() {
+@HiltViewModel
+class CalculatorViewModel @Inject constructor(
+        var sharedPrefs: SharedPreferences
+        ) : ViewModel() {
+
     private val _bmrLiveData: MutableLiveData<Double> = MutableLiveData()
     val bmrLiveData: LiveData<Double> = _bmrLiveData
 
-    fun calculateBMR(
-        gender: Int,
-        weight: Float,
-        height: Float,
-        age: Int,
+
+    private val _gender = sharedPrefs.getInt(Constants.KEY_GENDER, 0)
+    private val _weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
+    private val  _height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f).toString().toFloat()
+    private val  _age = sharedPrefs.getFloat(Constants.KEY_AGE, 0f).toString().toFloat().toInt()
+
+    fun calcBMR(
         activity: Int,
         goal: Int
     ) {
-        _bmrLiveData.value = calcBMRForGoal(
-            gender, weight, height, age, activity, goal
-        )
+        val genderVar = if(_gender == 1) 5 else -161
+        val bmr = 9.99f * _weight + 6.25f * _height - 4.92 * _age + genderVar
+        _bmrLiveData.value =  bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
     }
 
     // Harris-Benedict formula
@@ -26,16 +39,9 @@ class CalculatorViewModel : ViewModel() {
     // goal
     private val goalFormula = listOf(-300, 0, 300)
 
-    private fun calcBMRForGoal(
-        gender: Int,
-        weight: Float,
-        height: Float,
-        age: Int,
-        activity: Int,
-        goal: Int
-    ): Double {
-        val genderVar = if(gender == 1) 5 else -161
-        val bmr = 9.99f * weight + 6.25f * height - 4.92 * age + genderVar
-        return bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
+    fun calcBMI(): Float {
+        val bmi = ( _weight / (_height/100 * _height/ 100))
+        return  ((bmi * 100.0).roundToInt() / 100.0).toFloat()
     }
+
 }

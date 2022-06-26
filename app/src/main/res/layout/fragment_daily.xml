@@ -49,10 +49,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/daily_date_tv"
+            android:id="@+id/daily_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="03-09-2021"
+            android:text="03-03-2022"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,5 +1,6 @@
 package com.example.activediet.fragments.food
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -67,7 +68,6 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         highlightedDate = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
-        calculatedBMR = sharedPrefs.getFloat(BMR_PREF, 0f)
     }
 
     override fun onCreateView(
@@ -183,17 +183,20 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
             var date = ""
             var calsOfDay = 0F
             val listDate : MutableList<Float> = mutableListOf()
-            for(food in it){
+            val sorted = it.sortedBy { it.date }
+            for(food in sorted){
                 if (date != food.date)  {
                     listDate.add(calsOfDay)
                     date = food.date
                     calsOfDay = 0F
                 }
-                calsOfDay += (food.amount / 100F) * food.nutrients.getCalories().amount
+                calsOfDay += food.nutrients.getCalories().amount
             }
             //
-            listDate.removeFirst()
-            listDate.add(calsOfDay)
+            if (listDate.isNotEmpty()) {
+                listDate.removeFirst()
+                listDate.add(calsOfDay)
+            }
 
             val allCals =
                 listDate.indices.map { i -> BarEntry(i.toFloat(), listDate[i]) }
@@ -216,7 +219,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     }
 
     override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
-        viewModel.productsLiveDataArray.also {
+        viewModel.productsArray.also {
             holder.binding.rv.adapter = ProductAdapter(products[pos], this, pos)
             it[pos].observe(viewLifecycleOwner) { list ->
                 products[pos].clear()
@@ -245,7 +248,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     override fun addItemClicked(pos: Int) {
         val action = DailyFragmentDirections
-            .actionDailyFragmentToSearchFragment(highlightedDate)
+            .actionDailyFragmentToAddCustomFoodFragment(highlightedDate)
         findNavController().navigate(action)
     }
 
@@ -270,9 +273,10 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
             it.carbs.toDouble()
         }.toFloat()
 
-        return MealTotals(kcal = kcal, fats = fats, carbs = carbs, proteins = proteins)
+        return MealTotals(kcal,fats,carbs,proteins)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateDailyTotals(totals: MealTotals) {
         binding.apply {
             dailyTotalsKcal.text = String.format("%.2f", totals.kcal) + " / " +
@@ -294,7 +298,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     }
 
     private fun updateDateTextView() {
-        binding.dailyDateTv.text = highlightedDate
+        binding.dailyDate.text = highlightedDate
     }
 
     private fun setOnClickListeners(){

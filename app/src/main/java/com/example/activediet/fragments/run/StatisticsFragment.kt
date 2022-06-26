@@ -22,6 +22,8 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Math.*
+import kotlin.math.roundToInt
 
 
 @AndroidEntryPoint
@@ -130,7 +132,6 @@ class StatisticsFragment : Fragment() {
                 binding.apply {
                     barChart.apply {
                         data = BarData(barDataSet)
-                        // marker = CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
                         invalidate()
                     }
                 }
@@ -150,15 +151,15 @@ class StatisticsFragment : Fragment() {
         viewModel.totalDist.observe(viewLifecycleOwner) {
             it?.let {
                 val km = it / 1000f
-                val totalDistance = Math.round(km * 10f) / 10f
+                val totalDistance = (km * 10f).roundToInt() / 10f
                 val totalDistanceString = "${totalDistance}km"
                 binding.totalDistance.text = totalDistanceString
-                binding.tvTotalDistanceInfo
+                binding.totalDistanceInfo
             }
         }
         viewModel.totalAvgSpeed.observe(viewLifecycleOwner) {
             it?.let {
-                val avgSpeed = Math.round(it * 10f) / 10f
+                val avgSpeed = (it * 10f).roundToInt() / 10f
                 val avgSpeedString = "${avgSpeed}km/h"
                 binding.averageSpeed.text = avgSpeedString
             }

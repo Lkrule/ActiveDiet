@@ -1,5 +1,6 @@
 package com.example.activediet.fragments.food
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,10 +26,7 @@ class CalculatorFragment : Fragment() {
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CalculatorViewModel by viewModels()
-
-    @Inject
-    lateinit var sharedPrefs: SharedPreferences
+    private val  viewModel: CalculatorViewModel by viewModels()
 
     private var calculatedBmr: Float = 0f
 
@@ -40,27 +38,24 @@ class CalculatorFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            calcCalculateBtn.setOnClickListener(calculateButtonListener)
-            calcApplyButton.setOnClickListener(applyButtonClickListener)
-        }
+        addListeners()
 
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
             binding.apply {
-                calculatedBmr = bmr.toFloat()
-                calcCalculatedBmr.visibility = View.VISIBLE
-                calcCalculatedBmr.text = calculatedBmr.toString() + " ${getString(R.string.kcal)}"
-                calcYourBmr.visibility = View.VISIBLE
-                calcApplyButton.visibility = View.VISIBLE
+                calcBmi.visibility = View.VISIBLE
+                calcBmi.text = viewModel.calcBMI().toString() +  "kg/m^2"
+                calcYourBmi.visibility = View.VISIBLE
+                applyButton.visibility = View.VISIBLE
             }
         }
     }
 
     private val applyButtonClickListener = View.OnClickListener {
-        sharedPrefs.edit().putFloat(BMR_PREF, calculatedBmr).apply()
+        viewModel.sharedPrefs.edit().putFloat(BMR_PREF, calculatedBmr)
         navigateToDailyFragment()
     }
 
@@ -73,14 +68,7 @@ class CalculatorFragment : Fragment() {
     private val calculateButtonListener = View.OnClickListener {
         if (validate()) {
             binding.apply {
-                viewModel.calculateBMR(
-                    gender = sharedPrefs.getInt(Constants.KEY_GENDER, 0),
-                    weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f)
-                        .toString().toFloat(),
-                    height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f)
-                        .toString().toFloat(),
-                    age = sharedPrefs.getFloat(Constants.KEY_AGE, 0f)
-                        .toString().toFloat().toInt(),
+                viewModel.calcBMR(
                     activity = calcActivitySpinner.selectedItemPosition,
                     goal = calcGoalSpinner.selectedItemPosition
                 )
@@ -92,6 +80,13 @@ class CalculatorFragment : Fragment() {
     private fun validate(): Boolean {
         return binding.calcActivitySpinner.selectedItemPosition > 0 &&
                 binding.calcGoalSpinner.selectedItemPosition > 0 &&
-                sharedPrefs.getString(Constants.KEY_NAME, "").toString().isNotEmpty()
+                viewModel.sharedPrefs.getString(Constants.KEY_NAME, "").toString().isNotEmpty()
+    }
+
+    private fun addListeners(){
+        binding.apply {
+            calcButton.setOnClickListener(calculateButtonListener)
+            applyButton.setOnClickListener(applyButtonClickListener)
+        }
     }
 }

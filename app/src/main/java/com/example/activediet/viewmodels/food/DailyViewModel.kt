@@ -15,10 +15,10 @@ import javax.inject.Inject
 class DailyViewModel @Inject constructor(
     private val repo: DailyRepository
 ) : ViewModel() {
-    private val _productsLiveDataArray: Array<MutableLiveData<List<IngredientSearch>>> =
+    private val _productsArray: Array<MutableLiveData<List<IngredientSearch>>> =
         Array(5) { MutableLiveData<List<IngredientSearch>>() }
-    val productsLiveDataArray: Array<LiveData<List<IngredientSearch>>> =
-        Array(_productsLiveDataArray.size) { i -> _productsLiveDataArray[i] }
+    val productsArray: Array<LiveData<List<IngredientSearch>>> =
+        Array(_productsArray.size) { i -> _productsArray[i] }
 
     val test = repo.getProducts()
 
@@ -26,17 +26,17 @@ class DailyViewModel @Inject constructor(
     fun loadProducts(mealID: Int, date: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val products = repo.loadProducts(mealID, date)
-            _productsLiveDataArray[mealID].postValue(products)
+            _productsArray[mealID].postValue(products)
         }
     }
 
     fun deleteProduct(ingredient: IngredientSearch, mealIndex: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             repo.removeProduct(ingredient)
-            _productsLiveDataArray[mealIndex].value?.let {
+            _productsArray[mealIndex].value?.let {
                 val list = it.toMutableList()
                 list.remove(ingredient)
-                _productsLiveDataArray[mealIndex].postValue(list)
+                _productsArray[mealIndex].postValue(list)
             }
         }
     }
