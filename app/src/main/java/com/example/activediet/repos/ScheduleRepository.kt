@@ -4,7 +4,7 @@ import com.example.activediet.data.IngredientSearch
 import com.example.activediet.db.IngredientsDao
 import javax.inject.Inject
 
-class DailyRepository @Inject constructor(
+class ScheduleRepository @Inject constructor(
     private val ingredientDao: IngredientsDao
 ) {
     suspend fun loadProducts(mealID: Int, date: String) = ingredientDao.loadByMeal(mealID, date)

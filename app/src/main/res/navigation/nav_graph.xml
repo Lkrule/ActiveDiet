@@ -17,8 +17,8 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_welcomeFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment"
+            android:id="@+id/action_welcomeFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
         <action
@@ -35,8 +35,8 @@
         android:label="@string/calculate_bmr"
         tools:layout="@layout/fragment_calculator" >
         <action
-            android:id="@+id/action_calculatorFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment"
+            android:id="@+id/action_calculatorFragment_to_sechduleFragment"
+            app:destination="@id/scheduleFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
@@ -44,15 +44,15 @@
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/dailyFragment"
-        android:name="com.example.activediet.fragments.food.DailyFragment"
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.activediet.fragments.food.ScheduleFragment"
         android:label=""
-        tools:layout="@layout/fragment_daily" >
+        tools:layout="@layout/fragment_schedule" >
         <action
-            android:id="@+id/action_dailyFragment_to_addCustomFoodFragment"
+            android:id="@+id/action_scheduleFragment_to_addCustomFoodFragment"
             app:destination="@id/addCustomFoodFragment" />
         <action
-            android:id="@+id/action_dailyFragment_to_calculatorFragment"
+            android:id="@+id/action_scheduleFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment

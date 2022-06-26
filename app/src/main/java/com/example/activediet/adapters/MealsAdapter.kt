@@ -1,5 +1,6 @@
 package com.example.activediet.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class MealsAdapter(
         }
 
         // update total of all meals
+        @SuppressLint("SetTextI18n")
         fun updateTotals(totals: MealTotals) {
             binding.apply {
                 kcal.text = String.format("%.2f", totals.kcal) + " kcal"

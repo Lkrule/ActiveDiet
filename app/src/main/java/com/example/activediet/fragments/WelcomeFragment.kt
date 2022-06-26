@@ -98,7 +98,7 @@ class WelcomeFragment : Fragment() {
         val button5 = binding.dailyNav
         button5.setOnClickListener{
             val action = WelcomeFragmentDirections
-                .actionWelcomeFragmentToDailyFragment()
+                .actionWelcomeFragmentToScheduleFragment()
             findNavController().navigate(action)
         }
 

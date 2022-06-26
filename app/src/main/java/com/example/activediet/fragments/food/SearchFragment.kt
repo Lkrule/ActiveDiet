@@ -1,6 +1,7 @@
 package com.example.activediet.fragments.food
 
 import android.R
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,7 +27,8 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private var adapter: SearchAdapter = SearchAdapter(mutableListOf(Nutrient("food",4.0.toFloat() ,"ug")))
+    private var adapter: SearchAdapter = SearchAdapter(mutableListOf
+        (Nutrient("food",4.0.toFloat() ,"ug")))
 
     @Inject
     lateinit var api: FoodAPI
@@ -43,13 +45,14 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.products.observe(viewLifecycleOwner) {
             if(viewModel.isTextChange) {
                 val adapter = context?.let { it1 ->
-                    ArrayAdapter<String>(
+                    ArrayAdapter(
                         it1,
                         R.layout.simple_list_item_1, it)
                 }

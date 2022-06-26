@@ -7,13 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.Nutrient
-import com.example.activediet.db.IngredientsDao
-import com.example.activediet.repos.DailyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +16,6 @@ class SearchViewModel @Inject constructor(
     private val api: FoodAPI
 ) : ViewModel() {
     var isTextChange = false
-    var isProductPicked = false
 
     private var productsResults = listOf<IngredientSearch>()
 

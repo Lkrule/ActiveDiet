@@ -28,8 +28,6 @@ class CalculatorFragment : Fragment() {
 
     private val  viewModel: CalculatorViewModel by viewModels()
 
-    private var calculatedBmr: Float = 0f
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +40,7 @@ class CalculatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addListeners()
+        addOnClickListeners()
 
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
             binding.apply {
@@ -55,13 +53,13 @@ class CalculatorFragment : Fragment() {
     }
 
     private val applyButtonClickListener = View.OnClickListener {
-        viewModel.sharedPrefs.edit().putFloat(BMR_PREF, calculatedBmr)
+        viewModel.sharedPrefs.edit().putFloat(BMR_PREF, 0f)
         navigateToDailyFragment()
     }
 
     private fun navigateToDailyFragment() {
         val action = CalculatorFragmentDirections
-            .actionCalculatorFragmentToDailyFragment()
+            .actionCalculatorFragmentToSechduleFragment()
         findNavController().navigate(action)
     }
 
@@ -83,7 +81,7 @@ class CalculatorFragment : Fragment() {
                 viewModel.sharedPrefs.getString(Constants.KEY_NAME, "").toString().isNotEmpty()
     }
 
-    private fun addListeners(){
+    private fun addOnClickListeners(){
         binding.apply {
             calcButton.setOnClickListener(calculateButtonListener)
             applyButton.setOnClickListener(applyButtonClickListener)

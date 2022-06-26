@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.activediet.data.IngredientSearch
-import com.example.activediet.repos.DailyRepository
+import com.example.activediet.repos.ScheduleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,13 +12,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DailyViewModel @Inject constructor(
-    private val repo: DailyRepository
+class ScheduleViewModel @Inject constructor(
+    private val repo: ScheduleRepository
 ) : ViewModel() {
     private val _productsArray: Array<MutableLiveData<List<IngredientSearch>>> =
         Array(5) { MutableLiveData<List<IngredientSearch>>() }
     val productsArray: Array<LiveData<List<IngredientSearch>>> =
         Array(_productsArray.size) { i -> _productsArray[i] }
+
 
     val test = repo.getProducts()
 
