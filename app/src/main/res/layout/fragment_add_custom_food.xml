@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.91" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <TextView
         android:id="@+id/Food"
@@ -185,7 +185,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Calories_Amount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="number"
             android:paddingTop="8dp"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
