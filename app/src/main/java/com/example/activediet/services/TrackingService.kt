@@ -63,18 +63,7 @@ class TrackingService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             when(it.action){
-                ACTION_START_OR_RESUME_SERVICE -> {
-                    if(isFirstRun){
-                        startTimer()
-                        isTracking.postValue(true)
-                        isFirstRun = false
-                    }
-                    else{
-                        Timber.d("ACTION_START_OR_RESUME_SERVICE")
-                        startTimer()
-                    }
-                }
-
+                ACTION_START_OR_RESUME_SERVICE -> startTimer()
                 ACTION_PAUSE_SERVICE -> pauseService()
                 ACTION_STOP_SERVICE -> killService()
             }
@@ -116,6 +105,7 @@ class TrackingService : LifecycleService() {
         isTracking.postValue(true)
         timeStarted = System.currentTimeMillis()
         isTimerEnable = true
+        isTracking.postValue(true)
 
         CoroutineScope(Dispatchers.Main).launch {
             while (isTracking.value!!){
