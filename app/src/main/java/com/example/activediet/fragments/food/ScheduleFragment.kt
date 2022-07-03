@@ -202,7 +202,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         }
 
 
-        viewModel.test.observe(viewLifecycleOwner) {
+        viewModel.allProducts.observe(viewLifecycleOwner) { it ->
             var date = ""
             var calsOfDay = 0F
             val listDate : MutableList<Float> = mutableListOf()

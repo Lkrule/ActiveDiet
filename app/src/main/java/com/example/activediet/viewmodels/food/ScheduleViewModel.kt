@@ -3,8 +3,12 @@ package com.example.activediet.viewmodels.food
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.activediet.adapters.MealsAdapter
+import com.example.activediet.adapters.ProductAdapter
 import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.MealTotals
 import com.example.activediet.repos.ScheduleRepository
+import com.example.activediet.utilities.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,14 +18,22 @@ import javax.inject.Inject
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val repo: ScheduleRepository
-) : ViewModel() {
+) : ViewModel() , MealsAdapter.MealsAdapterListener,
+    ProductAdapter.ProductAdapterListener{
     private val _productsArray: Array<MutableLiveData<List<IngredientSearch>>> =
         Array(5) { MutableLiveData<List<IngredientSearch>>() }
     val productsArray: Array<LiveData<List<IngredientSearch>>> =
         Array(_productsArray.size) { i -> _productsArray[i] }
 
 
-    val test = repo.getProducts()
+
+
+    private val products =
+        Array<MutableList<IngredientSearch>>(Constants.MEALS_COUNT) { mutableListOf() }
+    private val totalsList =
+        Array(Constants.MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
+
+    val allProducts = repo.getProducts()
 
 
     fun loadProducts(mealID: Int, date: String) {
@@ -40,6 +52,18 @@ class ScheduleViewModel @Inject constructor(
                 _productsArray[mealIndex].postValue(list)
             }
         }
+    }
+
+    override fun addItemClicked(pos: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
+        TODO("Not yet implemented")
     }
 
 
