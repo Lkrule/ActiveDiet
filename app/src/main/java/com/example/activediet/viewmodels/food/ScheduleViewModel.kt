@@ -18,8 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val repo: ScheduleRepository
-) : ViewModel() , MealsAdapter.MealsAdapterListener,
-    ProductAdapter.ProductAdapterListener{
+) : ViewModel() , ProductAdapter.ProductAdapterListener{
     private val _productsArray: Array<MutableLiveData<List<IngredientSearch>>> =
         Array(5) { MutableLiveData<List<IngredientSearch>>() }
     val productsArray: Array<LiveData<List<IngredientSearch>>> =
@@ -54,16 +53,9 @@ class ScheduleViewModel @Inject constructor(
         }
     }
 
-    override fun addItemClicked(pos: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
-        TODO("Not yet implemented")
-    }
 
     override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
-        TODO("Not yet implemented")
+        deleteProduct(ingredient, mealIndex)
     }
 
 

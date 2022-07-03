@@ -45,8 +45,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
-    ProductAdapter.ProductAdapterListener {
+class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     private var _binding: FragmentScheduleBinding? = null
     private val binding get() = _binding!!
 
@@ -244,7 +243,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     @SuppressLint("NotifyDataSetChanged")
     override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
         viewModel.productsArray.also {
-            holder.binding.rv.adapter = ProductAdapter(products[pos], this, pos)
+            holder.binding.rv.adapter = ProductAdapter(products[pos], viewModel, pos)
             it[pos].observe(viewLifecycleOwner) { list ->
                 products[pos].clear()
                 products[pos].addAll(list)
@@ -261,11 +260,8 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
                 adapter.viewHolders[pos].updateTotals(totalsList[pos])
 
-                holder.binding.rv.adapter?.let { adapter ->
-                    adapter.notifyDataSetChanged()
-                }
-
-                updateDailyTotals(calculateDailyTotals())
+                holder.binding.rv.adapter?.notifyDataSetChanged()
+                calcTotals()
             }
         }
     }
@@ -276,40 +272,23 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
         findNavController().navigate(action)
     }
 
-    override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
-        viewModel.deleteProduct(ingredient, mealIndex)
-    }
-
-    private fun calculateDailyTotals(): MealTotals {
-        val kcal = totalsList.sumOf {
-            it.kcal.toDouble()
-        }.toFloat()
-
-        val fats = totalsList.sumOf {
-            it.fats.toDouble()
-        }.toFloat()
-
-        val proteins = totalsList.sumOf {
-            it.proteins.toDouble()
-        }.toFloat()
-
-        val carbs = totalsList.sumOf {
-            it.carbs.toDouble()
-        }.toFloat()
-
-        return MealTotals(kcal,fats,carbs,proteins)
-    }
 
     @SuppressLint("SetTextI18n")
-    private fun updateDailyTotals(totals: MealTotals) {
+    private fun calcTotals() {
+        val kcal = totalsList.sumOf { it.kcal.toDouble() }.toFloat()
+        val fats = totalsList.sumOf { it.fats.toDouble() }.toFloat()
+        val proteins = totalsList.sumOf { it.proteins.toDouble() }.toFloat()
+        val carbs = totalsList.sumOf { it.carbs.toDouble() }.toFloat()
+
         binding.apply {
-            dailyTotalsKcal.text = String.format("%.2f", totals.kcal) + " / " +
+            dailyTotalsKcal.text = String.format("%.2f", kcal) + " / " +
                     String.format("%.2f", sharedPrefs.getFloat(BMR, 0f))
-            dailyTotalsFats.text = String.format("%.2f", totals.fats) + " g"
-            dailyTotalsProteins.text = String.format("%.2f", totals.proteins) + " g"
-            dailyTotalsCarbs.text = String.format("%.2f", totals.carbs) + " g"
+            dailyTotalsFats.text = String.format("%.2f", fats) + " g"
+            dailyTotalsProteins.text = String.format("%.2f", proteins) + " g"
+            dailyTotalsCarbs.text = String.format("%.2f", carbs) + " g"
         }
     }
+
 
     private fun changeDate(byDays: Int) {
         val format = SimpleDateFormat("dd-MM-yyyy")
