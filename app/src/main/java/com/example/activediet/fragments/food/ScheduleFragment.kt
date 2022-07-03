@@ -52,13 +52,9 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
 
     private lateinit var adapter: MealsAdapter
-
     val viewModel: ScheduleViewModel by viewModels()
-
     private val products = Array<MutableList<IngredientSearch>>(MEALS_COUNT) { mutableListOf() }
-
     private lateinit var meals: List<String>
-
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
 
@@ -69,7 +65,6 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences
-    private lateinit var displayDate: TextView
     private var calculatedBMR: Float = 0f
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -108,7 +103,6 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
         dateListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             binding.dailyDate.text = "$day-$month-$year"
-
         }
 
         return binding.root
