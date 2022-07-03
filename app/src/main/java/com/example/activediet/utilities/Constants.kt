@@ -22,7 +22,7 @@ object Constants {
 
 
     const val MAP_ZOOM = 15F
-    const val BMR_PREF = "BMR"
+    const val BMR = "BMR"
 
     const val BASE_URL = "https://api.spoonacular.com/"
     const val API_KEY = "005f2b02140b4c28a6c1da806cb27c76"

@@ -30,9 +30,6 @@ class SearchFragment : Fragment() {
     private var adapter: SearchAdapter = SearchAdapter(mutableListOf
         (Nutrient("food",4.0.toFloat() ,"ug")))
 
-    @Inject
-    lateinit var api: FoodAPI
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

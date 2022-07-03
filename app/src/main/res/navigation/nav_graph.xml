@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/calculatorFragment"
         android:name="com.example.activediet.fragments.food.CalculatorFragment"
-        android:label="@string/calculate_bmr"
+        android:label="@string/calc_bmi"
         tools:layout="@layout/fragment_calculator" >
         <action
             android:id="@+id/action_calculatorFragment_to_sechduleFragment"

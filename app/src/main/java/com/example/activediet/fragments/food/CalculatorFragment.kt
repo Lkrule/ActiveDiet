@@ -10,13 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.activediet.R
 import com.example.activediet.databinding.FragmentCalculatorBinding
 import com.example.activediet.utilities.Constants
-import com.example.activediet.utilities.Constants.BMR_PREF
+import com.example.activediet.utilities.Constants.BMR
 import com.example.activediet.viewmodels.food.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 
@@ -42,7 +40,7 @@ class CalculatorFragment : Fragment() {
 
         addOnClickListeners()
 
-        viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
+        viewModel.bmr.observe(viewLifecycleOwner) {
             binding.apply {
                 calcBmi.visibility = View.VISIBLE
                 calcBmi.text = viewModel.calcBMI().toString() +  "kg/m^2"
@@ -53,23 +51,21 @@ class CalculatorFragment : Fragment() {
     }
 
     private val applyButtonClickListener = View.OnClickListener {
-        viewModel.sharedPrefs.edit().putFloat(BMR_PREF, 0f)
-        navigateToDailyFragment()
-    }
-
-    private fun navigateToDailyFragment() {
+        val bmr = viewModel.bmr.value?.toFloat()
+        if (bmr == null) viewModel.sharedPrefs.edit().putFloat(BMR,  0f)
+        else viewModel.sharedPrefs.edit().putFloat(BMR,  bmr)
         val action = CalculatorFragmentDirections
             .actionCalculatorFragmentToSechduleFragment()
         findNavController().navigate(action)
     }
 
+
     private val calculateButtonListener = View.OnClickListener {
         if (validate()) {
             binding.apply {
-                viewModel.calcBMR(
-                    activity = calcActivitySpinner.selectedItemPosition,
-                    goal = calcGoalSpinner.selectedItemPosition
-                )
+                val activity = calcActivitySpinner.selectedItemPosition
+                val goal = calcGoalSpinner.selectedItemPosition
+                viewModel.calcBMR(activity, goal)
             }
         }
         else Toast.makeText(context,"no settings or no plan", Toast.LENGTH_LONG).show()

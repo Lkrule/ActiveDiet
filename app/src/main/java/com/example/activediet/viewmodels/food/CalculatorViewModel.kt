@@ -16,8 +16,8 @@ class CalculatorViewModel @Inject constructor(
         var sharedPrefs: SharedPreferences
         ) : ViewModel() {
 
-    private val _bmrLiveData: MutableLiveData<Double> = MutableLiveData()
-    val bmrLiveData: LiveData<Double> = _bmrLiveData
+    private val _bmr: MutableLiveData<Double> = MutableLiveData()
+    val bmr: LiveData<Double> = _bmr
 
 
     private val _gender = sharedPrefs.getInt(Constants.KEY_GENDER, 0)
@@ -25,13 +25,12 @@ class CalculatorViewModel @Inject constructor(
     private val  _height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f).toString().toFloat()
     private val  _age = sharedPrefs.getFloat(Constants.KEY_AGE, 0f).toString().toFloat().toInt()
 
-    fun calcBMR(
-        activity: Int,
-        goal: Int
-    ) {
+
+    // bmr
+    fun calcBMR(activity: Int, goal: Int) {
         val genderVar = if(_gender == 1) 5 else -161
         val bmr = 9.99f * _weight + 6.25f * _height - 4.92 * _age + genderVar
-        _bmrLiveData.value =  bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
+        _bmr.value =  bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
     }
 
     // Harris-Benedict formula

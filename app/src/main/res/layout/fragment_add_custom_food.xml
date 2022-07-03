@@ -12,18 +12,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.91" />
 
     <TextView
         android:id="@+id/Food"
-        android:layout_width="wrap_content"
+        android:layout_width="103dp"
         android:layout_height="wrap_content"
         android:text="Food Name"
         android:textSize="20sp"
@@ -35,7 +49,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Food_Text"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="68dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
@@ -66,7 +80,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Protein_Text"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
@@ -80,8 +94,8 @@
             android:layout_weight="1"
             android:inputType="number"
             android:paddingTop="8dp"
-            tools:paddingLeft="8dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+            tools:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -98,7 +112,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Fat_Name"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
@@ -113,8 +127,8 @@
             android:layout_weight="1"
             android:inputType="number"
             android:paddingTop="8dp"
-            tools:paddingLeft="8dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -130,7 +144,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Carbon_Text"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
@@ -144,8 +158,8 @@
             android:layout_height="48dp"
             android:inputType="number"
             android:paddingTop="8dp"
-            tools:paddingLeft="8dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -161,7 +175,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Calories_Name"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
@@ -174,19 +188,19 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:paddingTop="8dp"
-            tools:paddingLeft="8dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+            tools:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="64dp"
         android:text="Add a new food"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guide_right"
-        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right2"
+        app:layout_constraintStart_toStartOf="@+id/guide_left2"
         app:layout_constraintTop_toBottomOf="@+id/Calories_Name"
         app:layout_constraintVertical_bias="0.5" />
 
