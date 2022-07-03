@@ -41,34 +41,33 @@ class CalculatorFragment : Fragment() {
         addOnClickListeners()
 
         viewModel.bmr.observe(viewLifecycleOwner) {
-            binding.apply {
-                calcBmi.visibility = View.VISIBLE
-                calcBmi.text = viewModel.calcBMI().toString() +  "kg/m^2"
-                calcYourBmi.visibility = View.VISIBLE
-                applyButton.visibility = View.VISIBLE
-            }
+            viewModel.sharedPrefs.edit().putFloat(BMR,  it.toFloat()).apply()
         }
     }
 
-    private val applyButtonClickListener = View.OnClickListener {
-        val bmr = viewModel.bmr.value?.toFloat()
-        if (bmr == null) viewModel.sharedPrefs.edit().putFloat(BMR,  0f)
-        else viewModel.sharedPrefs.edit().putFloat(BMR,  bmr)
-        val action = CalculatorFragmentDirections
-            .actionCalculatorFragmentToSechduleFragment()
-        findNavController().navigate(action)
-    }
-
-
-    private val calculateButtonListener = View.OnClickListener {
+    private val applyBtnClickListener = View.OnClickListener {
         if (validate()) {
             binding.apply {
                 val activity = calcActivitySpinner.selectedItemPosition
                 val goal = calcGoalSpinner.selectedItemPosition
                 viewModel.calcBMR(activity, goal)
             }
+            val action = CalculatorFragmentDirections
+                .actionCalculatorFragmentToSechduleFragment()
+            findNavController().navigate(action)
         }
         else Toast.makeText(context,"no settings or no plan", Toast.LENGTH_LONG).show()
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private val calcBtnListener = View.OnClickListener {
+        binding.apply {
+            calcBmi.visibility = View.VISIBLE
+            calcBmi.text = viewModel.calcBMI().toString() + "kg/m^2"
+            calcYourBmi.visibility = View.VISIBLE
+            applyButton.visibility = View.VISIBLE
+        }
     }
 
     private fun validate(): Boolean {
@@ -79,8 +78,8 @@ class CalculatorFragment : Fragment() {
 
     private fun addOnClickListeners(){
         binding.apply {
-            calcButton.setOnClickListener(calculateButtonListener)
-            applyButton.setOnClickListener(applyButtonClickListener)
+            calcButton.setOnClickListener(calcBtnListener)
+            applyButton.setOnClickListener(applyBtnClickListener)
         }
     }
 }

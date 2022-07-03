@@ -39,7 +39,8 @@ class CalculatorViewModel @Inject constructor(
     private val goalFormula = listOf(-300, 0, 300)
 
     fun calcBMI(): Float {
-        val bmi = ( _weight / (_height/100 * _height/ 100))
+        var bmi = 0f
+        if (_height != 0f) bmi = ( _weight / (_height/100 * _height/ 100))
         return  ((bmi * 100.0).roundToInt() / 100.0).toFloat()
     }
 

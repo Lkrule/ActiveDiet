@@ -30,6 +30,7 @@ import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentScheduleBinding
 import com.example.activediet.fragments.WelcomeFragment
+import com.example.activediet.utilities.Constants.BMR
 import com.example.activediet.utilities.Constants.MEALS_COUNT
 import com.example.activediet.utilities.run.CustomMarkerView
 import com.example.activediet.viewmodels.food.ScheduleViewModel
@@ -50,22 +51,19 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     private val binding get() = _binding!!
 
 
-
     private lateinit var adapter: MealsAdapter
     val viewModel: ScheduleViewModel by viewModels()
     private val products = Array<MutableList<IngredientSearch>>(MEALS_COUNT) { mutableListOf() }
     private lateinit var meals: List<String>
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
-
     // date
     private lateinit var currentDate: String
     private lateinit var dateListener : DatePickerDialog.OnDateSetListener
 
-
     @Inject
     lateinit var sharedPrefs: SharedPreferences
-    private var calculatedBMR: Float = 0f
+
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -306,7 +304,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener,
     private fun updateDailyTotals(totals: MealTotals) {
         binding.apply {
             dailyTotalsKcal.text = String.format("%.2f", totals.kcal) + " / " +
-                    String.format("%.2f", calculatedBMR)
+                    String.format("%.2f", sharedPrefs.getFloat(BMR, 0f))
             dailyTotalsFats.text = String.format("%.2f", totals.fats) + " g"
             dailyTotalsProteins.text = String.format("%.2f", totals.proteins) + " g"
             dailyTotalsCarbs.text = String.format("%.2f", totals.carbs) + " g"
