@@ -13,7 +13,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.example.activediet.R
 import com.example.activediet.api.SpoonacularAPI
-import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.Nutrient
 import com.example.activediet.data.Nutrients
 import com.example.activediet.databinding.FragmentAddCustomFoodBinding
@@ -66,7 +66,7 @@ class AddCustomFoodFragment : Fragment() {
                     Nutrient("Calories",binding.CaloriesAmount
                         .text.toString().toFloat(),"kcal")))
 
-                val ingredient = IngredientSearch(0,"",0,0,binding.FoodName
+                val ingredient = FoodSearch(0,"",0,0,binding.FoodName
                     .text.toString(),100.toFloat(),"g",listOfValues)
                 val input = input(
                     hintRes = R.string.amount,

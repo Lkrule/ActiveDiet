@@ -11,22 +11,19 @@ import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Binder
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.adapters.MealsAdapter
 import com.example.activediet.adapters.ProductAdapter
-import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentScheduleBinding
 import com.example.activediet.fragments.WelcomeFragment
@@ -52,7 +49,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     private lateinit var adapter: MealsAdapter
     val viewModel: ScheduleViewModel by viewModels()
-    private val products = Array<MutableList<IngredientSearch>>(MEALS_COUNT) { mutableListOf() }
+    private val products = Array<MutableList<FoodSearch>>(MEALS_COUNT) { mutableListOf() }
     private lateinit var meals: List<String>
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
@@ -170,6 +167,9 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
             notificationManager.createNotificationChannel(channel)
         }
     }
+
+    // end part of notification
+
     private fun loadAllProducts(date: String) {
         meals.forEachIndexed { index, _ ->
             viewModel.loadProducts(index, date)

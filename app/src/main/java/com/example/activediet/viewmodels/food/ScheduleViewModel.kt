@@ -3,9 +3,8 @@ package com.example.activediet.viewmodels.food
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.activediet.adapters.MealsAdapter
 import com.example.activediet.adapters.ProductAdapter
-import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.repos.ScheduleRepository
 import com.example.activediet.utilities.Constants
@@ -19,16 +18,16 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(
     private val repo: ScheduleRepository
 ) : ViewModel() , ProductAdapter.ProductAdapterListener{
-    private val _productsArray: Array<MutableLiveData<List<IngredientSearch>>> =
-        Array(5) { MutableLiveData<List<IngredientSearch>>() }
-    val productsArray: Array<LiveData<List<IngredientSearch>>> =
+    private val _productsArray: Array<MutableLiveData<List<FoodSearch>>> =
+        Array(5) { MutableLiveData<List<FoodSearch>>() }
+    val productsArray: Array<LiveData<List<FoodSearch>>> =
         Array(_productsArray.size) { i -> _productsArray[i] }
 
 
 
 
     private val products =
-        Array<MutableList<IngredientSearch>>(Constants.MEALS_COUNT) { mutableListOf() }
+        Array<MutableList<FoodSearch>>(Constants.MEALS_COUNT) { mutableListOf() }
     private val totalsList =
         Array(Constants.MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
@@ -43,12 +42,12 @@ class ScheduleViewModel @Inject constructor(
     }
 
 
-    override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
+    override fun onProductRemoveClick(food: FoodSearch, mealIndex: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            repo.removeProduct(ingredient)
+            repo.removeProduct(food)
             _productsArray[mealIndex].value?.let {
                 val list = it.toMutableList()
-                list.remove(ingredient)
+                list.remove(food)
                 _productsArray[mealIndex].postValue(list)
             }
         }

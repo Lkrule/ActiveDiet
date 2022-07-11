@@ -1,16 +1,10 @@
 package com.example.activediet.utilities.run
 
 import android.content.Context
-import android.view.LayoutInflater
-import com.example.activediet.data.IngredientSearch
-import com.example.activediet.data.Run
-import com.example.activediet.databinding.MarkerViewBinding
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CustomMarkerView(
     val cals: List<Float>,

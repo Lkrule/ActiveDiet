@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.activediet.api.SpoonacularAPI
-import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.Nutrient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
     var isTextChange = false
 
-    private var productsResults = listOf<IngredientSearch>()
+    private var productsResults = listOf<FoodSearch>()
 
     private var _products = MutableLiveData<List<String>>()
     val products: LiveData<List<String>> = _products

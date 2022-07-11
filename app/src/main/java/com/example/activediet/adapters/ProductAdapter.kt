@@ -3,11 +3,11 @@ package com.example.activediet.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.activediet.data.IngredientSearch
+import com.example.activediet.data.FoodSearch
 import com.example.activediet.databinding.ProductItemBinding
 
 class ProductAdapter(
-    private val data: List<IngredientSearch>,
+    private val data: List<FoodSearch>,
     private val listener: ProductAdapterListener,
     private val mealIndex: Int
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
@@ -15,30 +15,30 @@ class ProductAdapter(
     inner class ViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(ingredient: IngredientSearch) {
+        fun bind(food: FoodSearch) {
             binding.apply {
-                productItemTitle.text = ingredient.name.replaceFirstChar { it.uppercase() }
+                productItemTitle.text = food.name.replaceFirstChar { it.uppercase() }
 
-                productItemQuantity.text = ingredient.let {
+                productItemQuantity.text = food.let {
                     "${it.amount} ${it.unit}"
                 }
 
-                productItemKcal.text = ingredient.nutrients.getCalories().let {
+                productItemKcal.text = food.nutrients.getCalories().let {
                     "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
-                productItemFat.text = ingredient.nutrients.getFat().let {
+                productItemFat.text = food.nutrients.getFat().let {
                     "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
-                productItemCarbs.text = ingredient.nutrients.getCarbs().let {
+                productItemCarbs.text = food.nutrients.getCarbs().let {
                     "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
                 productItemProtein.text =
-                    ingredient.nutrients.getProtein().let {
+                    food.nutrients.getProtein().let {
                         "${String.format("%.2f", it.amount)} ${it.unit}"
                     }
 
                 productItemRemoveBtn.setOnClickListener {
-                    listener.onProductRemoveClick(ingredient, mealIndex)
+                    listener.onProductRemoveClick(food, mealIndex)
                 }
             }
         }
@@ -59,6 +59,6 @@ class ProductAdapter(
     }
 
     interface ProductAdapterListener {
-        fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int)
+        fun onProductRemoveClick(food: FoodSearch, mealIndex: Int)
     }
 }

@@ -10,7 +10,6 @@ object Constants {
     const val FOOD_DATABASE_NAME = "running_db"
     const val RUN_DATABASE_NAME = "running_db"
     const val REQUEST_CODE_LOCATION_PERMISSION = 0
-    const val KEY_FIRST_TIME_TOGGLE = "KEY_FIRST_TIME_TOGGLE"
 
     // shared preferences
     const val KEY_NAME = "KEY_NAME"
