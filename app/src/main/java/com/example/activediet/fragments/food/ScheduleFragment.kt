@@ -108,6 +108,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // unnecessary code
         val CHANNEL_ID = "Daily_Reminder"
         val notificationId = 1337
         createNotificationChannel(CHANNEL_ID, notificationId)
@@ -116,12 +117,11 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
             sendNotification(CHANNEL_ID, notificationId)
         }
 
+
+        // other part
         adapter = MealsAdapter(meals, this)
         val rv = binding.dailyRv
         rv.adapter = adapter
-
-
-
         setupBar()
 
         // helper functions
@@ -130,6 +130,8 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
         setOnClickListeners()
 
     }
+
+     // unnecessary code
 
     fun sendNotification(CHANNEL_ID: String,notificationId: Int){
         val intent = Intent(context, WelcomeFragment::class.java).apply{

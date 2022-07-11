@@ -42,7 +42,8 @@ class ScheduleViewModel @Inject constructor(
         }
     }
 
-    fun deleteProduct(ingredient: IngredientSearch, mealIndex: Int) {
+
+    override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             repo.removeProduct(ingredient)
             _productsArray[mealIndex].value?.let {
@@ -51,11 +52,6 @@ class ScheduleViewModel @Inject constructor(
                 _productsArray[mealIndex].postValue(list)
             }
         }
-    }
-
-
-    override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
-        deleteProduct(ingredient, mealIndex)
     }
 
 

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.example.activediet.R
-import com.example.activediet.api.FoodAPI
+import com.example.activediet.api.SpoonacularAPI
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.Nutrient
 import com.example.activediet.data.Nutrients
@@ -31,7 +31,7 @@ class AddCustomFoodFragment : Fragment() {
     private val args: AddCustomFoodFragmentArgs by navArgs()
 
     @Inject
-    lateinit var api: FoodAPI
+    lateinit var api: SpoonacularAPI
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +68,7 @@ class AddCustomFoodFragment : Fragment() {
 
                 val ingredient = IngredientSearch(0,"",0,0,binding.FoodName
                     .text.toString(),100.toFloat(),"g",listOfValues)
-                input(
+                val input = input(
                     hintRes = R.string.amount,
                     inputType = InputType.TYPE_CLASS_NUMBER
                 ) { _,
@@ -78,6 +78,7 @@ class AddCustomFoodFragment : Fragment() {
                 positiveButton(R.string.add)
                 negativeButton(R.string.cancel)
             }
+
         }
     }
 

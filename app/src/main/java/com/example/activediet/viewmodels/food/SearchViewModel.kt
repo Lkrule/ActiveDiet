@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.activediet.api.FoodAPI
+import com.example.activediet.api.SpoonacularAPI
 import com.example.activediet.data.IngredientSearch
 import com.example.activediet.data.Nutrient
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val api: FoodAPI
+    private val api: SpoonacularAPI
 ) : ViewModel() {
     var isTextChange = false
 

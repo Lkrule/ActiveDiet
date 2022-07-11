@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface FoodAPI {
+    interface SpoonacularAPI {
     @GET("/food/ingredients/search?apiKey=${API_KEY}&number=10")
     suspend fun searchIngredients(@Query("query") ingredient: String)
     : Response<IngredientSearchResponse>

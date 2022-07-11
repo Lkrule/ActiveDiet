@@ -1,19 +1,17 @@
 package com.example.activediet.module
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.example.activediet.api.FoodAPI
+import com.example.activediet.api.SpoonacularAPI
 import com.example.activediet.db.FoodDatabase
 import com.example.activediet.db.IngredientsDao
+import com.example.activediet.db.RunDAO
 import com.example.activediet.db.RunningDatabase
 import com.example.activediet.utilities.Constants.API_KEY
 import com.example.activediet.utilities.Constants.BASE_URL
-import com.example.activediet.utilities.Constants.KEY_FIRST_TIME_TOGGLE
-import com.example.activediet.utilities.Constants.KEY_NAME
-import com.example.activediet.utilities.Constants.KEY_WEIGHT
-import com.example.activediet.utilities.Constants.RUNNING_DATABASE_NAME
+import com.example.activediet.utilities.Constants.FOOD_DATABASE_NAME
+import com.example.activediet.utilities.Constants.RUN_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,14 +30,11 @@ import javax.inject.Singleton
 class AppModule {
 
 
-    @Singleton
-    @Provides
-    fun provideContext(application: Application): Context = application.applicationContext
-
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().apply {
+    fun provideAPI() : SpoonacularAPI {
+        // build http client
+        val okHttpClient = OkHttpClient.Builder().apply {
             addInterceptor(
                 Interceptor { chain ->
                     var request = chain.request()
@@ -49,39 +44,41 @@ class AppModule {
                 }
             )
         }.build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
+        // build retrofit
+        val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+        // return Spoonacular API
+        return retrofit.create(SpoonacularAPI::class.java)
     }
 
+    // food dao
     @Provides
     @Singleton
-    fun provideAPI(retrofit: Retrofit) : FoodAPI {
-        return retrofit.create(FoodAPI::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): FoodDatabase {
-        return Room.databaseBuilder(
+    fun provideIngredientsDao(@ApplicationContext context: Context): IngredientsDao {
+        val db = Room.databaseBuilder(
             context,
             FoodDatabase::class.java,
-            "ingredients_db"
+            FOOD_DATABASE_NAME
         ).build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideIngredientsDao(db: FoodDatabase): IngredientsDao {
         return db.ingredientDao()
     }
+
+
+    // run dao
+    @Singleton
+    @Provides
+    fun provideRunDao(@ApplicationContext context: Context) : RunDAO {
+        val db = Room.databaseBuilder(
+            context,
+            RunningDatabase::class.java,
+            RUN_DATABASE_NAME
+        ).build()
+        return db.getRunDao()
+    }
+
 
     @Provides
     @Singleton
@@ -89,35 +86,4 @@ class AppModule {
         return context.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
     }
 
-    // run module
-
-    @Singleton
-    @Provides
-    fun provideRunningDatabase(
-        @ApplicationContext app: Context
-    ) = Room.databaseBuilder(
-        app,
-        RunningDatabase::class.java,
-        RUNNING_DATABASE_NAME
-    ).build()
-
-    @Singleton
-    @Provides
-    fun provideRunDao(db: RunningDatabase) = db.getRunDao()
-
-
-    @Singleton
-    @Provides
-    fun provideName(sharedPref: SharedPreferences) =
-        sharedPref.getString(KEY_NAME, "") ?: ""
-
-    @Singleton
-    @Provides
-    fun provideWeight(sharedPref: SharedPreferences) =
-        sharedPref.getFloat(KEY_WEIGHT, 80f)
-
-    @Singleton
-    @Provides
-    fun provideFirstTimeToggle(sharedPref: SharedPreferences) =
-        sharedPref.getBoolean(KEY_FIRST_TIME_TOGGLE, true)
 }

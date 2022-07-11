@@ -8,17 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.adapters.SearchAdapter
-import com.example.activediet.api.FoodAPI
 import com.example.activediet.data.Nutrient
 import com.example.activediet.databinding.FragmentSearchBinding
 import com.example.activediet.viewmodels.food.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
