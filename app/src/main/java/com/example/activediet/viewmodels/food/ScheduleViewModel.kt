@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val repo: FoodRepository
-) : ViewModel() , FoodAdapter.ProductAdapterListener{
+) : ViewModel() , FoodAdapter.FoodProductAdapter{
     private val _productsArray: Array<MutableLiveData<List<FoodSearch>>> =
         Array(5) { MutableLiveData<List<FoodSearch>>() }
     val productsArray: Array<LiveData<List<FoodSearch>>> =
@@ -42,7 +42,7 @@ class ScheduleViewModel @Inject constructor(
     }
 
 
-    override fun onProductRemoveClick(food: FoodSearch, mealIndex: Int) {
+    override fun onFoodRemoveClick(food: FoodSearch, mealIndex: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             repo.removeProduct(food)
             _productsArray[mealIndex].value?.let {
