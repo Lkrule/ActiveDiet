@@ -29,7 +29,6 @@ import com.example.activediet.databinding.FragmentScheduleBinding
 import com.example.activediet.fragments.WelcomeFragment
 import com.example.activediet.utilities.Constants.BMR
 import com.example.activediet.utilities.Constants.MEALS_COUNT
-import com.example.activediet.utilities.run.CustomMarkerView
 import com.example.activediet.viewmodels.food.ScheduleViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -235,7 +234,6 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
             binding.apply {
                 barChart.apply {
                     data = BarData(barDataSet)
-                    marker = CustomMarkerView(listDate, requireContext(), R.layout.marker_view)
                     invalidate()
                 }
             }

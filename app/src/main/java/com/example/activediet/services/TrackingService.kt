@@ -35,16 +35,15 @@ class TrackingService : LifecycleService() {
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-
-    private val timeRunInSec = MutableLiveData<Long>()
-
-
     companion object {
         val timeRunInMs = MutableLiveData<Long>()
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<tracks>()
     }
 
+    private var lapTime = 0L
+    private var timeRun = 0L
+    private var timeStarted = 0L
 
     override fun onCreate() {
         super.onCreate()
@@ -82,23 +81,16 @@ class TrackingService : LifecycleService() {
             super.onLocationResult(result)
             if(isTracking.value!!){
                 result.locations.let { locations ->
-                    for (location in locations){
+                    for (location in locations)
                         addPathPoint(location)
-                        Timber.d("NEW LOCATION: ${location.latitude}, ${location.longitude}")
-                    }
                 }
             }
         }
     }
 
-    private var lapTime = 0L
-    private var timeRun = 0L
-    private var timeStarted = 0L
-
 
     private fun startTimer(){
         addEmptyTracks()
-        isTracking.postValue(true)
         timeStarted = System.currentTimeMillis()
         isTracking.postValue(true)
 
@@ -162,8 +154,6 @@ class TrackingService : LifecycleService() {
                 Looper.getMainLooper()
             )
         }
-        else{
-            fusedLocationProviderClient.removeLocationUpdates(locationCallback)
-        }
+        else fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 }

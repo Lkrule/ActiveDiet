@@ -1,13 +1,10 @@
 package com.example.activediet.fragments.run
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Location
-import android.location.LocationListener
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,10 +14,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.activediet.data.Run
 import com.example.activediet.databinding.FragmentRunBinding
-import com.example.activediet.fragments.food.CalculatorFragmentDirections
 import com.example.activediet.services.TrackingService
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.MAP_ZOOM
@@ -35,12 +29,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.components.FragmentComponent
 import pub.devrel.easypermissions.EasyPermissions
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
-import kotlin.math.round
 
 @AndroidEntryPoint
 class RunFragment : Fragment() {
@@ -57,10 +47,9 @@ class RunFragment : Fragment() {
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences
-
     private var map: GoogleMap? = null
 
-    private var curTimeInMs = 0L
+    private var time = 0L
 
 
 
@@ -184,8 +173,8 @@ class RunFragment : Fragment() {
             moveCameraToUser()
         }
         TrackingService.timeRunInMs.observe(viewLifecycleOwner) {
-            curTimeInMs = it
-            val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMs, true)
+            time = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(time, true)
             binding.timer!!.text = formattedTime
         }
     }
@@ -193,26 +182,12 @@ class RunFragment : Fragment() {
 
     // save db
 
-    private fun saveRunInDB(){
+    private fun insertRun(){
         map?.snapshot { bitmap ->
-            var distInMeters = 0
-            for (track in pathPoints){
-                distInMeters += viewModel.calcLength(track).toInt()
-            }
-            val dateFormat = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
-
-            val time = curTimeInMs
-            // values
-            val date = dateFormat.format(Calendar.getInstance().time)
-            val avgSpeed = round((distInMeters / 1000f) / (curTimeInMs / 1000f / 60 / 60) * 10) / 10f
             val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
-            val calsBurned = ((distInMeters/1000.toFloat())* weight).toInt()
-
-            // run
-            val run = Run(bitmap,date, avgSpeed, distInMeters, curTimeInMs, calsBurned)
-            viewModel.insertRun(run)
-
+            viewModel.insertRun(bitmap, pathPoints, weight, time)
             Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
+            stopRun()
         }
     }
 
@@ -220,6 +195,7 @@ class RunFragment : Fragment() {
     // init map
     private fun initMap(savedInstanceState: Bundle?){
         binding.apply {
+
             mapView.apply {
                 onCreate(savedInstanceState)
                 getMapAsync {
@@ -227,6 +203,24 @@ class RunFragment : Fragment() {
                     addAllTracks()
                 }
             }
+
+            if (context?.let {
+                    ActivityCompat.checkSelfPermission(
+                        it,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+                } != PackageManager.PERMISSION_GRANTED && context?.let {
+                    ActivityCompat.checkSelfPermission(
+                        it,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                } != PackageManager.PERMISSION_GRANTED
+            ) {
+                map?.isMyLocationEnabled = true
+                map?.uiSettings?.isMyLocationButtonEnabled = true
+                map?.uiSettings?.isZoomControlsEnabled = true
+            }
+
         }
     }
 
@@ -276,11 +270,7 @@ class RunFragment : Fragment() {
             btnFinishRun.setOnClickListener {
                 zoomTrack()
                 // check if not empty run
-                if (pathPoints.isNotEmpty()) {
-                    saveRunInDB()
-                    stopRun()
-                }
-
+                insertRun()
             }
         }
     }
