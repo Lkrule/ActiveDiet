@@ -11,7 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.activediet.databinding.FragmentRunBinding
@@ -38,11 +41,8 @@ class RunFragment : Fragment() {
     private var _binding: FragmentRunBinding? = null
     private val binding get() = _binding!!
 
-
     private val viewModel: RunViewModel by viewModels()
-
     private var isTracking = false
-
     private var pathPoints = mutableListOf<track>()
 
     @Inject
@@ -67,7 +67,6 @@ class RunFragment : Fragment() {
 
         // map
         initMap(savedInstanceState)
-        requestPermissions()
 
         // listeners
         setOnClickListeners()
@@ -183,6 +182,7 @@ class RunFragment : Fragment() {
     // save db
 
     private fun insertRun(){
+
         map?.snapshot { bitmap ->
             val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
             viewModel.insertRun(bitmap, pathPoints, weight, time)
@@ -199,6 +199,20 @@ class RunFragment : Fragment() {
             mapView.apply {
                 onCreate(savedInstanceState)
                 getMapAsync {
+                    if (ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                    }
+                    if (requestPermissions()) {
+                        it.isMyLocationEnabled = true
+                        it.uiSettings.isMyLocationButtonEnabled = true
+                        it.uiSettings.isZoomControlsEnabled = true
+                    }
                     map = it
                     addAllTracks()
                 }
@@ -216,9 +230,6 @@ class RunFragment : Fragment() {
                     )
                 } != PackageManager.PERMISSION_GRANTED
             ) {
-                map?.isMyLocationEnabled = true
-                map?.uiSettings?.isMyLocationButtonEnabled = true
-                map?.uiSettings?.isZoomControlsEnabled = true
             }
 
         }
@@ -280,6 +291,8 @@ class RunFragment : Fragment() {
 
     private fun stopRun(){
         sendCommandToService(STOP_SERVICE)
+        time = 0
+        binding.timer!!.text = TrackingUtility.getFormattedStopWatchTime(time, true)
     }
 
 
@@ -290,45 +303,16 @@ class RunFragment : Fragment() {
         }
 
 
-
     // permissions - buggy need to fix
+    private fun requestPermissions(): Boolean {
 
-    private fun requestPermissions(){
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-            binding.apply {
-                mapView.apply {
-                    getMapAsync {
-                        if (ActivityCompat.checkSelfPermission(
-                                context,
-                                Manifest.permission.ACCESS_FINE_LOCATION
-                            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                                context,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                            ) != PackageManager.PERMISSION_GRANTED
-                        ) {
-                        }
-                        it.isMyLocationEnabled = true
-                        it.uiSettings.isMyLocationButtonEnabled = true
-                        it.uiSettings.isZoomControlsEnabled = true
-                    }
-                }
-            }
-            // map updated
-            return
-        }
-        else{
-             EasyPermissions.requestPermissions(
-                this,
-                "You need to accept location permissions to use this app.",
-                Constants.REQUEST_CODE_LOCATION_PERMISSION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        val context = context ?: return false
 
-            )
-//            val action = RunFragmentDirections.actionTrackingFragmentToWelcomeFragment()
-//            findNavController().navigate(action)
-
-        }
+        return PackageManager.PERMISSION_GRANTED == checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
     }
+
+
 }
