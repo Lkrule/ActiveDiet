@@ -13,7 +13,7 @@ import com.example.activediet.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.adapters.RunAdapter
 import com.example.activediet.databinding.FragmentHistoryBinding
-import com.example.activediet.utilities.run.TrackingUtility
+import com.example.activediet.utilities.run.TimeFormatter
 import com.example.activediet.viewmodels.run.HistoryViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -139,15 +139,14 @@ class HistoryFragment : Fragment() {
         }
         viewModel.totalTimeInMs.observe(viewLifecycleOwner) {
             it?.let {
-                val totalTimeRun = TrackingUtility.getFormattedStopWatchTime(it)
+                val totalTimeRun = TimeFormatter.formatTime(it)
                 binding.totalTime.text = totalTimeRun
             }
         }
         viewModel.totalDist.observe(viewLifecycleOwner) {
             it?.let {
                 val km = it / 1000f
-                val totalDistance = (km * 10f).roundToInt() / 10f
-                val totalDistanceString = "${totalDistance}km"
+                val totalDistanceString = "${(km * 10f).roundToInt() / 10f}km"
                 binding.totalDistance.text = totalDistanceString
                 binding.totalDistanceInfo
             }

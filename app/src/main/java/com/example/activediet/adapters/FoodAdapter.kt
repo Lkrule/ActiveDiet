@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.activediet.data.FoodSearch
 import com.example.activediet.databinding.ProductItemBinding
 
-class ProductAdapter(
+class FoodAdapter(
     private val data: List<FoodSearch>,
     private val listener: ProductAdapterListener,
     private val mealIndex: Int
-) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

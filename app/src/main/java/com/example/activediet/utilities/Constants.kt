@@ -9,7 +9,6 @@ typealias tracks = MutableList<track>
 object Constants {
     const val FOOD_DATABASE_NAME = "food_db"
     const val RUN_DATABASE_NAME = "running_db"
-    const val REQUEST_CODE_LOCATION_PERMISSION = 0
 
     // shared preferences
     const val KEY_NAME = "KEY_NAME"

@@ -19,10 +19,11 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.adapters.MealsAdapter
-import com.example.activediet.adapters.ProductAdapter
+import com.example.activediet.adapters.FoodAdapter
 import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentScheduleBinding
@@ -53,8 +54,9 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
     // date
-    private lateinit var currentDate: String
     private lateinit var dateListener : DatePickerDialog.OnDateSetListener
+    private val curDate = MutableLiveData<String>()
+
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences
@@ -63,14 +65,25 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentDate = SimpleDateFormat("dd-MM-yyyy")
-            .format(Calendar.getInstance().time)
     }
 
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        curDate.observe(viewLifecycleOwner)  {
+            updateDateTextView()
+            loadProductsByDate(it)
+        }
+
+        with(curDate) {
+            postValue( SimpleDateFormat("dd-MM-yyyy")
+                .format(Calendar.getInstance().time))
+        }
+
+
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
         meals = listOf(
             getString(R.string.breakfast),
@@ -95,7 +108,9 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
         }
 
         dateListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
-            binding.dailyDate.text = "$day-$month-$year"
+            val fixed = month + 1
+            if ( month < 10) curDate.postValue("$day-0$fixed-$year")
+            else curDate.postValue("$day-$fixed-$year")
         }
 
         return binding.root
@@ -121,8 +136,6 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
         setupBar()
 
         // helper functions
-        updateDateTextView()
-        loadAllProducts(currentDate)
         setOnClickListeners()
 
     }
@@ -169,7 +182,8 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     // end part of notification
 
-    private fun loadAllProducts(date: String) {
+
+    private fun loadProductsByDate(date: String) {
         meals.forEachIndexed { index, _ ->
             viewModel.loadProducts(index, date)
         }
@@ -243,7 +257,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     @SuppressLint("NotifyDataSetChanged")
     override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
         viewModel.productsArray.also {
-            holder.binding.rv.adapter = ProductAdapter(products[pos], viewModel, pos)
+            holder.binding.rv.adapter = FoodAdapter(products[pos], viewModel, pos)
             it[pos].observe(viewLifecycleOwner) { list ->
                 products[pos].clear()
                 products[pos].addAll(list)
@@ -268,7 +282,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     override fun addItemClicked(pos: Int) {
         val action = ScheduleFragmentDirections
-            .actionScheduleFragmentToAddCustomFoodFragment(currentDate)
+            .actionScheduleFragmentToAddCustomFoodFragment(curDate.value.toString())
         findNavController().navigate(action)
     }
 
@@ -290,32 +304,28 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     }
 
 
-    private fun changeDate(byDays: Int) {
-        val format = SimpleDateFormat("dd-MM-yyyy")
-        val date = format.parse(currentDate)
-        val calendar = Calendar.getInstance()
-        calendar.time = date
-        calendar.add(Calendar.DATE, byDays)
-        currentDate = format.format(calendar.time)
-        updateDateTextView()
-    }
-
-
-
-
     private fun updateDateTextView() {
-        binding.dailyDate.text = currentDate
+        binding.dailyDate.text = curDate.value
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun setOnClickListeners(){
         binding.dailyNextDayBtn.setOnClickListener {
-            changeDate(1)
-            loadAllProducts(currentDate)
+            val format = SimpleDateFormat("dd-MM-yyyy")
+            val date = format.parse(curDate.value.toString())
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+            calendar.add(Calendar.DATE, 1)
+            curDate.postValue(format.format(calendar.time))
         }
 
         binding.dailyPreviousDayBtn.setOnClickListener {
-            changeDate(-1)
-            loadAllProducts(currentDate)
+            val format = SimpleDateFormat("dd-MM-yyyy")
+            val date = format.parse(curDate.value.toString())
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+            calendar.add(Calendar.DATE, -1)
+            curDate.postValue(format.format(calendar.time))
         }
     }
 

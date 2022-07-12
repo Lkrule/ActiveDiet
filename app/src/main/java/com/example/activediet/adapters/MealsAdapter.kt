@@ -11,7 +11,7 @@ import com.example.activediet.databinding.MealItemBinding
 
 class MealsAdapter(
     private val items: List<String>,
-    private val mealsListener: MealsAdapterListener
+    private val listener: MealsAdapterListener
 ) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
 
     val viewHolders = mutableListOf<ViewHolder>()
@@ -23,7 +23,7 @@ class MealsAdapter(
             binding.title.text = title
 
             binding.addBtn.setOnClickListener {
-                mealsListener.addItemClicked(pos)
+                listener.addItemClicked(pos)
             }
 
             binding.root.setOnClickListener {
@@ -34,7 +34,7 @@ class MealsAdapter(
             }
 
             viewHolders.add(this)
-            mealsListener.viewHolderBind(pos, this)
+            listener.viewHolderBind(pos, this)
         }
 
         // update total of all meals

@@ -24,25 +24,27 @@ class RunViewModel @Inject constructor(
 
     fun insertRun(bitmap : Bitmap?,pathPoints : tracks, weight : Float, time : Long) =
         viewModelScope.launch {
+            // dist in meters
             var dist = 0
             for (track in pathPoints){
                 dist += calcLength(track).toInt()
             }
+            // values
             val dateFormat = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
             val date = dateFormat.format(Calendar.getInstance().time)
-            val avgSpeed = ((dist / 1000f) / (time / 1000f / 60 / 60) * 10).roundToLong() / 10f
+            // dist
+            val avgSpeed = ((dist / 1000f) / ((time / 1000f) / 3600) * 10).roundToLong() / 10f
             val cals = ((dist/1000.toFloat())* weight).toInt()
             val run = Run(bitmap,date, avgSpeed, dist, time, cals)
             runRepository.insertRun(run)
         }
 
-    fun calcLength(track: track): Float {
+    private fun calcLength(track: track): Float {
         var distance = 0f
+        val result = FloatArray(1)
         for (i in 0..track.size - 2){
             val start = track[i]
             val end = track[i + 1]
-
-            val result = FloatArray(1)
 
             // calculate distance between two coordinates
 

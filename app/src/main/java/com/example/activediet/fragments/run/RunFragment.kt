@@ -1,19 +1,16 @@
 package com.example.activediet.fragments.run
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,7 +21,7 @@ import com.example.activediet.utilities.Constants.MAP_ZOOM
 import com.example.activediet.utilities.Constants.PAUSE_SERVICE
 import com.example.activediet.utilities.Constants.START_OR_RESUME_SERVICE
 import com.example.activediet.utilities.Constants.STOP_SERVICE
-import com.example.activediet.utilities.run.TrackingUtility
+import com.example.activediet.utilities.run.TimeFormatter
 import com.example.activediet.utilities.track
 import com.example.activediet.viewmodels.run.RunViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,7 +29,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
-import pub.devrel.easypermissions.EasyPermissions
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -98,6 +94,7 @@ class RunFragment : Fragment() {
     }
 
 
+    // add tracks and save them
     private fun addAllTracks() {
         for(track in pathPoints) {
             val trackOptions = PolylineOptions()
@@ -173,7 +170,7 @@ class RunFragment : Fragment() {
         }
         TrackingService.timeRunInMs.observe(viewLifecycleOwner) {
             time = it
-            val formattedTime = TrackingUtility.getFormattedStopWatchTime(time, true)
+            val formattedTime = TimeFormatter.formatTime(time, true)
             binding.timer!!.text = formattedTime
         }
     }
@@ -193,45 +190,23 @@ class RunFragment : Fragment() {
 
 
     // init map
+    @SuppressLint("MissingPermission")
     private fun initMap(savedInstanceState: Bundle?){
         binding.apply {
 
             mapView.apply {
                 onCreate(savedInstanceState)
                 getMapAsync {
-                    if (ActivityCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                    }
                     if (requestPermissions()) {
                         it.isMyLocationEnabled = true
                         it.uiSettings.isMyLocationButtonEnabled = true
                         it.uiSettings.isZoomControlsEnabled = true
                     }
+                    else Toast.makeText(context,"no gps permissions", Toast.LENGTH_LONG).show()
                     map = it
                     addAllTracks()
                 }
             }
-
-            if (context?.let {
-                    ActivityCompat.checkSelfPermission(
-                        it,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-                } != PackageManager.PERMISSION_GRANTED && context?.let {
-                    ActivityCompat.checkSelfPermission(
-                        it,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    )
-                } != PackageManager.PERMISSION_GRANTED
-            ) {
-            }
-
         }
     }
 
@@ -279,9 +254,10 @@ class RunFragment : Fragment() {
                 else sendCommandToService(START_OR_RESUME_SERVICE)
             }
             btnFinishRun.setOnClickListener {
-                zoomTrack()
+                val test = zoomTrack()
                 // check if not empty run
-                insertRun()
+                if (test > 0)
+                    insertRun()
             }
         }
     }
@@ -292,7 +268,7 @@ class RunFragment : Fragment() {
     private fun stopRun(){
         sendCommandToService(STOP_SERVICE)
         time = 0
-        binding.timer!!.text = TrackingUtility.getFormattedStopWatchTime(time, true)
+        binding.timer!!.text = TimeFormatter.formatTime(time, true)
     }
 
 
@@ -303,7 +279,6 @@ class RunFragment : Fragment() {
         }
 
 
-    // permissions - buggy need to fix
     private fun requestPermissions(): Boolean {
 
         val context = context ?: return false

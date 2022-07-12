@@ -3,7 +3,7 @@ package com.example.activediet.viewmodels.food
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.activediet.adapters.ProductAdapter
+import com.example.activediet.adapters.FoodAdapter
 import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.MealTotals
 import com.example.activediet.repos.FoodRepository
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val repo: FoodRepository
-) : ViewModel() , ProductAdapter.ProductAdapterListener{
+) : ViewModel() , FoodAdapter.ProductAdapterListener{
     private val _productsArray: Array<MutableLiveData<List<FoodSearch>>> =
         Array(5) { MutableLiveData<List<FoodSearch>>() }
     val productsArray: Array<LiveData<List<FoodSearch>>> =

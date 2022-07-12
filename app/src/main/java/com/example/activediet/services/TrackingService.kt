@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import com.example.activediet.utilities.Constants.PAUSE_SERVICE
 import com.example.activediet.utilities.Constants.START_OR_RESUME_SERVICE
 import com.example.activediet.utilities.Constants.STOP_SERVICE
-import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.utilities.tracks
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -22,7 +21,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -129,9 +127,8 @@ class TrackingService : LifecycleService() {
 
     private fun addPathPoint(location: Location?){
         location?.let {
-            val position = LatLng(location.altitude, location.longitude)
             pathPoints.value?.apply {
-                last().add(position)
+                last().add(LatLng(location.altitude, location.longitude))
                 pathPoints.postValue(this)
             }
         }
@@ -142,6 +139,7 @@ class TrackingService : LifecycleService() {
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean){
         if(isTracking){
+            // get gps info every interval
             val request = LocationRequest.create().apply {
                 interval = 5000L
                 fastestInterval = 2000L

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.activediet.databinding.RunItemBinding
 import com.example.activediet.data.Run
-import com.example.activediet.utilities.run.TrackingUtility
+import com.example.activediet.utilities.run.TimeFormatter
 
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
@@ -39,7 +39,7 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
                 Distance.text = "${run.dist / 1000f}km"
                 Calories.text = "${run.cals}kcal"
 
-                Time.text = TrackingUtility.getFormattedStopWatchTime(run.time)
+                Time.text = TimeFormatter.formatTime(run.time)
             }
         }
     }

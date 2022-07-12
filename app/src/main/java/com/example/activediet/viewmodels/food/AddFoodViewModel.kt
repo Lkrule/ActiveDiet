@@ -16,7 +16,7 @@ class AddFoodViewModel @Inject constructor(
     fun addIngredient(meal: Int, date: String, food: FoodSearch, amount: Int) {
         food.meal = meal
         food.amount = amount.toFloat()
-        food.nutrients.updateAll(amount)
+        food.nutrients.updateFood(amount)
         food.date = date
         viewModelScope.launch {
             repo.insertProducts(food)

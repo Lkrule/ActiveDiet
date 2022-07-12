@@ -19,10 +19,18 @@ data class Nutrients(
         it.name == "Carbohydrates"
     }
 
-    fun updateAll(amount: Int) {
-        getCalories().amount *= (amount / 100.0f)
-        getFat().amount *= (amount / 100.0f)
-        getProtein().amount *= (amount / 100.0f)
-        getCarbs().amount *= (amount / 100.0f)
+    fun updateFood(amount: Int) {
+        nutrients.first {
+            it.name == "Calories"
+        }.amount *= (amount / 100.0f)
+        nutrients.first {
+            it.name == "Fat"
+        }.amount *= (amount / 100.0f)
+        nutrients.first {
+            it.name == "Protein"
+        }.amount *= (amount / 100.0f)
+        nutrients.first {
+            it.name == "Carbohydrates"
+        }.amount *= (amount / 100.0f)
     }
 }
