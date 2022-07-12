@@ -10,8 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.activediet.databinding.RunItemBinding
 import com.example.activediet.data.Run
 import com.example.activediet.utilities.run.TrackingUtility
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
@@ -33,19 +31,15 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(run: Run) {
             binding.apply {
-                Glide.with(itemView).load(run.Image).into(RunImage)
+                Glide.with(itemView).load(run.image).into(RunImage)
 
-                val calendar = Calendar.getInstance().apply {
-                    timeInMillis = run.TimeStamp
-                }
-                val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-                Date.text = dateFormat.format(calendar.time)
+                // values
+                Date.text = run.date
+                AvgSpeed.text = "${ run.speed }km/h"
+                Distance.text = "${run.dist / 1000f}km"
+                Calories.text = "${run.cals}kcal"
 
-                AvgSpeed.text = "${ run.AvgSpeedInKmh }km/h"
-                Distance.text = "${run.DistInMeters / 1000f}km"
-                Calories.text = "${run.CalBurned}kcal"
-
-                Time.text = TrackingUtility.getFormattedStopWatchTime(run.TimeInMs)
+                Time.text = TrackingUtility.getFormattedStopWatchTime(run.time)
             }
         }
     }

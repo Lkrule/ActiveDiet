@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,10 +22,10 @@ import com.example.activediet.data.Run
 import com.example.activediet.databinding.FragmentRunBinding
 import com.example.activediet.services.TrackingService
 import com.example.activediet.utilities.Constants
-import com.example.activediet.utilities.Constants.ACTION_PAUSE_SERVICE
-import com.example.activediet.utilities.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.activediet.utilities.Constants.ACTION_STOP_SERVICE
 import com.example.activediet.utilities.Constants.MAP_ZOOM
+import com.example.activediet.utilities.Constants.PAUSE_SERVICE
+import com.example.activediet.utilities.Constants.START_OR_RESUME_SERVICE
+import com.example.activediet.utilities.Constants.STOP_SERVICE
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.utilities.track
 import com.example.activediet.viewmodels.run.RunViewModel
@@ -35,12 +37,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.math.round
 
 @AndroidEntryPoint
-class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
+class RunFragment : Fragment(), LocationListener {
 
     private var _binding: FragmentRunBinding? = null
     private val binding get() = _binding!!
@@ -59,7 +62,6 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var curTimeInMs = 0L
 
-    private var menu: Menu? = null
 
 
     override fun onCreateView(
@@ -128,7 +130,6 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             binding.btnFinishRun.visibility = View.VISIBLE
         } else {
             binding.btnToggleRun.text = "Stop"
-            menu?.getItem(0)?.isVisible = true
             binding.btnFinishRun.visibility = View.GONE
         }
     }
@@ -148,22 +149,24 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     // zoom track
-    private fun zoomTrack(){
+    private fun zoomTrack() : Int{
         val bounce = LatLngBounds.builder()
+        var counter = 0
         for (track in pathPoints){
             for (pos in track){
+                counter++
                 bounce.include(pos)
             }
         }
-
-        map?.moveCamera(
-            CameraUpdateFactory.newLatLngBounds(
-                bounce.build(),
-                binding.mapView.width,
-                binding.mapView.height,
-                (binding.mapView.height * 0.05).toInt()
+        if (counter > 0) map?.moveCamera(
+                CameraUpdateFactory.newLatLngBounds(
+                    bounce.build(),
+                    binding.mapView.width,
+                    binding.mapView.height,
+                    (binding.mapView.height * 0.05).toInt()
+                )
             )
-        )
+        return counter
     }
 
 
@@ -189,18 +192,22 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     // save db
 
-    private fun SaveRunInDB(){
+    private fun saveRunInDB(){
         map?.snapshot { bitmap ->
             var distInMeters = 0
             for (track in pathPoints){
                 distInMeters += TrackingUtility.calcTrackLength(track).toInt()
             }
+            val dateFormat = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
+
+            // values
+            val date = dateFormat.format(Calendar.getInstance().time)
             val avgSpeed = round((distInMeters / 1000f) / (curTimeInMs / 1000f / 60 / 60) * 10) / 10f
-            val dateTimeStamp = Calendar.getInstance().timeInMillis
             val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
             val calsBurned = ((distInMeters/1000.toFloat())* weight).toInt()
 
-            val run = Run(bitmap, dateTimeStamp, avgSpeed, distInMeters, curTimeInMs, calsBurned)
+            // run
+            val run = Run(bitmap,date, avgSpeed, distInMeters, curTimeInMs, calsBurned)
             viewModel.insertRun(run)
 
             Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
@@ -276,11 +283,14 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun setOnClickListeners(){
         binding.apply{
             btnToggleRun.setOnClickListener {
-                toggleRun()
+                if(isTracking) sendCommandToService(PAUSE_SERVICE)
+                else sendCommandToService(START_OR_RESUME_SERVICE)
             }
             btnFinishRun.setOnClickListener {
-                zoomTrack()
-                SaveRunInDB()
+                val test = zoomTrack()
+                if (test > 0) {
+                    saveRunInDB()
+                }
             }
         }
     }
@@ -288,19 +298,8 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     // send commands
 
-
-    private fun toggleRun() {
-        if(isTracking) {
-            menu?.getItem(0)?.isVisible = true
-            sendCommandToService(ACTION_PAUSE_SERVICE)
-        } else {
-            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
-        }
-    }
-
-
     private fun stopRun(){
-        sendCommandToService(ACTION_STOP_SERVICE)
+        sendCommandToService(STOP_SERVICE)
     }
 
 
@@ -361,25 +360,8 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) { }
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)){
-            AppSettingsDialog.Builder(this).build().show()
-        }
-        else{
-            requestPermissions()
-        }
-    }
-
-    // Deprecated code
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    override fun onLocationChanged(p0: Location) {
+        TODO("Not yet implemented")
     }
 }

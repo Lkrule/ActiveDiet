@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity
+@Entity(tableName = "food_table")
 data class FoodSearch (
     @PrimaryKey(autoGenerate = true) val key: Int,
     var date: String,

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.activediet.adapters.ProductAdapter
 import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.MealTotals
-import com.example.activediet.repos.ScheduleRepository
+import com.example.activediet.repos.FoodRepository
 import com.example.activediet.utilities.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
-    private val repo: ScheduleRepository
+    private val repo: FoodRepository
 ) : ViewModel() , ProductAdapter.ProductAdapterListener{
     private val _productsArray: Array<MutableLiveData<List<FoodSearch>>> =
         Array(5) { MutableLiveData<List<FoodSearch>>() }

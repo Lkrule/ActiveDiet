@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class StatisticsViewModel @Inject constructor(
+class HistoryViewModel @Inject constructor(
     private val runRepository: RunRepository
 ): ViewModel() {
 

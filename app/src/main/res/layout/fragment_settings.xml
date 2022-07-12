@@ -74,7 +74,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/AgeInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -93,7 +92,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/WeightInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -173,7 +171,6 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name"
-            style="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

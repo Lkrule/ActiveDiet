@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.adapters.RunAdapter
 import com.example.activediet.databinding.FragmentHistoryBinding
 import com.example.activediet.utilities.run.TrackingUtility
-import com.example.activediet.viewmodels.run.StatisticsViewModel
+import com.example.activediet.viewmodels.run.HistoryViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -34,7 +34,7 @@ class HistoryFragment : Fragment() {
     private lateinit var runAdapter: RunAdapter
 
 
-    private val viewModel: StatisticsViewModel by viewModels()
+    private val viewModel: HistoryViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -46,11 +46,10 @@ class HistoryFragment : Fragment() {
         recyclerView()
 
         when(viewModel.sortType) {
-            "timestamp" -> binding.filter.setSelection(0)
-            "time_ms" -> binding.filter.setSelection(1)
-            "distance" -> binding.filter.setSelection(2)
-            "speed" -> binding.filter.setSelection(3)
-            "calories" -> binding.filter.setSelection(4)
+            "time_ms" -> binding.filter.setSelection(0)
+            "distance" -> binding.filter.setSelection(1)
+            "speed" -> binding.filter.setSelection(2)
+            "calories" -> binding.filter.setSelection(3)
         }
 
         binding.filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -58,11 +57,10 @@ class HistoryFragment : Fragment() {
 
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 when(pos) {
-                    0 -> viewModel.sortRuns("timestamp")
-                    1 -> viewModel.sortRuns("time_ms")
-                    2 -> viewModel.sortRuns("distance")
-                    3 -> viewModel.sortRuns("speed")
-                    4 -> viewModel.sortRuns("calories")
+                    0 -> viewModel.sortRuns("time_ms")
+                    1 -> viewModel.sortRuns("distance")
+                    2 -> viewModel.sortRuns("speed")
+                    3 -> viewModel.sortRuns("calories")
                 }
             }
         }
@@ -118,7 +116,7 @@ class HistoryFragment : Fragment() {
         viewModel.sortBy("timestamp").observe(viewLifecycleOwner) {
             it?.let {
                 val allAvgSpeeds =
-                    it.indices.map { i -> BarEntry(i.toFloat(), it[i].AvgSpeedInKmh) }
+                    it.indices.map { i -> BarEntry(i.toFloat(), it[i].speed) }
                 //
                 val barDataSet = BarDataSet(allAvgSpeeds, "Avg Speed Over Time").apply {
                     valueTextColor = Color.WHITE

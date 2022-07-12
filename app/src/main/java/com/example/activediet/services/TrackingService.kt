@@ -7,9 +7,9 @@ import android.os.Looper
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.activediet.utilities.Constants.ACTION_PAUSE_SERVICE
-import com.example.activediet.utilities.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.activediet.utilities.Constants.ACTION_STOP_SERVICE
+import com.example.activediet.utilities.Constants.PAUSE_SERVICE
+import com.example.activediet.utilities.Constants.START_OR_RESUME_SERVICE
+import com.example.activediet.utilities.Constants.STOP_SERVICE
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.utilities.tracks
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -28,9 +28,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrackingService : LifecycleService() {
-
-    var isFirstRun = true
-    var serviceKilled = false
 
 
 
@@ -63,9 +60,9 @@ class TrackingService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             when(it.action){
-                ACTION_START_OR_RESUME_SERVICE -> startTimer()
-                ACTION_PAUSE_SERVICE -> pauseService()
-                ACTION_STOP_SERVICE -> killService()
+                START_OR_RESUME_SERVICE -> startTimer()
+                PAUSE_SERVICE -> pauseService()
+                STOP_SERVICE -> killService()
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -93,7 +90,6 @@ class TrackingService : LifecycleService() {
         }
     }
 
-    private var isTimerEnable = false
     private var lapTime = 0L
     private var timeRun = 0L
     private var timeStarted = 0L
@@ -104,7 +100,6 @@ class TrackingService : LifecycleService() {
         addEmptyTracks()
         isTracking.postValue(true)
         timeStarted = System.currentTimeMillis()
-        isTimerEnable = true
         isTracking.postValue(true)
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -129,7 +124,6 @@ class TrackingService : LifecycleService() {
 
     private fun pauseService() {
         isTracking.postValue(false)
-        isTimerEnable = false
     }
 
 
@@ -142,8 +136,6 @@ class TrackingService : LifecycleService() {
 
 
     private fun killService(){
-        serviceKilled = true
-        isFirstRun = true
         pauseService()
         postInitialValues()
         stopSelf()
