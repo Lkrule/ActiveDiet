@@ -15,10 +15,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.data.Run
-import com.example.activediet.databinding.FragmentTrackingBinding
+import com.example.activediet.databinding.FragmentRunBinding
 import com.example.activediet.services.TrackingService
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.ACTION_PAUSE_SERVICE
@@ -41,9 +40,9 @@ import javax.inject.Inject
 import kotlin.math.round
 
 @AndroidEntryPoint
-class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
+class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    private var _binding: FragmentTrackingBinding? = null
+    private var _binding: FragmentRunBinding? = null
     private val binding get() = _binding!!
 
 
@@ -68,7 +67,7 @@ class TrackingFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentTrackingBinding.inflate(inflater, container, false)
+        _binding = FragmentRunBinding.inflate(inflater, container, false)
         requestPermissions()
         return binding.root
     }

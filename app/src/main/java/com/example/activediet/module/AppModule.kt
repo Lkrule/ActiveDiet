@@ -6,7 +6,7 @@ import androidx.room.Room
 import com.example.activediet.api.SpoonacularAPI
 import com.example.activediet.db.FoodDatabase
 import com.example.activediet.db.FoodDao
-import com.example.activediet.db.RunDAO
+import com.example.activediet.db.RunDao
 import com.example.activediet.db.RunDatabase
 import com.example.activediet.utilities.Constants.API_KEY
 import com.example.activediet.utilities.Constants.BASE_URL
@@ -57,7 +57,7 @@ class AppModule {
     // food dao
     @Provides
     @Singleton
-    fun provideIngredientsDao(@ApplicationContext context: Context): FoodDao {
+    fun provideFoodDao(@ApplicationContext context: Context): FoodDao {
         val db = Room.databaseBuilder(
             context,
             FoodDatabase::class.java,
@@ -70,7 +70,7 @@ class AppModule {
     // run dao
     @Singleton
     @Provides
-    fun provideRunDao(@ApplicationContext context: Context) : RunDAO {
+    fun provideRunDao(@ApplicationContext context: Context) : RunDao {
         val db = Room.databaseBuilder(
             context,
             RunDatabase::class.java,

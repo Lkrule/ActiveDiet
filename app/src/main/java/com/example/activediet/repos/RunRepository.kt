@@ -1,11 +1,11 @@
 package com.example.activediet.repos
 
 import com.example.activediet.data.Run
-import com.example.activediet.db.RunDAO
+import com.example.activediet.db.RunDao
 import javax.inject.Inject
 
 class RunRepository @Inject constructor(
-    private val runDao: RunDAO
+    private val runDao: RunDao
 ) {
     suspend fun insertRun(run: Run) = runDao.insertRun(run)
 

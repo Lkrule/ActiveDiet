@@ -5,7 +5,7 @@ import androidx.room.*
 import com.example.activediet.data.Run
 
 @Dao
-interface RunDAO {
+interface RunDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRun(run: Run)

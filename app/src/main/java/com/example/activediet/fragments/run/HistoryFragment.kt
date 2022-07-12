@@ -10,11 +10,9 @@ import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.activediet.R
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activediet.adapters.RunAdapter
-import com.example.activediet.databinding.FragmentStatisticsBinding
-import com.example.activediet.utilities.run.CustomMarkerView
+import com.example.activediet.databinding.FragmentHistoryBinding
 import com.example.activediet.utilities.run.TrackingUtility
 import com.example.activediet.viewmodels.run.StatisticsViewModel
 import com.github.mikephil.charting.components.XAxis
@@ -22,13 +20,12 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Math.*
 import kotlin.math.roundToInt
 
 
 @AndroidEntryPoint
-class StatisticsFragment : Fragment() {
-    private var _binding: FragmentStatisticsBinding? = null
+class HistoryFragment : Fragment() {
+    private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
 
 
@@ -44,7 +41,7 @@ class StatisticsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
 
         recyclerView()
 

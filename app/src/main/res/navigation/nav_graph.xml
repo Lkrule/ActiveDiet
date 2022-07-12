@@ -73,15 +73,15 @@
 
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.example.activediet.fragments.run.StatisticsFragment"
+        android:name="com.example.activediet.fragments.run.HistoryFragment"
         android:label=""
-        tools:layout="@layout/fragment_statistics"/>
+        tools:layout="@layout/fragment_history"/>
 
     <fragment
         android:id="@+id/trackingFragment"
-        android:name="com.example.activediet.fragments.run.TrackingFragment"
+        android:name="com.example.activediet.fragments.run.RunFragment"
         android:label=""
-        tools:layout="@layout/fragment_tracking"/>
+        tools:layout="@layout/fragment_run"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.activediet.fragments.SettingsFragment"

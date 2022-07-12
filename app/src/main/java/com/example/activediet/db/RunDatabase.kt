@@ -8,5 +8,5 @@ import com.example.activediet.data.Run
 @Database(entities = [Run::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class RunDatabase : RoomDatabase() {
-    abstract fun getRunDao(): RunDAO
+    abstract fun getRunDao(): RunDao
 }
