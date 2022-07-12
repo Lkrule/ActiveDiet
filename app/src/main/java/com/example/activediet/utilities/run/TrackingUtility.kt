@@ -10,22 +10,6 @@ import java.util.concurrent.TimeUnit
 
 object TrackingUtility {
 
-    fun hasLocationPermissions(context: Context) =
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-            EasyPermissions.hasPermissions(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        }else{
-            EasyPermissions.hasPermissions(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            )
-        }
-
     fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String{
         var milliseconds = ms
         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
@@ -45,27 +29,5 @@ object TrackingUtility {
                 "${if(seconds < 10) "0" else ""}$seconds:" +
                 "${if(milliseconds < 10) "0" else ""}$milliseconds"
 
-    }
-
-    fun calcTrackLength(track: track): Float {
-        var distance = 0f
-        for (i in 0..track.size - 2){
-            val start = track[i]
-            val end = track[i + 1]
-
-            val result = FloatArray(1)
-
-            // calculate distance between two coordinates
-
-            Location.distanceBetween(
-                start.latitude,
-                start.longitude,
-                end.latitude,
-                end.longitude,
-                result
-            )
-            distance += result[0]
-        }
-        return  distance
     }
 }

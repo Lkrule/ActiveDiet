@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id = "@+id/trackingFragment"
+        android:id = "@+id/runFragment"
         android:icon="@android:drawable/ic_menu_mapmode"
         android:title="Run" />
     <item
@@ -14,7 +14,7 @@
         android:icon="@android:drawable/ic_menu_day"
         android:title="Schedule" />
     <item
-        android:id = "@+id/statisticsFragment"
+        android:id = "@+id/historyFragment"
         android:icon="@android:drawable/ic_menu_recent_history"
         android:title="History" />
     <item

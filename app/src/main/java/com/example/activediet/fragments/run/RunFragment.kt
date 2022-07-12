@@ -1,6 +1,7 @@
 package com.example.activediet.fragments.run
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -9,17 +10,17 @@ import android.location.Location
 import android.location.LocationListener
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.activediet.R
+import androidx.navigation.fragment.findNavController
 import com.example.activediet.data.Run
 import com.example.activediet.databinding.FragmentRunBinding
+import com.example.activediet.fragments.food.CalculatorFragmentDirections
 import com.example.activediet.services.TrackingService
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.MAP_ZOOM
@@ -33,9 +34,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import pub.devrel.easypermissions.AppSettingsDialog
+import dagger.hilt.android.components.FragmentComponent
 import pub.devrel.easypermissions.EasyPermissions
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,7 +43,7 @@ import javax.inject.Inject
 import kotlin.math.round
 
 @AndroidEntryPoint
-class RunFragment : Fragment(), LocationListener {
+class RunFragment : Fragment() {
 
     private var _binding: FragmentRunBinding? = null
     private val binding get() = _binding!!
@@ -70,17 +70,18 @@ class RunFragment : Fragment(), LocationListener {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentRunBinding.inflate(inflater, container, false)
-        requestPermissions()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // listeners
-        setOnClickListeners()
         // map
         initMap(savedInstanceState)
+        requestPermissions()
+
+        // listeners
+        setOnClickListeners()
 
         // subscribe observers
         subscribeToObservers()
@@ -149,7 +150,7 @@ class RunFragment : Fragment(), LocationListener {
 
 
     // zoom track
-    private fun zoomTrack() : Int{
+    private fun zoomTrack() : Int {
         val bounce = LatLngBounds.builder()
         var counter = 0
         for (track in pathPoints){
@@ -196,10 +197,11 @@ class RunFragment : Fragment(), LocationListener {
         map?.snapshot { bitmap ->
             var distInMeters = 0
             for (track in pathPoints){
-                distInMeters += TrackingUtility.calcTrackLength(track).toInt()
+                distInMeters += viewModel.calcLength(track).toInt()
             }
             val dateFormat = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
 
+            val time = curTimeInMs
             // values
             val date = dateFormat.format(Calendar.getInstance().time)
             val avgSpeed = round((distInMeters / 1000f) / (curTimeInMs / 1000f / 60 / 60) * 10) / 10f
@@ -211,7 +213,6 @@ class RunFragment : Fragment(), LocationListener {
             viewModel.insertRun(run)
 
             Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
-            stopRun()
         }
     }
 
@@ -222,25 +223,11 @@ class RunFragment : Fragment(), LocationListener {
             mapView.apply {
                 onCreate(savedInstanceState)
                 getMapAsync {
-                    if (ActivityCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                    }
-                    it.isMyLocationEnabled = true
-                    it.uiSettings.isMyLocationButtonEnabled = true
-                    it.uiSettings.isZoomControlsEnabled = true
                     map = it
                     addAllTracks()
                 }
             }
-
         }
-
     }
 
 
@@ -287,10 +274,13 @@ class RunFragment : Fragment(), LocationListener {
                 else sendCommandToService(START_OR_RESUME_SERVICE)
             }
             btnFinishRun.setOnClickListener {
-                val test = zoomTrack()
-                if (test > 0) {
+                zoomTrack()
+                // check if not empty run
+                if (pathPoints.isNotEmpty()) {
                     saveRunInDB()
+                    stopRun()
                 }
+
             }
         }
     }
@@ -304,64 +294,51 @@ class RunFragment : Fragment(), LocationListener {
 
 
     private fun sendCommandToService(action: String) =
-        Intent(requireContext(), TrackingService::class.java).also {
+        Intent(context, TrackingService::class.java).also {
             it.action = action
-            requireContext().startService(it)
+            context?.startService(it)
         }
-
-    // dialog cancel - maybe unnecessary
-
-    private fun showCancelDialog(){
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Cancel the Run?")
-            .setMessage("Are you sure to cancel the current run and delete all the data")
-            .setIcon(R.drawable.remove_circle)
-            .setPositiveButton("Yes"){ _,_ ->
-                stopRun()
-            }
-            .setNegativeButton("No"){dialog, _ ->
-                dialog.cancel()
-            }
-            .create()
-
-        dialog.show()
-    }
-
-
 
 
 
     // permissions - buggy need to fix
 
     private fun requestPermissions(){
-        if (TrackingUtility.hasLocationPermissions(requireContext())){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+            binding.apply {
+                mapView.apply {
+                    getMapAsync {
+                        if (ActivityCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                        }
+                        it.isMyLocationEnabled = true
+                        it.uiSettings.isMyLocationButtonEnabled = true
+                        it.uiSettings.isZoomControlsEnabled = true
+                    }
+                }
+            }
+            // map updated
             return
         }
         else{
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-                EasyPermissions.requestPermissions(
-                    this,
-                    "You need to accept location permissions to use this app.",
-                    Constants.REQUEST_CODE_LOCATION_PERMISSION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            }
-            else{
-                EasyPermissions.requestPermissions(
-                    this,
-                    "You need to accept location permissions to use this app.",
-                    Constants.REQUEST_CODE_LOCATION_PERMISSION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                )
-            }
+             EasyPermissions.requestPermissions(
+                this,
+                "You need to accept location permissions to use this app.",
+                Constants.REQUEST_CODE_LOCATION_PERMISSION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+
+            )
+//            val action = RunFragmentDirections.actionTrackingFragmentToWelcomeFragment()
+//            findNavController().navigate(action)
+
         }
-    }
-
-
-    override fun onLocationChanged(p0: Location) {
-        TODO("Not yet implemented")
     }
 }

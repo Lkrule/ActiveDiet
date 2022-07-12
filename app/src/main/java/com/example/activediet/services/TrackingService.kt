@@ -48,7 +48,8 @@ class TrackingService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
-        postInitialValues()
+        // reset
+        postValues()
         fusedLocationProviderClient = FusedLocationProviderClient(this)
 
         isTracking.observe(this, Observer {
@@ -93,7 +94,6 @@ class TrackingService : LifecycleService() {
     private var lapTime = 0L
     private var timeRun = 0L
     private var timeStarted = 0L
-    private var lastSecondsTimeStamp = 0L
 
 
     private fun startTimer(){
@@ -106,14 +106,8 @@ class TrackingService : LifecycleService() {
             while (isTracking.value!!){
                 // time difference between now and timeStarted
                 lapTime = System.currentTimeMillis() - timeStarted
-
                 // post new lapTime
                 timeRunInMs.postValue(timeRun + lapTime)
-
-                if (timeRunInMs.value!! >= lastSecondsTimeStamp + 1000L){
-                    timeRunInSec.postValue(timeRunInSec.value!! + 1)
-                    lastSecondsTimeStamp += 1000L
-                }
                 delay(50L)
             }
 
@@ -127,17 +121,16 @@ class TrackingService : LifecycleService() {
     }
 
 
-    private fun postInitialValues(){
+    private fun postValues(){
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
-        timeRunInSec.postValue(0L)
         timeRunInMs.postValue(0L)
     }
 
 
     private fun killService(){
         pauseService()
-        postInitialValues()
+        postValues()
         stopSelf()
     }
 
@@ -156,7 +149,7 @@ class TrackingService : LifecycleService() {
 
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean){
-        if(isTracking && TrackingUtility.hasLocationPermissions(this)){
+        if(isTracking){
             val request = LocationRequest.create().apply {
                 interval = 5000L
                 fastestInterval = 2000L

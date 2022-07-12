@@ -72,16 +72,20 @@
 
 
     <fragment
-        android:id="@+id/statisticsFragment"
+        android:id="@+id/historyFragment"
         android:name="com.example.activediet.fragments.run.HistoryFragment"
         android:label=""
         tools:layout="@layout/fragment_history"/>
 
     <fragment
-        android:id="@+id/trackingFragment"
+        android:id="@+id/runFragment"
         android:name="com.example.activediet.fragments.run.RunFragment"
         android:label=""
-        tools:layout="@layout/fragment_run"/>
+        tools:layout="@layout/fragment_run">
+        <action
+            android:id="@+id/action_trackingFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.activediet.fragments.SettingsFragment"
