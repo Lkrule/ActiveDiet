@@ -25,7 +25,7 @@ import com.example.activediet.R
 import com.example.activediet.adapters.MealsAdapter
 import com.example.activediet.adapters.FoodAdapter
 import com.example.activediet.data.Food
-import com.example.activediet.data.MealTotals
+import com.example.activediet.data.Meal
 import com.example.activediet.databinding.FragmentScheduleBinding
 import com.example.activediet.fragments.WelcomeFragment
 import com.example.activediet.utilities.Constants.BMR
@@ -50,8 +50,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     private lateinit var adapter: MealsAdapter
     val viewModel: ScheduleViewModel by viewModels()
     private val products = Array<MutableList<Food>>(MEALS_COUNT) { mutableListOf() }
-    private lateinit var meals: List<String>
-    private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
+    private lateinit var meals: List<Meal>
 
     // date
     private lateinit var dateListener : DatePickerDialog.OnDateSetListener
@@ -82,16 +81,17 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
             postValue( SimpleDateFormat("dd-MM-yyyy")
                 .format(Calendar.getInstance().time))
         }
-
-
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
+
+        // meals
         meals = listOf(
-            getString(R.string.breakfast),
-            getString(R.string.second_breakfast),
-            getString(R.string.lunch),
-            getString(R.string.diner),
-            getString(R.string.supper)
-        )
+            Meal(getString(R.string.breakfast),0f, 0f, 0f, 0f),
+            Meal(getString(R.string.brunch),0f, 0f, 0f, 0f),
+            Meal(getString(R.string.lunch),0f, 0f, 0f, 0f),
+            Meal(getString(R.string.diner),0f, 0f, 0f, 0f),
+            Meal(getString(R.string.supper),0f, 0f, 0f, 0f))
+
+
         binding.dailyDate.setOnClickListener{
             val calender = Calendar.getInstance()
             val year = calender.get(Calendar.YEAR)
@@ -134,6 +134,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
         val rv = binding.dailyRv
         rv.adapter = adapter
         setupBar()
+
 
         // helper functions
         setOnClickListeners()
@@ -210,7 +211,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
                 setDrawGridLines(false)
             }
             barChart.apply {
-                description.text = "Avg Cals Over Time"
+                description.text = "Cals Over Time"
                 legend.isEnabled = false
             }
         }
@@ -240,9 +241,6 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
             val barDataSet = BarDataSet(allCals, "Cals Over Date").apply {
                 valueTextColor = Color.WHITE
                 color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
-
-
-
             }
 
             binding.apply {
@@ -254,54 +252,34 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
         }
     }
 
+    override fun addBtnClicked(pos: Int) {
+        val action = ScheduleFragmentDirections
+            .actionScheduleFragmentToAddCustomFoodFragment(pos, curDate.value.toString())
+        findNavController().navigate(action)
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
         viewModel.productsArray.also {
-            holder.binding.rv.adapter = FoodAdapter(products[pos], viewModel, pos)
+            holder.binding.rv.adapter = FoodAdapter(products[pos], viewModel)
+
             it[pos].observe(viewLifecycleOwner) { list ->
                 products[pos].clear()
                 products[pos].addAll(list)
 
-                totalsList[pos].clearAll()
+                adapter.getItem()[pos].clearAll()
                 list.forEach { item ->
-                    totalsList[pos].update(
-                        kcal = item.cals,
-                        fat = item.fats,
-                        carbs = item.carbs,
-                        proteins = item.proteins,
-                    )
+                    adapter.getItem()[pos]
+                        .update(item.cals, item.fats, item.carbs, item.proteins)
                 }
 
-                adapter.viewHolders[pos].updateTotals(totalsList[pos])
-
+                adapter.viewHolders[pos].updateMeals(adapter.getItem()[pos])
                 holder.binding.rv.adapter?.notifyDataSetChanged()
-                calcTotals()
+                update()
             }
         }
     }
 
-    override fun addItemClicked(pos: Int) {
-        val action = ScheduleFragmentDirections
-            .actionScheduleFragmentToAddCustomFoodFragment(curDate.value.toString())
-        findNavController().navigate(action)
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    private fun calcTotals() {
-        val kcal = totalsList.sumOf { it.kcal.toDouble() }.toFloat()
-        val fats = totalsList.sumOf { it.fats.toDouble() }.toFloat()
-        val proteins = totalsList.sumOf { it.proteins.toDouble() }.toFloat()
-        val carbs = totalsList.sumOf { it.carbs.toDouble() }.toFloat()
-
-        binding.apply {
-            dailyTotalsKcal.text = String.format("%.2f", kcal) + " / " +
-                    String.format("%.2f", sharedPrefs.getFloat(BMR, 0f))
-            dailyTotalsFats.text = String.format("%.2f", fats) + " g"
-            dailyTotalsProteins.text = String.format("%.2f", proteins) + " g"
-            dailyTotalsCarbs.text = String.format("%.2f", carbs) + " g"
-        }
-    }
 
 
     private fun updateDateTextView() {
@@ -326,6 +304,22 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
             calendar.time = date
             calendar.add(Calendar.DATE, -1)
             curDate.postValue(format.format(calendar.time))
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun update(){
+        val kcal = adapter.getItem().sumOf { it.kcal.toDouble() }.toFloat()
+        val fats = adapter.getItem().sumOf { it.fats.toDouble() }.toFloat()
+        val proteins = adapter.getItem().sumOf { it.proteins.toDouble() }.toFloat()
+        val carbs = adapter.getItem().sumOf { it.carbs.toDouble() }.toFloat()
+
+        binding.apply {
+            totalsCals.text = String.format("%.2f", kcal) + " / " +
+                    String.format("%.2f", sharedPrefs.getFloat(BMR, 0f))
+            totalsFats.text = String.format("%.2f", fats) + " g"
+            totalsProteins.text = String.format("%.2f", proteins) + " g"
+            totalsCarbs.text = String.format("%.2f", carbs) + " g"
         }
     }
 

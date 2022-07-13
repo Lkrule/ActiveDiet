@@ -63,8 +63,7 @@
         >
         <argument
             android:name="mealID"
-            app:argType="integer"
-            android:defaultValue="0" />
+            app:argType="integer" />
         <argument
             android:name="date"
             app:argType="string" />

@@ -7,15 +7,11 @@ import javax.inject.Inject
 class FoodRepository @Inject constructor(
     private val foodDao: FoodDao
 ) {
-    suspend fun loadProducts(mealID: Int, date: String) =
-        foodDao.loadByMeal(mealID, date)
+    suspend fun loadProducts(mealID: Int, date: String) = foodDao.loadByMeal(mealID, date)
 
-    suspend fun removeProduct(food: Food) =
-        foodDao.delete(food)
+    suspend fun removeProduct(food: Food) = foodDao.delete(food)
 
-    fun getProducts() =
-        foodDao.loadAllMeals()
+    fun getProducts() = foodDao.loadAllMeals()
 
-    suspend fun insertProducts(ingredients: Food) =
-        foodDao.insertAll(ingredients)
+    suspend fun insertProducts(ingredients: Food) = foodDao.insertAll(ingredients)
 }

@@ -44,7 +44,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="breakfast">Breakfast</string>
-    <string name="second_breakfast">Brunch</string>
+    <string name="brunch">Brunch</string>
     <string name="lunch">Lunch</string>
     <string name="diner">Diner</string>
     <string name="supper">Supper</string>
@@ -55,7 +55,7 @@
     <string name="cancel">Cancel</string>
     <string name="amount">Amount</string>
     <string name="add_ingredient_dialog_title">Add Ingredient</string>
-    <string name="calories">Calories</string>
+    <string name="calories">Calories BMR</string>
     <string name="proteins">Proteins</string>
     <string name="fats">Fats</string>
     <string name="carbs">Carbs</string>

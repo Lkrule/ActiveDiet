@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.activediet.data.MealTotals
+import com.example.activediet.data.Meal
 import com.example.activediet.databinding.MealItemBinding
 
 class MealsAdapter(
-    private val items: List<String>,
+    private val items: List<Meal>,
     private val listener: MealsAdapterListener
 ) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
 
@@ -19,16 +19,15 @@ class MealsAdapter(
     inner class ViewHolder(val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(title: String, pos: Int) {
-            binding.title.text = title
-
-            binding.addBtn.setOnClickListener {
-                listener.addItemClicked(pos)
-            }
-
-            binding.root.setOnClickListener {
-                binding.apply {
-                    if(rv.isVisible) rv.visibility = View.GONE
+        fun bind(meal : Meal, pos: Int) {
+            binding.title.text = meal.name
+            binding.apply {
+                addBtn.setOnClickListener {
+                    listener.addBtnClicked(pos)
+                }
+                // layout click listener
+                root.setOnClickListener {
+                    if (rv.isVisible) rv.visibility = View.GONE
                     else rv.visibility = View.VISIBLE
                 }
             }
@@ -39,12 +38,12 @@ class MealsAdapter(
 
         // update total of all meals
         @SuppressLint("SetTextI18n")
-        fun updateTotals(totals: MealTotals) {
+        fun updateMeals(meal: Meal) {
             binding.apply {
-                kcal.text = String.format("%.2f", totals.kcal) + " kcal"
-                fat.text =  String.format("%.2f", totals.fats) + " g"
-                protein.text = String.format("%.2f", totals.proteins) + " g"
-                carbs.text = String.format("%.2f", totals.carbs) + " g"
+                kcal.text = String.format("%.1f", meal.kcal) + " kcal"
+                fat.text =  String.format("%.1f", meal.fats) + " g"
+                protein.text = String.format("%.1f", meal.proteins) + " g"
+                carbs.text = String.format("%.1f", meal.carbs) + " g"
             }
         }
     }
@@ -62,9 +61,13 @@ class MealsAdapter(
         return items.size
     }
 
+    fun getItem(): List<Meal> {
+        return items
+    }
+
 
     interface MealsAdapterListener {
-        fun addItemClicked(pos: Int)
+        fun addBtnClicked(pos: Int)
         fun viewHolderBind(pos: Int, holder: ViewHolder)
     }
 }

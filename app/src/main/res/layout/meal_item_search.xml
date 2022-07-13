@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_anount_unit"
+        android:id="@+id/item_amount_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="100g"

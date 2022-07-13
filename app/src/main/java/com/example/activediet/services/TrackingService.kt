@@ -42,6 +42,7 @@ class TrackingService : LifecycleService() {
     private var time = 0L
     private var timeStart = 0L
 
+    @SuppressLint("VisibleForTests")
     override fun onCreate() {
         super.onCreate()
         // reset

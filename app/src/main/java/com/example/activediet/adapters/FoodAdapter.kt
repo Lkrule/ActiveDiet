@@ -9,7 +9,6 @@ import com.example.activediet.databinding.FoodItemBinding
 class FoodAdapter(
     private val data: List<Food>,
     private val foodListener: FoodProductAdapter,
-    private val mealIndex: Int
 ) : RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: FoodItemBinding) :
@@ -18,15 +17,15 @@ class FoodAdapter(
         fun bind(food: Food) {
             binding.apply {
                 foodName.text = food.name.replaceFirstChar { it.uppercase() }
-
+                // update text
                 foodAmount.text = food.let { "${it.amount} g" }
                 foodCals.text = food.let { "${String.format("%.2f", it.cals)} kcal" }
                 foodFats.text = food.let { "${String.format("%.2f", it.fats)} g" }
                 foodCarbs.text = food.let { "${String.format("%.2f", it.carbs)} g" }
                 foodProteins.text = food.let { "${String.format("%.2f", it.proteins)} g" }
 
-                productItemRemoveBtn.setOnClickListener {
-                    foodListener.onFoodRemoveClick(food, mealIndex)
+                foodItemRemoveBtn .setOnClickListener {
+                    foodListener.onFoodRemoveClick(food)
                 }
             }
         }
@@ -47,6 +46,6 @@ class FoodAdapter(
     }
 
     interface FoodProductAdapter {
-        fun onFoodRemoveClick(food: Food, mealIndex: Int)
+        fun onFoodRemoveClick(food: Food)
     }
 }

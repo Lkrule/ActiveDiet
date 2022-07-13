@@ -1,6 +1,7 @@
 package com.example.activediet.data
 
-data class MealTotals(
+data class Meal(
+    var name: String,
     var kcal: Float,
     var fats: Float,
     var carbs: Float,

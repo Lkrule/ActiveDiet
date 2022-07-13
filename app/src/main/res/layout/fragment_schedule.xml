@@ -89,7 +89,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="319dp"
+        android:layout_height="495dp"
         android:layout_gravity="bottom"
         android:paddingStart="40dp"
         android:paddingEnd="40dp">
@@ -153,28 +153,30 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
-            android:layout_width="307dp"
-            android:layout_height="195dp"
+            android:layout_width="331dp"
+            android:layout_height="332dp"
+            android:layout_marginTop="3dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totals_cals" />
 
         <TextView
             android:id="@+id/caloires"
-            android:layout_width="66dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="93dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="12dp"
             android:text="@string/calories"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/daily_totals_proteins"
-            app:layout_constraintHorizontal_bias="0.433"
-            app:layout_constraintStart_toStartOf="@+id/daily_totals_proteins"
-            app:layout_constraintTop_toBottomOf="@+id/daily_totals_proteins" />
+            app:layout_constraintEnd_toEndOf="@+id/totals_proteins"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/totals_proteins"
+            app:layout_constraintTop_toBottomOf="@+id/totals_proteins" />
 
         <TextView
-            android:id="@+id/daily_totals_kcal"
+            android:id="@+id/totals_cals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100 kcal"
@@ -194,7 +196,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/daily_totals_proteins"
+            android:id="@+id/totals_proteins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100 g"
@@ -209,13 +211,13 @@
             android:layout_marginTop="12dp"
             android:text="@string/fats"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/daily_totals_carbs"
+            app:layout_constraintEnd_toEndOf="@+id/totals_carbs"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/daily_totals_carbs"
-            app:layout_constraintTop_toBottomOf="@+id/daily_totals_carbs" />
+            app:layout_constraintStart_toStartOf="@+id/totals_carbs"
+            app:layout_constraintTop_toBottomOf="@+id/totals_carbs" />
 
         <TextView
-            android:id="@+id/daily_totals_fats"
+            android:id="@+id/totals_fats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -223,7 +225,7 @@
             android:text="100 g"
             app:layout_constraintBottom_toTopOf="@+id/barChart"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             app:layout_constraintVertical_bias="0.0" />
@@ -240,7 +242,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/daily_totals_carbs"
+            android:id="@+id/totals_carbs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

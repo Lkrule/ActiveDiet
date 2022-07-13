@@ -251,6 +251,10 @@ class RunFragment : Fragment() {
                 if (test > 0)
                     insertRun()
             }
+
+            btnCancelRun?.setOnClickListener {
+                sendCommandToService(STOP_SERVICE)
+            }
         }
     }
 

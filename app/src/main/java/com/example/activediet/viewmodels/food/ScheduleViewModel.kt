@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.activediet.adapters.FoodAdapter
 import com.example.activediet.data.Food
-import com.example.activediet.data.MealTotals
+import com.example.activediet.data.Meal
 import com.example.activediet.repos.FoodRepository
 import com.example.activediet.utilities.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,10 +26,6 @@ class ScheduleViewModel @Inject constructor(
 
 
 
-    private val products =
-        Array<MutableList<Food>>(Constants.MEALS_COUNT) { mutableListOf() }
-    private val totalsList =
-        Array(Constants.MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
     val allProducts = repo.getProducts()
 
@@ -42,7 +38,7 @@ class ScheduleViewModel @Inject constructor(
     }
 
 
-    override fun onFoodRemoveClick(food: Food, mealIndex: Int) {
+    override fun onFoodRemoveClick(food: Food) {
         CoroutineScope(Dispatchers.IO).launch {
             repo.removeProduct(food)
             _productsArray[food.meal].value?.let {
@@ -52,6 +48,4 @@ class ScheduleViewModel @Inject constructor(
             }
         }
     }
-
-
 }

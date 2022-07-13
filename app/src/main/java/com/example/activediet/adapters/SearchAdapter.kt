@@ -17,7 +17,7 @@ class SearchAdapter(
         fun bind(nutrient: Nutrient) {
             binding.apply {
                 itemSearchTitle.text = nutrient.name
-                itemAnountUnit.text = nutrient.amount.toString() + nutrient.unit
+                itemAmountUnit.text = nutrient.let {  it.amount.toString() + it.unit }
             }
         }
     }
