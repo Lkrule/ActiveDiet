@@ -39,7 +39,7 @@ class RunFragment : Fragment() {
 
     private val viewModel: RunViewModel by viewModels()
     private var isTracking = false
-    private var pathPoints = mutableListOf<track>()
+    private var tracks = mutableListOf<track>()
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences
@@ -77,10 +77,10 @@ class RunFragment : Fragment() {
 
     private fun addLatestTrack(){
         // check path points
-        if(pathPoints.isNotEmpty() && pathPoints.last().size > 1){
+        if(tracks.isNotEmpty() && tracks.last().size > 1){
 
-            val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
-            val lastLatLng = pathPoints.last().last()
+            val preLastLatLng = tracks.last()[tracks.last().size - 2]
+            val lastLatLng = tracks.last().last()
 
             // track options
             val trackOptions = PolylineOptions()
@@ -92,21 +92,6 @@ class RunFragment : Fragment() {
 
         }
     }
-
-
-    // add tracks and save them
-    private fun addAllTracks() {
-        for(track in pathPoints) {
-            val trackOptions = PolylineOptions()
-                .color(Color.RED)
-                .width(8F)
-                .addAll(track)
-            map?.addPolyline(trackOptions)
-        }
-    }
-
-
-
 
     //update track
     private fun updateTracking(isTracking: Boolean) {
@@ -122,10 +107,10 @@ class RunFragment : Fragment() {
 
 
     private fun moveCameraToUser() {
-        if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
+        if(tracks.isNotEmpty() && tracks.last().isNotEmpty()) {
             map?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
-                    pathPoints.last().last(),
+                    tracks.last().last(),
                     MAP_ZOOM
                 )
             )
@@ -138,7 +123,7 @@ class RunFragment : Fragment() {
     private fun zoomTrack() : Int {
         val bounce = LatLngBounds.builder()
         var counter = 0
-        for (track in pathPoints){
+        for (track in tracks){
             for (pos in track){
                 counter++
                 bounce.include(pos)
@@ -149,7 +134,7 @@ class RunFragment : Fragment() {
                     bounce.build(),
                     binding.mapView.width,
                     binding.mapView.height,
-                    (binding.mapView.height * 0.05).toInt()
+                    (binding.mapView.height * 0.2).toInt()
                 )
             )
         return counter
@@ -163,12 +148,12 @@ class RunFragment : Fragment() {
         TrackingService.isTracking.observe(viewLifecycleOwner) {
             updateTracking(it)
         }
-        TrackingService.pathPoints.observe(viewLifecycleOwner) {
-            pathPoints = it
+        TrackingService.tracks.observe(viewLifecycleOwner) {
+            tracks = it
             addLatestTrack()
             moveCameraToUser()
         }
-        TrackingService.timeRunInMs.observe(viewLifecycleOwner) {
+        TrackingService.timeRun.observe(viewLifecycleOwner) {
             time = it
             val formattedTime = TimeFormatter.formatTime(time, true)
             binding.timer!!.text = formattedTime
@@ -182,7 +167,7 @@ class RunFragment : Fragment() {
 
         map?.snapshot { bitmap ->
             val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
-            viewModel.insertRun(bitmap, pathPoints, weight, time)
+            viewModel.insertRun(bitmap, tracks, weight, time)
             Toast.makeText(context,"Run Save successfully", Toast.LENGTH_SHORT).show()
             stopRun()
         }
@@ -204,7 +189,14 @@ class RunFragment : Fragment() {
                     }
                     else Toast.makeText(context,"no gps permissions", Toast.LENGTH_LONG).show()
                     map = it
-                    addAllTracks()
+                    // init
+                    for(track in tracks) {
+                        val trackOptions = PolylineOptions()
+                            .color(Color.RED)
+                            .width(8F)
+                            .addAll(track)
+                        map?.addPolyline(trackOptions)
+                    }
                 }
             }
         }

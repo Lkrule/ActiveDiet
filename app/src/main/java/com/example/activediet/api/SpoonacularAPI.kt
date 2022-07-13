@@ -1,5 +1,6 @@
 package com.example.activediet.api
 
+import com.example.activediet.data.Food
 import com.example.activediet.data.FoodSearch
 import com.example.activediet.data.FoodSearchResponse
 import com.example.activediet.utilities.Constants.API_KEY

@@ -62,6 +62,7 @@ class MealsAdapter(
         return items.size
     }
 
+
     interface MealsAdapterListener {
         fun addItemClicked(pos: Int)
         fun viewHolderBind(pos: Int, holder: ViewHolder)

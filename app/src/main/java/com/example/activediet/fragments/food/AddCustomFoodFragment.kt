@@ -13,7 +13,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.example.activediet.R
 import com.example.activediet.api.SpoonacularAPI
-import com.example.activediet.data.FoodSearch
+import com.example.activediet.data.Food
 import com.example.activediet.data.Nutrient
 import com.example.activediet.data.Nutrients
 import com.example.activediet.databinding.FragmentAddCustomFoodBinding
@@ -56,24 +56,24 @@ class AddCustomFoodFragment : Fragment() {
             MaterialDialog(requireContext()).show {
                 title(R.string.add_ingredient_dialog_title)
                 // create list
-                val listOfValues = Nutrients(listOf(
-                    Nutrient("Fat",binding.FatAmount
-                    .text.toString().toFloat(),"g"),
-                    Nutrient("Protein",binding.ProteinAmount
-                        .text.toString().toFloat(),"g"),
-                    Nutrient("Carbohydrates",binding.CarbonAmount
-                        .text.toString().toFloat(),"g"),
-                    Nutrient("Calories",binding.CaloriesAmount
-                        .text.toString().toFloat(),"kcal")))
 
-                val ingredient = FoodSearch(0,"",0,0,binding.FoodName
-                    .text.toString(),100.toFloat(),"g",listOfValues)
+                val fats = binding.FatAmount
+                    .text.toString().toFloat()
+                val proteins = binding.ProteinAmount
+                    .text.toString().toFloat()
+                val carbs = binding.CarbonAmount
+                    .text.toString().toFloat()
+                val cals = binding.CaloriesAmount
+                    .text.toString().toFloat()
+                val name = binding.FoodName
+                    .text.toString()
+
                 val input = input(
                     hintRes = R.string.amount,
                     inputType = InputType.TYPE_CLASS_NUMBER
                 ) { _,
-                    text ->
-                    viewModel.addIngredient(args.mealID, args.date, ingredient, text.toString().toInt())
+                    text -> viewModel.addFood(args.date,args.mealID,
+                    name, text.toString().toInt(),cals, carbs,proteins,fats)
                 }
                 positiveButton(R.string.add)
                 negativeButton(R.string.cancel)

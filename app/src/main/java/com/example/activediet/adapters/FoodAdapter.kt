@@ -3,39 +3,27 @@ package com.example.activediet.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.activediet.data.FoodSearch
-import com.example.activediet.databinding.ProductItemBinding
+import com.example.activediet.data.Food
+import com.example.activediet.databinding.FoodItemBinding
 
 class FoodAdapter(
-    private val data: List<FoodSearch>,
+    private val data: List<Food>,
     private val foodListener: FoodProductAdapter,
     private val mealIndex: Int
 ) : RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val binding: ProductItemBinding) :
+    inner class ViewHolder(private val binding: FoodItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(food: FoodSearch) {
+        fun bind(food: Food) {
             binding.apply {
-                productItemTitle.text = food.name.replaceFirstChar { it.uppercase() }
+                foodName.text = food.name.replaceFirstChar { it.uppercase() }
 
-                productItemQuantity.text = food.let {
-                    "${it.amount} ${it.unit}"
-                }
-
-                productItemKcal.text = food.nutrients.getCalories().let {
-                    "${String.format("%.2f", it.amount)} ${it.unit}"
-                }
-                productItemFat.text = food.nutrients.getFat().let {
-                    "${String.format("%.2f", it.amount)} ${it.unit}"
-                }
-                productItemCarbs.text = food.nutrients.getCarbs().let {
-                    "${String.format("%.2f", it.amount)} ${it.unit}"
-                }
-                productItemProtein.text =
-                    food.nutrients.getProtein().let {
-                        "${String.format("%.2f", it.amount)} ${it.unit}"
-                    }
+                foodAmount.text = food.let { "${it.amount} g" }
+                foodCals.text = food.let { "${String.format("%.2f", it.cals)} kcal" }
+                foodFats.text = food.let { "${String.format("%.2f", it.fats)} g" }
+                foodCarbs.text = food.let { "${String.format("%.2f", it.carbs)} g" }
+                foodProteins.text = food.let { "${String.format("%.2f", it.proteins)} g" }
 
                 productItemRemoveBtn.setOnClickListener {
                     foodListener.onFoodRemoveClick(food, mealIndex)
@@ -46,7 +34,7 @@ class FoodAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = FoodItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -59,6 +47,6 @@ class FoodAdapter(
     }
 
     interface FoodProductAdapter {
-        fun onFoodRemoveClick(food: FoodSearch, mealIndex: Int)
+        fun onFoodRemoveClick(food: Food, mealIndex: Int)
     }
 }

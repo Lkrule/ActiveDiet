@@ -38,7 +38,6 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
                 AvgSpeed.text = "${ run.speed }km/h"
                 Distance.text = "${run.dist / 1000f}km"
                 Calories.text = "${run.cals}kcal"
-
                 Time.text = TimeFormatter.formatTime(run.time)
             }
         }

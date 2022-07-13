@@ -24,7 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
 import com.example.activediet.adapters.MealsAdapter
 import com.example.activediet.adapters.FoodAdapter
-import com.example.activediet.data.FoodSearch
+import com.example.activediet.data.Food
 import com.example.activediet.data.MealTotals
 import com.example.activediet.databinding.FragmentScheduleBinding
 import com.example.activediet.fragments.WelcomeFragment
@@ -49,7 +49,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     private lateinit var adapter: MealsAdapter
     val viewModel: ScheduleViewModel by viewModels()
-    private val products = Array<MutableList<FoodSearch>>(MEALS_COUNT) { mutableListOf() }
+    private val products = Array<MutableList<Food>>(MEALS_COUNT) { mutableListOf() }
     private lateinit var meals: List<String>
     private val totalsList = Array(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
@@ -227,7 +227,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
                     date = food.date
                     calsOfDay = 0F
                 }
-                calsOfDay += food.nutrients.getCalories().amount
+                calsOfDay += food.cals
             }
             //
             if (listDate.isNotEmpty()) {
@@ -265,10 +265,10 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
                 totalsList[pos].clearAll()
                 list.forEach { item ->
                     totalsList[pos].update(
-                        kcal = item.nutrients.getCalories().amount,
-                        fat = item.nutrients.getFat().amount,
-                        carbs = item.nutrients.getCarbs().amount,
-                        proteins = item.nutrients.getProtein().amount,
+                        kcal = item.cals,
+                        fat = item.fats,
+                        carbs = item.carbs,
+                        proteins = item.proteins,
                     )
                 }
 

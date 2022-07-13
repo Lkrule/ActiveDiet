@@ -22,6 +22,8 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/breakfast"
                 android:textColor="@color/black"
                 android:textSize="25sp"
@@ -33,50 +35,47 @@
                 android:id="@+id/kcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
                 android:text="50 kcal"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/protein"
                 app:layout_constraintEnd_toStartOf="@+id/protein"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+                app:layout_constraintTop_toTopOf="@+id/protein"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/protein"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="4.5 g"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/kcal"
-                app:layout_constraintEnd_toStartOf="@+id/fat"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/kcal"
-                app:layout_constraintTop_toTopOf="@+id/kcal" />
+                app:layout_constraintEnd_toEndOf="@+id/carbs"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/carbs"
+                app:layout_constraintTop_toBottomOf="@+id/carbs" />
 
             <TextView
                 android:id="@+id/fat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
                 android:text="4.5 g"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/protein"
+                app:layout_constraintBottom_toBottomOf="@+id/carbs"
                 app:layout_constraintEnd_toStartOf="@+id/carbs"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/protein"
-                app:layout_constraintTop_toTopOf="@+id/protein" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/carbs"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="4.5 g"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/fat"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/fat"
-                app:layout_constraintTop_toTopOf="@+id/fat" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/add_btn"
@@ -103,6 +102,6 @@
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="1"
-            tools:listitem="@layout/product_item" />
+            tools:listitem="@layout/food_item" />
     </LinearLayout>
 </LinearLayout>

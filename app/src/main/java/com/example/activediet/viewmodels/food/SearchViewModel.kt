@@ -42,7 +42,7 @@ class SearchViewModel @Inject constructor(
     fun launch(position: Int) {
         viewModelScope.launch {
             val response = api.getIngredientInfo(productsResults[position].id)
-            _nutrients.value = response.body()!!.nutrients.nutrients
+            response.body()!!.nutrients
         }
     }
 }

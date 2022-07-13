@@ -29,12 +29,9 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
-
     private lateinit var runAdapter: RunAdapter
-
-
     private val viewModel: HistoryViewModel by viewModels()
+
 
 
     override fun onCreateView(
@@ -45,7 +42,7 @@ class HistoryFragment : Fragment() {
 
         recyclerView()
 
-        when(viewModel.sortType) {
+        when(viewModel.type) {
             "time_ms" -> binding.filter.setSelection(0)
             "distance" -> binding.filter.setSelection(1)
             "speed" -> binding.filter.setSelection(2)

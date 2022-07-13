@@ -31,26 +31,26 @@ class HistoryViewModel @Inject constructor(
     private val runsSortedByTimeInMs = sortBy("time_ms")
     private val runsSortedByAvgSpeed = sortBy("speed")
 
-    var sortType = "time_ms"
+    var type = "time_ms"
 
     init {
         runs.addSource(runsSortedByAvgSpeed) { result ->
-            if(sortType == "speed") {
+            if(type == "speed") {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runsSortedByCalsBurned) { result ->
-            if(sortType == "calories") {
+            if(type == "calories") {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runsSortedByDist) { result ->
-            if(sortType == "distance") {
+            if(type == "distance") {
                 result?.let { runs.value = it }
             }
         }
         runs.addSource(runsSortedByTimeInMs) { result ->
-            if(sortType == "time_ms") {
+            if(type == "time_ms") {
                 result?.let { runs.value = it }
             }
         }
@@ -64,7 +64,7 @@ class HistoryViewModel @Inject constructor(
         "calories" -> runsSortedByCalsBurned.value?.let { runs.value = it }
         else -> {}
     }.also {
-        this.sortType = sortType
+        this.type = sortType
     }
 
 

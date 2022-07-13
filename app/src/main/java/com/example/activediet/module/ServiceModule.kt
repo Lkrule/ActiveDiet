@@ -1,6 +1,7 @@
 package com.example.activediet.module
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module
@@ -14,6 +15,7 @@ import dagger.hilt.android.scopes.ServiceScoped
 @InstallIn(ServiceComponent::class)
 object ServiceModule {
 
+    @SuppressLint("VisibleForTests")
     @ServiceScoped
     @Provides
     fun provideFusedLocationProviderClient(

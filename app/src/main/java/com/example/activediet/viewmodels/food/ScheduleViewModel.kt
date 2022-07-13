@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.activediet.adapters.FoodAdapter
-import com.example.activediet.data.FoodSearch
+import com.example.activediet.data.Food
 import com.example.activediet.data.MealTotals
 import com.example.activediet.repos.FoodRepository
 import com.example.activediet.utilities.Constants
@@ -18,16 +18,16 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(
     private val repo: FoodRepository
 ) : ViewModel() , FoodAdapter.FoodProductAdapter{
-    private val _productsArray: Array<MutableLiveData<List<FoodSearch>>> =
-        Array(5) { MutableLiveData<List<FoodSearch>>() }
-    val productsArray: Array<LiveData<List<FoodSearch>>> =
+    private val _productsArray: Array<MutableLiveData<List<Food>>> =
+        Array(5) { MutableLiveData<List<Food>>() }
+    val productsArray: Array<LiveData<List<Food>>> =
         Array(_productsArray.size) { i -> _productsArray[i] }
 
 
 
 
     private val products =
-        Array<MutableList<FoodSearch>>(Constants.MEALS_COUNT) { mutableListOf() }
+        Array<MutableList<Food>>(Constants.MEALS_COUNT) { mutableListOf() }
     private val totalsList =
         Array(Constants.MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
@@ -42,13 +42,13 @@ class ScheduleViewModel @Inject constructor(
     }
 
 
-    override fun onFoodRemoveClick(food: FoodSearch, mealIndex: Int) {
+    override fun onFoodRemoveClick(food: Food, mealIndex: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             repo.removeProduct(food)
-            _productsArray[mealIndex].value?.let {
+            _productsArray[food.meal].value?.let {
                 val list = it.toMutableList()
                 list.remove(food)
-                _productsArray[mealIndex].postValue(list)
+                _productsArray[food.meal].postValue(list)
             }
         }
     }

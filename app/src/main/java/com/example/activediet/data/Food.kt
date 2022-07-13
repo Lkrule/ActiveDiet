@@ -5,13 +5,14 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "food_table")
-data class FoodSearch (
+data class Food (
     @PrimaryKey(autoGenerate = true) val key: Int,
     var date: String,
-    val id: Int,
     var meal: Int,
     val name: String,
-    var amount: Float,
-    val unit: String,
-    @SerializedName("nutrition") val nutrients: Nutrients
+    var amount: Int,
+    val cals: Float,
+    val carbs: Float,
+    val proteins: Float,
+    val fats: Float
 )

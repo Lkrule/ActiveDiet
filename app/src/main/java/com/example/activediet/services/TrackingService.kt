@@ -2,7 +2,6 @@ package com.example.activediet.services
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.location.Location
 import android.os.Looper
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
@@ -34,14 +33,14 @@ class TrackingService : LifecycleService() {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     companion object {
-        val timeRunInMs = MutableLiveData<Long>()
+        val timeRun = MutableLiveData<Long>()
         val isTracking = MutableLiveData<Boolean>()
-        val pathPoints = MutableLiveData<tracks>()
+        val tracks = MutableLiveData<tracks>()
     }
 
-    private var lapTime = 0L
-    private var timeRun = 0L
-    private var timeStarted = 0L
+    private var lap = 0L
+    private var time = 0L
+    private var timeStart = 0L
 
     override fun onCreate() {
         super.onCreate()
@@ -49,9 +48,9 @@ class TrackingService : LifecycleService() {
         postValues()
         fusedLocationProviderClient = FusedLocationProviderClient(this)
 
-        isTracking.observe(this, Observer {
+        isTracking.observe(this) {
             updateLocationTracking(it)
-        })
+        }
     }
 
 
@@ -68,10 +67,11 @@ class TrackingService : LifecycleService() {
 
 
 
-    private fun addEmptyTracks() = pathPoints.value?.apply {
+    // every pause can create new track
+    private fun addEmptyTrack() = tracks.value?.apply {
         add(mutableListOf())
-        pathPoints.postValue(this)
-    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
+        tracks.postValue(this)
+    } ?: tracks.postValue(mutableListOf(mutableListOf()))
 
 
     private val locationCallback = object : LocationCallback(){
@@ -79,8 +79,13 @@ class TrackingService : LifecycleService() {
             super.onLocationResult(result)
             if(isTracking.value!!){
                 result.locations.let { locations ->
-                    for (location in locations)
-                        addPathPoint(location)
+                    for (location in locations) {
+                        // add locations
+                        tracks.value?.apply {
+                            last().add(LatLng(location.altitude, location.longitude))
+                            tracks.postValue(this)
+                        }
+                    }
                 }
             }
         }
@@ -88,20 +93,20 @@ class TrackingService : LifecycleService() {
 
 
     private fun startTimer(){
-        addEmptyTracks()
-        timeStarted = System.currentTimeMillis()
+        addEmptyTrack()
+        timeStart = System.currentTimeMillis()
         isTracking.postValue(true)
 
         CoroutineScope(Dispatchers.Main).launch {
             while (isTracking.value!!){
                 // time difference between now and timeStarted
-                lapTime = System.currentTimeMillis() - timeStarted
+                lap = System.currentTimeMillis() - timeStart
                 // post new lapTime
-                timeRunInMs.postValue(timeRun + lapTime)
+                timeRun.postValue(time + lap)
                 delay(50L)
             }
 
-            timeRun += lapTime
+            time += lap
         }
     }
 
@@ -113,8 +118,8 @@ class TrackingService : LifecycleService() {
 
     private fun postValues(){
         isTracking.postValue(false)
-        pathPoints.postValue(mutableListOf())
-        timeRunInMs.postValue(0L)
+        tracks.postValue(mutableListOf())
+        timeRun.postValue(0L)
     }
 
 
@@ -124,15 +129,6 @@ class TrackingService : LifecycleService() {
         stopSelf()
     }
 
-
-    private fun addPathPoint(location: Location?){
-        location?.let {
-            pathPoints.value?.apply {
-                last().add(LatLng(location.altitude, location.longitude))
-                pathPoints.postValue(this)
-            }
-        }
-    }
 
 
 

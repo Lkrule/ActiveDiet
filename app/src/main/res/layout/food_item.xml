@@ -1,79 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#EFEFEF"
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/product_item_title"
+        android:id="@+id/food_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
         android:text="Milk"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/product_item_quantity"
+        android:id="@+id/food_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:text="100 g"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/food_name"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_item_title" />
+        app:layout_constraintTop_toBottomOf="@+id/food_name" />
 
     <TextView
-        android:id="@+id/product_item_kcal"
+        android:id="@+id/food_cals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="50 kcal"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/product_item_protein"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_item_quantity" />
+        app:layout_constraintBottom_toBottomOf="@+id/food_fats"
+        app:layout_constraintEnd_toEndOf="@+id/food_proteins"
+        app:layout_constraintTop_toTopOf="@+id/food_fats"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/product_item_protein"
+        android:id="@+id/food_proteins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
         android:text="3.5g"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/product_item_kcal"
-        app:layout_constraintEnd_toStartOf="@+id/product_item_fat"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/product_item_kcal"
-        app:layout_constraintTop_toTopOf="@+id/product_item_kcal" />
+        app:layout_constraintBottom_toBottomOf="@+id/food_carbs"
+        app:layout_constraintEnd_toStartOf="@+id/food_carbs"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintStart_toEndOf="@+id/food_name"
+        app:layout_constraintTop_toTopOf="@+id/food_carbs"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/product_item_fat"
+        android:id="@+id/food_fats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="4.5g"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/product_item_protein"
-        app:layout_constraintEnd_toStartOf="@+id/product_item_carbs"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/product_item_protein"
-        app:layout_constraintTop_toTopOf="@+id/product_item_protein" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/food_carbs" />
 
     <TextView
-        android:id="@+id/product_item_carbs"
+        android:id="@+id/food_carbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="5.5g"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/product_item_fat"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/product_item_fat"
-        app:layout_constraintTop_toTopOf="@+id/product_item_fat" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/product_item_remove_btn"
