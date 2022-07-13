@@ -2,22 +2,22 @@ package com.example.activediet.data
 
 data class Meal(
     var name: String,
-    var kcal: Float,
+    var cals: Float,
     var fats: Float,
     var carbs: Float,
     var proteins: Float
 ) {
     fun clearAll() {
-        kcal = 0f
+        cals = 0f
         fats = 0f
         carbs = 0f
         proteins = 0f
     }
 
-    fun update(kcal: Float, fat: Float, carbs: Float, proteins: Float) {
-        this.kcal += kcal
-        this.fats += fat
-        this.carbs += carbs
-        this.proteins += proteins
+    fun update(cals: Float, fats: Float, carbs: Float, proteins: Float) {
+        this.cals = cals
+        this.fats = fats
+        this.carbs = carbs
+        this.proteins = proteins
     }
 }

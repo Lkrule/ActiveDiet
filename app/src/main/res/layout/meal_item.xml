@@ -35,19 +35,31 @@
                 android:id="@+id/kcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="40dp"
                 android:text="50 kcal"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/protein"
-                app:layout_constraintEnd_toStartOf="@+id/protein"
-                app:layout_constraintTop_toTopOf="@+id/protein"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintBottom_toBottomOf="@+id/fat"
+                app:layout_constraintEnd_toStartOf="@+id/fat"
+                app:layout_constraintTop_toTopOf="@+id/fat"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/protein"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="40dp"
+                android:text="4.5 g"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/carbs"
+                app:layout_constraintEnd_toStartOf="@+id/carbs"
+                app:layout_constraintTop_toTopOf="@+id/carbs"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/fat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="4.5 g"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/carbs"
@@ -56,22 +68,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/carbs" />
 
             <TextView
-                android:id="@+id/fat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:text="4.5 g"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/carbs"
-                app:layout_constraintEnd_toStartOf="@+id/carbs"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
                 android:id="@+id/carbs"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:text="4.5 g"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"

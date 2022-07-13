@@ -49,8 +49,8 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     private lateinit var adapter: MealsAdapter
     val viewModel: ScheduleViewModel by viewModels()
-    private val products = Array<MutableList<Food>>(MEALS_COUNT) { mutableListOf() }
-    private lateinit var meals: List<Meal>
+    private val foods = Array<MutableList<Food>>(MEALS_COUNT) { mutableListOf() }
+    private lateinit var meals: MutableList<Meal>
 
     // date
     private lateinit var dateListener : DatePickerDialog.OnDateSetListener
@@ -74,7 +74,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
         curDate.observe(viewLifecycleOwner)  {
             updateDateTextView()
-            loadProductsByDate(it)
+            updateMealsByDate(it)
         }
 
         with(curDate) {
@@ -84,7 +84,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
         // meals
-        meals = listOf(
+        meals = mutableListOf(
             Meal(getString(R.string.breakfast),0f, 0f, 0f, 0f),
             Meal(getString(R.string.brunch),0f, 0f, 0f, 0f),
             Meal(getString(R.string.lunch),0f, 0f, 0f, 0f),
@@ -184,9 +184,9 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     // end part of notification
 
 
-    private fun loadProductsByDate(date: String) {
+    private fun updateMealsByDate(date: String) {
         meals.forEachIndexed { index, _ ->
-            viewModel.loadProducts(index, date)
+            viewModel.updateMeals(index, date, adapter)
         }
     }
 
@@ -260,20 +260,23 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     @SuppressLint("NotifyDataSetChanged")
     override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
-        viewModel.productsArray.also {
-            holder.binding.rv.adapter = FoodAdapter(products[pos], viewModel)
+        viewModel.foodsArray.also { it ->
+            holder.binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
 
             it[pos].observe(viewLifecycleOwner) { list ->
-                products[pos].clear()
-                products[pos].addAll(list)
+                foods[pos].clear()
+                foods[pos].addAll(list)
+                adapter.getItems()[pos].clearAll()
 
-                adapter.getItem()[pos].clearAll()
-                list.forEach { item ->
-                    adapter.getItem()[pos]
-                        .update(item.cals, item.fats, item.carbs, item.proteins)
-                }
+                val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
+                val fats = list.sumOf { it.fats.toDouble() }.toFloat()
+                val cals = list.sumOf { it.cals.toDouble() }.toFloat()
+                val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
+                adapter.getItems()[pos]
+                    .update(cals, fats, carbs, proteins)
 
-                adapter.viewHolders[pos].updateMeals(adapter.getItem()[pos])
+
+                adapter.viewHolders[pos].updateMeals(adapter.getItems()[pos])
                 holder.binding.rv.adapter?.notifyDataSetChanged()
                 update()
             }
@@ -309,10 +312,10 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     @SuppressLint("SetTextI18n")
     private fun update(){
-        val kcal = adapter.getItem().sumOf { it.kcal.toDouble() }.toFloat()
-        val fats = adapter.getItem().sumOf { it.fats.toDouble() }.toFloat()
-        val proteins = adapter.getItem().sumOf { it.proteins.toDouble() }.toFloat()
-        val carbs = adapter.getItem().sumOf { it.carbs.toDouble() }.toFloat()
+        val kcal = adapter.getItems().sumOf { it.cals.toDouble() }.toFloat()
+        val fats = adapter.getItems().sumOf { it.fats.toDouble() }.toFloat()
+        val proteins = adapter.getItems().sumOf { it.proteins.toDouble() }.toFloat()
+        val carbs = adapter.getItems().sumOf { it.carbs.toDouble() }.toFloat()
 
         binding.apply {
             totalsCals.text = String.format("%.2f", kcal) + " / " +

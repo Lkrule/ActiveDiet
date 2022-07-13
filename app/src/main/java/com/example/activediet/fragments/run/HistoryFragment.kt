@@ -76,7 +76,7 @@ class HistoryFragment : Fragment() {
         // setup bar chart
 
         binding.clear?.setOnClickListener {
-            viewModel.remove()
+            viewModel.removeAll()
         }
 
         binding.apply {

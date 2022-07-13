@@ -10,7 +10,7 @@ interface FoodDao {
     suspend fun loadByMeal(meal: Int, date: String): List<Food>
 
     @Query("SELECT * FROM food_table")
-    fun loadAllMeals() : LiveData<List<Food>>
+    fun loadAllFoods() : LiveData<List<Food>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg foods: Food)

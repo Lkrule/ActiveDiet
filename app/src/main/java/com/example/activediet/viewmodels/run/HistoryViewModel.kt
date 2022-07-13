@@ -68,7 +68,7 @@ class HistoryViewModel @Inject constructor(
     }
 
 
-    fun remove() {
+    fun removeAll() {
         if (runs.value?.isNotEmpty() == true) {
             viewModelScope.launch {
                 for (run in runs.value!!) {

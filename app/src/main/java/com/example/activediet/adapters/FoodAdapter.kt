@@ -8,7 +8,7 @@ import com.example.activediet.databinding.FoodItemBinding
 
 class FoodAdapter(
     private val data: List<Food>,
-    private val foodListener: FoodProductAdapter,
+    private val foodListener: ListenerFoodAdapter,
 ) : RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: FoodItemBinding) :
@@ -45,7 +45,7 @@ class FoodAdapter(
         return data.size
     }
 
-    interface FoodProductAdapter {
+    interface ListenerFoodAdapter {
         fun onFoodRemoveClick(food: Food)
     }
 }

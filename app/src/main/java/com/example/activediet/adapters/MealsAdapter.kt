@@ -10,7 +10,7 @@ import com.example.activediet.data.Meal
 import com.example.activediet.databinding.MealItemBinding
 
 class MealsAdapter(
-    private val items: List<Meal>,
+    private val meals: MutableList<Meal>,
     private val listener: MealsAdapterListener
 ) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
 
@@ -19,6 +19,7 @@ class MealsAdapter(
     inner class ViewHolder(val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(meal : Meal, pos: Int) {
             binding.title.text = meal.name
             binding.apply {
@@ -30,6 +31,10 @@ class MealsAdapter(
                     if (rv.isVisible) rv.visibility = View.GONE
                     else rv.visibility = View.VISIBLE
                 }
+                kcal.text = String.format("%.1f", meal.cals) + " kcal"
+                fat.text =  String.format("%.1f", meal.fats) + " g"
+                protein.text = String.format("%.1f", meal.proteins) + " g"
+                carbs.text = String.format("%.1f", meal.carbs) + " g"
             }
 
             viewHolders.add(this)
@@ -40,7 +45,7 @@ class MealsAdapter(
         @SuppressLint("SetTextI18n")
         fun updateMeals(meal: Meal) {
             binding.apply {
-                kcal.text = String.format("%.1f", meal.kcal) + " kcal"
+                kcal.text = String.format("%.1f", meal.cals) + " kcal"
                 fat.text =  String.format("%.1f", meal.fats) + " g"
                 protein.text = String.format("%.1f", meal.proteins) + " g"
                 carbs.text = String.format("%.1f", meal.carbs) + " g"
@@ -54,15 +59,15 @@ class MealsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], position)
+        holder.bind(meals[position], position)
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return meals.size
     }
 
-    fun getItem(): List<Meal> {
-        return items
+    fun getItems(): List<Meal> {
+        return meals
     }
 
 

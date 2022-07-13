@@ -24,7 +24,7 @@ class AddFoodViewModel @Inject constructor(
             proteins * (amount / 100.0f),
             fats * (amount / 100.0f))
         viewModelScope.launch {
-            repo.insertProducts(food)
+            repo.insertFood(food)
         }
     }
 }
