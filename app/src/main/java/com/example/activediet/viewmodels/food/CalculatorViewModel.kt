@@ -27,7 +27,8 @@ class CalculatorViewModel @Inject constructor(
     // bmr
     fun calcBMR(activity: Int, goal: Int) {
         val genderVar = if(_gender == 1) 5 else -161
-        val bmr = 9.99f * _weight + 6.25f * _height - 4.92 * _age + genderVar
+        // The Mifflin St Jeor equation
+        val bmr = 10.0f * _weight + 6.25f * _height - 5.0f * _age + genderVar
         _bmr.value =  bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
     }
 
