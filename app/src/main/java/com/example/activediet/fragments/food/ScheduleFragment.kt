@@ -159,7 +159,6 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
                 }
             }
         }
-
         // helper functions
         setOnClickListeners()
     }
