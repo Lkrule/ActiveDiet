@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.activediet.adapters.FoodAdapter
-import com.example.activediet.adapters.MealsAdapter
 import com.example.activediet.data.Food
 import com.example.activediet.repos.FoodRepository
+import com.example.activediet.utilities.Constants.MEALS_COUNT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ class ScheduleViewModel @Inject constructor(
     private val repo: FoodRepository
 ) : ViewModel() , FoodAdapter.ListenerFoodAdapter{
     private val _foodsArray: Array<MutableLiveData<List<Food>>> =
-        Array(5) { MutableLiveData<List<Food>>() }
+        Array(MEALS_COUNT) { MutableLiveData<List<Food>>() }
     val foodsArray: Array<LiveData<List<Food>>> =
         Array(_foodsArray.size) { i -> _foodsArray[i] }
 
@@ -29,7 +29,7 @@ class ScheduleViewModel @Inject constructor(
     val allProducts = repo.getAllFoods()
 
 
-    fun updateMeals(index: Int, date: String, adapter: MealsAdapter) {
+    fun updateMeal(index: Int, date: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val foods = repo.loadFoods(index, date)
             _foodsArray[index].postValue(foods)

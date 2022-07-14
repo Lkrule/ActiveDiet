@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Looper
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.example.activediet.utilities.Constants.PAUSE_SERVICE
 import com.example.activediet.utilities.Constants.START_OR_RESUME_SERVICE
 import com.example.activediet.utilities.Constants.STOP_SERVICE
@@ -60,7 +59,7 @@ class TrackingService : LifecycleService() {
             when(it.action){
                 START_OR_RESUME_SERVICE -> startTimer()
                 PAUSE_SERVICE -> pauseService()
-                STOP_SERVICE -> killService()
+                STOP_SERVICE -> stopService()
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -68,11 +67,6 @@ class TrackingService : LifecycleService() {
 
 
 
-    // every pause can create new track
-    private fun addEmptyTrack() = tracks.value?.apply {
-        add(mutableListOf())
-        tracks.postValue(this)
-    } ?: tracks.postValue(mutableListOf(mutableListOf()))
 
 
     private val locationCallback = object : LocationCallback(){
@@ -94,7 +88,13 @@ class TrackingService : LifecycleService() {
 
 
     private fun startTimer(){
-        addEmptyTrack()
+        // every pause can create new empty track
+        tracks.value?.apply {
+            add(mutableListOf())
+            tracks.postValue(this)
+        } ?: tracks.postValue(mutableListOf(mutableListOf()))
+
+        // init
         timeStart = System.currentTimeMillis()
         isTracking.postValue(true)
 
@@ -124,7 +124,7 @@ class TrackingService : LifecycleService() {
     }
 
 
-    private fun killService(){
+    private fun stopService(){
         pauseService()
         postValues()
         stopSelf()

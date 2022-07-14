@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.activediet.data.Meal
 import com.example.activediet.databinding.MealItemBinding
 
-class MealsAdapter(
+class MealAdapter(
     private val meals: MutableList<Meal>,
-    private val listener: MealsAdapterListener
-) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
+    private val listener: MealAdapterListener
+) : RecyclerView.Adapter<MealAdapter.ViewHolder>() {
 
     val viewHolders = mutableListOf<ViewHolder>()
 
@@ -71,7 +71,7 @@ class MealsAdapter(
     }
 
 
-    interface MealsAdapterListener {
+    interface MealAdapterListener {
         fun addBtnClicked(pos: Int)
         fun viewHolderBind(pos: Int, holder: ViewHolder)
     }

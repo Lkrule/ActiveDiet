@@ -22,7 +22,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.activediet.R
-import com.example.activediet.adapters.MealsAdapter
+import com.example.activediet.adapters.MealAdapter
 import com.example.activediet.adapters.FoodAdapter
 import com.example.activediet.data.Food
 import com.example.activediet.data.Meal
@@ -42,12 +42,12 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
+class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
     private var _binding: FragmentScheduleBinding? = null
     private val binding get() = _binding!!
 
 
-    private lateinit var adapter: MealsAdapter
+    private lateinit var adapter: MealAdapter
     val viewModel: ScheduleViewModel by viewModels()
     private val foods = Array<MutableList<Food>>(MEALS_COUNT) { mutableListOf() }
     private lateinit var meals: MutableList<Meal>
@@ -130,7 +130,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
 
         // other part
-        adapter = MealsAdapter(meals, this)
+        adapter = MealAdapter(meals, this)
         val rv = binding.dailyRv
         rv.adapter = adapter
         setupBar()
@@ -186,7 +186,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
 
     private fun updateMealsByDate(date: String) {
         meals.forEachIndexed { index, _ ->
-            viewModel.updateMeals(index, date, adapter)
+            viewModel.updateMeal(index, date)
         }
     }
 
@@ -259,7 +259,7 @@ class ScheduleFragment : Fragment(), MealsAdapter.MealsAdapterListener{
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
+    override fun viewHolderBind(pos: Int, holder: MealAdapter.ViewHolder) {
         viewModel.foodsArray.also { it ->
             holder.binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
 
