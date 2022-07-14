@@ -116,6 +116,7 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -135,6 +136,29 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         rv.adapter = adapter
         setupBar()
 
+        adapter.viewHolders.observe(viewLifecycleOwner) {
+            it?.forEachIndexed{ pos, mealHolder ->
+                mealHolder.binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
+
+                viewModel.foodsArray[pos]
+                    .observe(viewLifecycleOwner) { list ->
+                    foods[pos].clear()
+                    foods[pos].addAll(list)
+                    adapter.getMeals()[pos].clearAll()
+
+                    val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
+                    val fats = list.sumOf { it.fats.toDouble() }.toFloat()
+                    val cals = list.sumOf { it.cals.toDouble() }.toFloat()
+                    val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
+                    adapter.getMeals()[pos]
+                        .update(cals, fats, carbs, proteins)
+
+                    mealHolder.updateMeal(adapter.getMeals()[pos])
+                    mealHolder.binding.rv.adapter?.notifyDataSetChanged()
+                    update()
+                }
+            }
+        }
 
         // helper functions
         setOnClickListeners()
@@ -189,7 +213,6 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         meals.forEachIndexed { index, _ ->
             viewModel.updateMeal(index, date)
         }
-        observerMeals()
     }
 
 
@@ -263,30 +286,6 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
 
     @SuppressLint("NotifyDataSetChanged")
     fun observerMeals() {
-        viewModel.foodsArray.forEachIndexed { pos, meal ->
-            if (adapter.viewHolders.size > 0) {
-                adapter.viewHolders[pos].binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
-
-                meal.observe(viewLifecycleOwner) { list ->
-                    foods[pos].clear()
-                    foods[pos].addAll(list)
-                    adapter.getItems()[pos].clearAll()
-
-                    val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
-                    val fats = list.sumOf { it.fats.toDouble() }.toFloat()
-                    val cals = list.sumOf { it.cals.toDouble() }.toFloat()
-                    val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
-                    adapter.getItems()[pos]
-                        .update(cals, fats, carbs, proteins)
-
-
-                    adapter.viewHolders[pos].updateMeal(adapter.getItems()[pos])
-                    adapter.viewHolders[pos]
-                        .binding.rv.adapter?.notifyDataSetChanged()
-                    update()
-                }
-            }
-        }
     }
 
 
@@ -317,10 +316,10 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
 
     @SuppressLint("SetTextI18n")
     private fun update(){
-        val kcal = adapter.getItems().sumOf { it.cals.toDouble() }.toFloat()
-        val fats = adapter.getItems().sumOf { it.fats.toDouble() }.toFloat()
-        val proteins = adapter.getItems().sumOf { it.proteins.toDouble() }.toFloat()
-        val carbs = adapter.getItems().sumOf { it.carbs.toDouble() }.toFloat()
+        val kcal = adapter.getMeals().sumOf { it.cals.toDouble() }.toFloat()
+        val fats = adapter.getMeals().sumOf { it.fats.toDouble() }.toFloat()
+        val proteins = adapter.getMeals().sumOf { it.proteins.toDouble() }.toFloat()
+        val carbs = adapter.getMeals().sumOf { it.carbs.toDouble() }.toFloat()
 
         binding.apply {
             totalsCals.text = String.format("%.2f", kcal) + " / " +

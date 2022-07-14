@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.activediet.data.Meal
 import com.example.activediet.databinding.MealItemBinding
@@ -14,7 +16,8 @@ class MealAdapter(
     private val listener: MealAdapterListener
 ) : RecyclerView.Adapter<MealAdapter.ViewHolder>() {
 
-    val viewHolders = mutableListOf<ViewHolder>()
+    private val holders = mutableListOf<ViewHolder>()
+    val viewHolders = MutableLiveData<MutableList<ViewHolder>>()
 
     inner class ViewHolder(val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -37,7 +40,9 @@ class MealAdapter(
                 carbs.text = String.format("%.1f", meal.carbs) + " g"
             }
 
-            viewHolders.add(this)
+
+            holders.add(this)
+            viewHolders.postValue(holders)
         }
 
         // update total of all meals
@@ -65,7 +70,7 @@ class MealAdapter(
         return meals.size
     }
 
-    fun getItems(): List<Meal> {
+    fun getMeals(): List<Meal> {
         return meals
     }
 
