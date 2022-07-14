@@ -31,21 +31,20 @@ class MealAdapter(
                     if (rv.isVisible) rv.visibility = View.GONE
                     else rv.visibility = View.VISIBLE
                 }
-                kcal.text = String.format("%.1f", meal.cals) + " kcal"
+                cals.text = String.format("%.1f", meal.cals) + " kcal"
                 fat.text =  String.format("%.1f", meal.fats) + " g"
                 protein.text = String.format("%.1f", meal.proteins) + " g"
                 carbs.text = String.format("%.1f", meal.carbs) + " g"
             }
 
             viewHolders.add(this)
-            listener.viewHolderBind(pos, this)
         }
 
         // update total of all meals
         @SuppressLint("SetTextI18n")
-        fun updateMeals(meal: Meal) {
+        fun updateMeal(meal: Meal) {
             binding.apply {
-                kcal.text = String.format("%.1f", meal.cals) + " kcal"
+                cals.text = String.format("%.1f", meal.cals) + " kcal"
                 fat.text =  String.format("%.1f", meal.fats) + " g"
                 protein.text = String.format("%.1f", meal.proteins) + " g"
                 carbs.text = String.format("%.1f", meal.carbs) + " g"
@@ -73,6 +72,5 @@ class MealAdapter(
 
     interface MealAdapterListener {
         fun addBtnClicked(pos: Int)
-        fun viewHolderBind(pos: Int, holder: ViewHolder)
     }
 }

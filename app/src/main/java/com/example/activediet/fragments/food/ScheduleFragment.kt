@@ -138,10 +138,11 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
 
         // helper functions
         setOnClickListeners()
-
     }
 
-     // unnecessary code
+
+
+    // unnecessary code
 
     fun sendNotification(CHANNEL_ID: String,notificationId: Int){
         val intent = Intent(context, WelcomeFragment::class.java).apply{
@@ -188,6 +189,7 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         meals.forEachIndexed { index, _ ->
             viewModel.updateMeal(index, date)
         }
+        observerMeals()
     }
 
 
@@ -258,31 +260,34 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         findNavController().navigate(action)
     }
 
+
     @SuppressLint("NotifyDataSetChanged")
-    override fun viewHolderBind(pos: Int, holder: MealAdapter.ViewHolder) {
-        viewModel.foodsArray.also { it ->
-            holder.binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
+    fun observerMeals() {
+        viewModel.foodsArray.forEachIndexed { pos, meal ->
+            if (adapter.viewHolders.size > 0) {
+                adapter.viewHolders[pos].binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
 
-            it[pos].observe(viewLifecycleOwner) { list ->
-                foods[pos].clear()
-                foods[pos].addAll(list)
-                adapter.getItems()[pos].clearAll()
+                meal.observe(viewLifecycleOwner) { list ->
+                    foods[pos].clear()
+                    foods[pos].addAll(list)
+                    adapter.getItems()[pos].clearAll()
 
-                val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
-                val fats = list.sumOf { it.fats.toDouble() }.toFloat()
-                val cals = list.sumOf { it.cals.toDouble() }.toFloat()
-                val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
-                adapter.getItems()[pos]
-                    .update(cals, fats, carbs, proteins)
+                    val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
+                    val fats = list.sumOf { it.fats.toDouble() }.toFloat()
+                    val cals = list.sumOf { it.cals.toDouble() }.toFloat()
+                    val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
+                    adapter.getItems()[pos]
+                        .update(cals, fats, carbs, proteins)
 
 
-                adapter.viewHolders[pos].updateMeals(adapter.getItems()[pos])
-                holder.binding.rv.adapter?.notifyDataSetChanged()
-                update()
+                    adapter.viewHolders[pos].updateMeal(adapter.getItems()[pos])
+                    adapter.viewHolders[pos]
+                        .binding.rv.adapter?.notifyDataSetChanged()
+                    update()
+                }
             }
         }
     }
-
 
 
     private fun updateDateTextView() {
