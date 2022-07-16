@@ -29,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.EasyPermissions
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -177,6 +178,8 @@ class RunFragment : Fragment() {
     // init map
     @SuppressLint("MissingPermission")
     private fun initMap(savedInstanceState: Bundle?){
+        val frag = this
+
         binding.apply {
 
             mapView.apply {
@@ -187,7 +190,15 @@ class RunFragment : Fragment() {
                         it.uiSettings.isMyLocationButtonEnabled = true
                         it.uiSettings.isZoomControlsEnabled = true
                     }
-                    else Toast.makeText(context,"no gps permissions", Toast.LENGTH_LONG).show()
+                    else {
+                        EasyPermissions.requestPermissions(
+                            frag,
+                            "no gps permissions .",
+                            0,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        )
+                    }
                     map = it
                     // init
                     for(track in tracks) {

@@ -120,15 +120,6 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // unnecessary code
-        val CHANNEL_ID = "Daily_Reminder"
-        val notificationId = 1337
-        createNotificationChannel(CHANNEL_ID, notificationId)
-        val set_reminder = binding.reminder
-        set_reminder.setOnClickListener {
-            sendNotification(CHANNEL_ID, notificationId)
-        }
-
 
         // other part
         adapter = MealAdapter(meals, this)
@@ -163,49 +154,6 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         setOnClickListeners()
     }
 
-
-
-    // unnecessary code
-
-    fun sendNotification(CHANNEL_ID: String,notificationId: Int){
-        val intent = Intent(context, WelcomeFragment::class.java).apply{
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0,intent,0)
-        val bitmap = BitmapFactory.decodeResource(resources,R.drawable.diet_reminder2)
-        val bitmapLargeIcon = BitmapFactory.decodeResource(resources, R.drawable.foodsjpg)
-
-        val builder = context?.let {
-            NotificationCompat.Builder(it, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Food Notification")
-                .setContentText("I didn't eat my meal yet!")
-                .setLargeIcon(bitmapLargeIcon)
-                .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
-                .setContentIntent(pendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        }
-        if (builder != null) {
-            with(context?.let { NotificationManagerCompat.from(it) }){
-                this?.notify(notificationId, builder.build())
-            }
-        }
-    }
-
-    private fun createNotificationChannel(CHANNEL_ID: String, notificationId: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val name = "Notification Title"
-            val descriptionText = "Notification Description"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID,name, importance).apply {
-                description = descriptionText
-            }
-            val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    // end part of notification
 
 
     private fun updateMealsByDate(date: String) {
@@ -282,10 +230,6 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         findNavController().navigate(action)
     }
 
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun observerMeals() {
-    }
 
 
     private fun updateDateTextView() {

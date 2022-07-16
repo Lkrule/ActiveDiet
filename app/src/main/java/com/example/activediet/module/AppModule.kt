@@ -3,6 +3,7 @@ package com.example.activediet.module
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.activediet.api.SpoonacularAPI
 import com.example.activediet.db.FoodDatabase
 import com.example.activediet.db.FoodDao
@@ -62,7 +63,8 @@ class AppModule {
             context,
             FoodDatabase::class.java,
             FOOD_DATABASE_NAME
-        ).build()
+        ).setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
+            .build()
         return db.getFoodDao()
     }
 
@@ -75,7 +77,8 @@ class AppModule {
             context,
             RunDatabase::class.java,
             RUN_DATABASE_NAME
-        ).build()
+        ).setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
+            .build()
         return db.getRunDao()
     }
 

@@ -15,30 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
-        <androidx.constraintlayout.utils.widget.ImageFilterButton
-            android:id="@+id/reminder"
-            android:layout_width="90dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="2dp"
-            android:background="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="54dp"
-            android:layout_height="55dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/alarm"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/reminder"
-            app:layout_constraintHorizontal_bias="0.813"
-            app:layout_constraintStart_toStartOf="@+id/daily_next_day_btn"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ImageContrastCheck" />
-
         <ImageView
             android:id="@+id/daily_previous_day_btn"
             android:layout_width="wrap_content"
@@ -53,14 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="03-03-2022"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/daily_next_day_btn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/daily_previous_day_btn"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.515" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <ImageView
             android:id="@+id/daily_next_day_btn"
@@ -68,7 +44,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/chevron_right_48"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/reminder"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -220,12 +196,10 @@
             android:id="@+id/totals_fats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="3dp"
             android:text="100 g"
             app:layout_constraintBottom_toTopOf="@+id/barChart"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
-            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             app:layout_constraintVertical_bias="0.0" />
@@ -245,7 +219,6 @@
             android:id="@+id/totals_carbs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:text="100 g"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
             app:layout_constraintHorizontal_bias="0.0"
