@@ -18,17 +18,16 @@ class CalculatorViewModel @Inject constructor(
     val bmr: LiveData<Double> = _bmr
 
 
-    private val _gender = sharedPrefs.getInt(Constants.KEY_GENDER, 0)
-    private val _weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
-    private val  _height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f).toString().toFloat()
-    private val  _age = sharedPrefs.getFloat(Constants.KEY_AGE, 0f).toString().toFloat().toInt()
-
 
     // bmr
     fun calcBMR(activity: Int, goal: Int) {
-        val genderVar = if(_gender == 1) 5 else -161
+        val gender = sharedPrefs.getInt(Constants.KEY_GENDER, 0)
+        val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
+        val  height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f).toString().toFloat()
+        val  age = sharedPrefs.getFloat(Constants.KEY_AGE, 0f).toString().toFloat().toInt()
+        val genderVar = if(gender == 1) 5 else -161
         // The Mifflin St Jeor equation
-        val bmr = 10.0f * _weight + 6.25f * _height - 5.0f * _age + genderVar
+        val bmr = 10.0f * weight + 6.25f * height - 5.0f * age + genderVar
         _bmr.value =  bmr * energyFormula[activity - 1] + goalFormula[goal - 1]
     }
 
@@ -39,7 +38,9 @@ class CalculatorViewModel @Inject constructor(
 
     fun calcBMI(): Float {
         var bmi = 0f
-        if (_height != 0f) bmi = ( _weight / (_height/100 * _height/ 100))
+        val weight = sharedPrefs.getFloat(Constants.KEY_WEIGHT, 0f).toString().toFloat()
+        val  height = sharedPrefs.getFloat(Constants.KEY_HEIGHT, 0f).toString().toFloat()
+        if (height != 0f) bmi = ( weight / (height/100 * height/ 100))
         return  ((bmi * 100.0).roundToInt() / 100.0).toFloat()
     }
 
