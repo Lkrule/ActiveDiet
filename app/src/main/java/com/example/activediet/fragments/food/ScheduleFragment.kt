@@ -180,15 +180,10 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
                 textColor = Color.WHITE
                 setDrawGridLines(false)
             }
-            barChart.axisRight.apply {
-                axisLineColor = Color.WHITE
-                textColor = Color.WHITE
-                setDrawGridLines(false)
-            }
             barChart.apply {
-                description.text = "Cals Over Time"
-                legend.isEnabled = false
+                description.text = ""
             }
+
         }
 
 
@@ -211,19 +206,17 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
                 listDate.add(calsOfDay)
             }
 
+
             val allCals =
                 listDate.indices.map { i -> BarEntry(i.toFloat(), listDate[i]) }
             val barDataSet = BarDataSet(allCals, "Cals Over Date").apply {
                 valueTextColor = Color.WHITE
-                color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+                color = ContextCompat.getColor(requireContext(), R.color.background)
             }
 
-            binding.apply {
-                barChart.apply {
-                    data = BarData(barDataSet)
-                    invalidate()
-                }
-            }
+            // update
+            binding.barChart.data = BarData(barDataSet)
+            binding.barChart.invalidate()
         }
     }
 
