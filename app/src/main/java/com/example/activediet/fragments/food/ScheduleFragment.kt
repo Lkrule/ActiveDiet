@@ -132,24 +132,25 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
 
         adapter.viewHolders.observe(viewLifecycleOwner) {
             it?.forEachIndexed{ pos, mealHolder ->
-                mealHolder.binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
+                if( pos < 5) {
+                    mealHolder.binding.rv.adapter = FoodAdapter(foods[pos], viewModel)
+                    viewModel.foodsArray[pos]
+                        .observe(viewLifecycleOwner) { list ->
+                            foods[pos].clear()
+                            foods[pos].addAll(list)
+                            adapter.getMeals()[pos].clearAll()
 
-                viewModel.foodsArray[pos]
-                    .observe(viewLifecycleOwner) { list ->
-                    foods[pos].clear()
-                    foods[pos].addAll(list)
-                    adapter.getMeals()[pos].clearAll()
+                            val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
+                            val fats = list.sumOf { it.fats.toDouble() }.toFloat()
+                            val cals = list.sumOf { it.cals.toDouble() }.toFloat()
+                            val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
+                            adapter.getMeals()[pos]
+                                .update(cals, fats, carbs, proteins)
 
-                    val carbs = list.sumOf { it.carbs.toDouble() }.toFloat()
-                    val fats = list.sumOf { it.fats.toDouble() }.toFloat()
-                    val cals = list.sumOf { it.cals.toDouble() }.toFloat()
-                    val proteins = list.sumOf { it.proteins.toDouble() }.toFloat()
-                    adapter.getMeals()[pos]
-                        .update(cals, fats, carbs, proteins)
-
-                    mealHolder.updateMeal(adapter.getMeals()[pos])
-                    mealHolder.binding.rv.adapter?.notifyDataSetChanged()
-                    update()
+                            mealHolder.updateMeal(adapter.getMeals()[pos])
+                            mealHolder.binding.rv.adapter?.notifyDataSetChanged()
+                            update()
+                        }
                 }
             }
         }

@@ -13,9 +13,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.example.activediet.R
 import com.example.activediet.api.SpoonacularAPI
-import com.example.activediet.data.Food
-import com.example.activediet.data.Nutrient
-import com.example.activediet.data.Nutrients
 import com.example.activediet.databinding.FragmentAddCustomFoodBinding
 import com.example.activediet.viewmodels.food.AddFoodViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +51,7 @@ class AddCustomFoodFragment : Fragment() {
     private val buttonListener = View.OnClickListener {
         if (!validateForm()) {
             MaterialDialog(requireContext()).show {
-                title(R.string.add_ingredient_dialog_title)
+                title(R.string.dialog_title)
                 // create list
 
                 val fats = binding.FatAmount

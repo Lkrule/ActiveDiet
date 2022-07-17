@@ -5,11 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class ExcerciseAdapter: RecyclerView.Adapter<ExcerciseAdapter.ExcerciseViewHolder>() {
     private var stdList: ArrayList<ExcerciseModel> = ArrayList()
     private var onClickItem: ((ExcerciseModel) -> Unit)? = null
     private var onClickDeleteItem: ((ExcerciseModel) -> Unit)? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExcerciseViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.card_item_std,parent,false)

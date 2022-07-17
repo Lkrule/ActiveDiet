@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="45dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="300dp"
+    android:layout_marginTop="45dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:videoId="S0Q4gqBUs7c" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearLayoutCompat"
-        android:layout_width="210dp"
-        android:layout_height="60dp"
+        android:layout_width="283dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="4dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">>
+        app:layout_constraintTop_toTopOf="parent">>
 
         <TextView
             android:id="@+id/tvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="id" />
+            android:text="id"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="Name"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Details" />
+            android:text="Details"
+            android:textSize="24sp" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDelete"
         android:layout_width="89dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/dark_button"
         android:shadowColor="#A8A8A8"
         android:shadowDx="0"
@@ -51,9 +73,7 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintVertical_bias="0.048" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
