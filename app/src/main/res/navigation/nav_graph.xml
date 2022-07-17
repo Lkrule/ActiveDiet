@@ -42,6 +42,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_calculatorFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/scheduleFragment"
@@ -51,9 +54,6 @@
         <action
             android:id="@+id/action_scheduleFragment_to_addCustomFoodFragment"
             app:destination="@id/addCustomFoodFragment" />
-        <action
-            android:id="@+id/action_scheduleFragment_to_calculatorFragment"
-            app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCustomFoodFragment"

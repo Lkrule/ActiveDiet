@@ -37,15 +37,28 @@
 
     <TextView
         android:id="@+id/Food"
-        android:layout_width="103dp"
-        android:layout_height="wrap_content"
+        android:layout_width="155dp"
+        android:layout_height="49dp"
         android:text="Food Name"
-        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Food_Text"
         app:layout_constraintEnd_toEndOf="@+id/Food_Text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/Food_Text"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/food"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:text="Per 100 grams"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/Calories_Name" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Food_Text"
@@ -135,7 +148,7 @@
         android:id="@+id/Carbohydrates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carbohydrates in grams"
+        android:text="Carbs in grams"
         app:layout_constraintBottom_toTopOf="@+id/Carbon_Text"
         app:layout_constraintEnd_toEndOf="@+id/Carbon_Text"
         app:layout_constraintStart_toStartOf="@+id/Carbon_Text"

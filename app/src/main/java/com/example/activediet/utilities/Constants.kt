@@ -16,6 +16,7 @@ object Constants {
     const val KEY_WEIGHT = "KEY_WEIGHT"
     const val KEY_HEIGHT = "KEY_HEIGHT"
     const val KEY_AGE = "KEY_AGE"
+    const val DATE = "DATE"
     const val MEALS_COUNT = 5
 
 

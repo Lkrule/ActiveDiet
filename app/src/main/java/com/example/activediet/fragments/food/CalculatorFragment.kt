@@ -1,22 +1,18 @@
 package com.example.activediet.fragments.food
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.activediet.R
 import com.example.activediet.databinding.FragmentCalculatorBinding
 import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.BMR
 import com.example.activediet.viewmodels.food.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
-
 
 
 @AndroidEntryPoint
@@ -31,6 +27,7 @@ class CalculatorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -81,5 +78,21 @@ class CalculatorFragment : Fragment() {
             calcButton.setOnClickListener(calcBtnListener)
             applyButton.setOnClickListener(applyBtnClickListener)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_settings, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_settings -> {
+                val action = CalculatorFragmentDirections
+                    .actionCalculatorFragmentToSettingsFragment()
+                findNavController().navigate(action)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

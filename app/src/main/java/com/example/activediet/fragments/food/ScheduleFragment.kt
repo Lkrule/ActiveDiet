@@ -28,7 +28,9 @@ import com.example.activediet.data.Food
 import com.example.activediet.data.Meal
 import com.example.activediet.databinding.FragmentScheduleBinding
 import com.example.activediet.fragments.WelcomeFragment
+import com.example.activediet.utilities.Constants
 import com.example.activediet.utilities.Constants.BMR
+import com.example.activediet.utilities.Constants.DATE
 import com.example.activediet.utilities.Constants.MEALS_COUNT
 import com.example.activediet.viewmodels.food.ScheduleViewModel
 import com.github.mikephil.charting.components.XAxis
@@ -75,11 +77,12 @@ class ScheduleFragment : Fragment(), MealAdapter.MealAdapterListener{
         curDate.observe(viewLifecycleOwner)  {
             updateDateTextView()
             updateMealsByDate(it)
+            sharedPrefs.edit()
+                .putString(DATE, it).apply()
         }
 
         with(curDate) {
-            postValue( SimpleDateFormat("dd-MM-yyyy")
-                .format(Calendar.getInstance().time))
+            postValue( sharedPrefs.getString(DATE,""))
         }
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
