@@ -39,13 +39,11 @@ class ExcerciseAdapter: RecyclerView.Adapter<ExcerciseAdapter.ExcerciseViewHolde
         notifyDataSetChanged()
     }
     class ExcerciseViewHolder (var view: View): RecyclerView.ViewHolder(view){
-        private var id = view.findViewById<TextView>(R.id.tvId)
         private var name = view.findViewById<TextView>(R.id.tvName)
         private var details = view.findViewById<TextView>(R.id.tvDetails)
         var btnDelete = view.findViewById<TextView>(R.id.btnDelete)
 
         fun bindView(std: ExcerciseModel){
-            id.text = std.id.toString()
             name.text = std.name
             details.text = std.details
         }
